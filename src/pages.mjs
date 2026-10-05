@@ -1,7 +1,7 @@
 // Vaste pagina's: home, diensten, opties, projecten, werkwijze, kennisbank, offerte, contact.
 import { site } from './config.mjs';
 import { page, hero, cta, icon, waIcon, wa, tel, esc, googleWord, crumbLd, faqLd, faqHtml, SERVICES } from './layout.mjs';
-import { OPTIONS, STEPS, stepsHtml, optionCards, reviewsSection, PROJECTS, projectCard, featureList, keywordBand, ruler, heroCard, buildUp, calculator, offerteTool, gallery, videoSection, EXTRAS } from './blocks.mjs';
+import { OPTIONS, STEPS, stepsHtml, optionCards, reviewsSection, PROJECTS, projectCard, featureList, keywordBand, ruler, heroCard, buildUp, calculator, offerteTool, gallery, videoSection, EXTRAS, cityBand } from './blocks.mjs';
 
 
 // ───────────────────────── Home
@@ -9,7 +9,7 @@ export function home(ctx) {
   const stats = `<div class="stats"><div class="wrap">${site.stats.map(([b, s]) => `<div class="stat"><b>${b}</b><span>${s}</span></div>`).join('')}</div></div>`;
   const body = `
 ${hero({
-    sub: false, video: ctx.media.heroVideo, img: ctx.media.heroPoster,
+    sub: false, video: ctx.media.heroVideo, videoWebm: ctx.media.heroWebm, poster: ctx.media.heroVideoPoster, img: ctx.media.heroPoster,
     h1: 'Zandcement dekvloeren:<br><span class="accent">De perfecte basis voor elk project</span>',
     lead: 'Een strakke, duurzame en kaarsrechte vloer begint bij de basis. Voor nieuwbouw, utiliteit en renovatie, door heel Nederland.',
     checks: ['Specialist in zandcementdekvloeren', 'Door heel Nederland', 'Gratis offerte', 'Voor particulieren &amp; aannemers'],
@@ -83,7 +83,9 @@ ${offerteTool()}
 <h2>Van eerste contact<br><span class="accent">tot legklare vloer</span></h2>
 <p class="lead">Heldere communicatie en een offerte die klopt.</p></div>
 ${stepsHtml()}
-</div></section>
+</div>
+${cityBand(ctx)}
+</section>
 
 <section class="paper" id="opbouw"><div class="wrap">
 <div class="center sec-head reveal"><span class="eyebrow">Zo is een vloer opgebouwd</span>

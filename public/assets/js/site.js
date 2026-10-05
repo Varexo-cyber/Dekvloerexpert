@@ -4,9 +4,15 @@
   var burger = document.querySelector('.burger');
   if (burger) burger.addEventListener('click', function () {
     var open = nav.classList.toggle('open');
+    document.body.classList.toggle('menu-open', open);
     burger.setAttribute('aria-expanded', open);
     burger.setAttribute('aria-label', open ? 'Menu sluiten' : 'Menu openen');
   });
+  // Menu sluiten bij klik op een link of Escape
+  document.querySelectorAll('.menu a').forEach(function (a) {
+    a.addEventListener('click', function () { if (nav.classList.contains('open')) burger.click(); });
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && nav && nav.classList.contains('open')) burger.click(); });
   // Diensten-dropdown (klik voor touch en toetsenbord)
   document.querySelectorAll('.has-drop > button').forEach(function (b) {
     b.addEventListener('click', function () {

@@ -19,6 +19,8 @@ export function loadMedia(publicDir) {
   const credits = has('credits.json') ? JSON.parse(readFileSync(join(dir, 'credits.json'), 'utf8')) : [];
   const creditFor = f => credits.find(c => c.file === f) || null;
   const heroVideo = has('hero.mp4') ? '/assets/media/hero.mp4' : '';
+  const heroWebm = has('hero.webm') ? '/assets/media/hero.webm' : '';
+  const heroVideoPoster = has('hero-video.jpg') ? '/assets/media/hero-video.jpg' : '';
   const heroPoster = has('hero.jpg') ? '/assets/media/hero.jpg' : '/assets/img/hero.jpg';
 
   const pdir = join(dir, 'projecten');
@@ -45,5 +47,5 @@ export function loadMedia(publicDir) {
     return { src: `/assets/media/video/${f}`, webm, video: true, poster: existsSync(join(vdir, stem + '.jpg')) ? `/assets/media/video/${stem}.jpg` : '', caption: stem.replace(/[-_]+/g, ' ').replace(/^\d+\s*/, '').replace(/^\w/, c => c.toUpperCase()), credit: null };
   }) : [];
 
-  return { heroVideo, heroPoster, heroCredit: creditFor('hero.jpg'), credits, videos, gallery: gallery.length ? gallery : fallback, real: gallery.length > 0 };
+  return { heroVideo, heroWebm, heroVideoPoster, heroPoster, heroCredit: creditFor('hero.jpg'), credits, videos, gallery: gallery.length ? gallery : fallback, real: gallery.length > 0 };
 }

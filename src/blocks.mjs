@@ -46,7 +46,8 @@ export const reviewsSection = () => `<section class="dark" id="reviews"><div cla
 <h2>Wat onze klanten <span class="accent">zeggen</span></h2>
 ${site.reviews?.length ? '' : '<p class="lead">Voorbeeldweergave: zodra uw Google Bedrijfsprofiel is gekoppeld, verschijnen hier de echte beoordelingen van uw klanten.</p>'}
 </div>
-<div class="wrap"><div class="rev-grid">${(site.reviews?.length ? site.reviews : REVIEWS).slice(0, 3).map(reviewCard).join('')}</div></div>
+${(() => { const r = site.reviews?.length ? site.reviews : REVIEWS; const half = Math.ceil(r.length / 2); const rows = [r, [...r.slice(half), ...r.slice(0, half)]];
+  return rows.map((row, i) => `<div class="marquee"${i ? ' style="margin-top:0"' : ''}><div class="track${i ? ' rev' : ''}">${row.map(reviewCard).join('')}<div class="dup" aria-hidden="true">${row.map(reviewCard).join('')}</div></div></div>`).join(''); })()}
 </section>`;
 
 // Voorbeeldprojecten uit de demo. Vervang foto's in public/assets/img/ en pas teksten hier aan.
@@ -157,3 +158,14 @@ export const videoSection = (videos, { title = 'Van zandaanvoer tot legklare vlo
 <div class="vids-text reveal"><h2>${title}</h2><p class="lead">${lead}</p><p class="vids-note">Klik op een filmpje om het met geluid te bekijken.</p></div>
 <div class="vids-row">${videos.map(v => `<button type="button" class="gal-item vid-tile" data-src="${v.src}" data-webm="${v.webm || ''}" data-video="1" data-caption="${esc(v.caption)}" aria-label="Bekijk filmpje: ${esc(v.caption)}"><video ${v.poster ? `poster="${v.poster}" ` : ''}autoplay muted loop playsinline preload="metadata"><source src="${v.src}" type="video/mp4">${v.webm ? `<source src="${v.webm}" type="video/webm">` : ''}</video><span class="gal-cap">${esc(v.caption)}</span></button>`).join('')}</div>
 </div></section>`;
+
+// Schuivende band met plaatsnamen (links naar de plaatspagina's), bij de werkwijze.
+export function cityBand(ctx) {
+  const mains = ctx.places.filter(p => p.isMain);
+  const rows = [mains.filter((_, i) => i % 2 === 0), mains.filter((_, i) => i % 2 === 1)];
+  const chip = p => `<a class="city-chip" href="/${p.slug}">${esc(p.name)}</a>`;
+  return `<div class="city-band" aria-label="Plaatsen waar wij werken">
+<p class="city-band-lbl">Actief in heel Nederland, onder meer in</p>
+${rows.map((row, i) => `<div class="marquee"><div class="track city-track${i ? ' rev' : ''}">${row.map(chip).join('')}<div class="dup" aria-hidden="true">${row.map(p => chip(p).replace('<a ', '<a tabindex="-1" ')).join('')}</div></div></div>`).join('')}
+</div>`;
+}

@@ -28,6 +28,7 @@ const P = {
   wave: '<path d="M3 8c3-3 6 3 9 0s6 3 9 0M3 16c3-3 6 3 9 0s6 3 9 0"/>',
   sparkle: '<path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/>',
   info: '<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5h.01"/>',
+  doc: '<path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/>',
   mail: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>',
   instagram: '<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/>',
   tiktok: '<path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M14 3c.5 2.5 2.5 4.5 5 5"/>',
@@ -69,13 +70,14 @@ export function header(active) {
 <div class="progress" aria-hidden="true"><span></span></div>
 <header class="site-header"><nav class="nav" aria-label="Hoofdmenu">
 <a class="logo" href="/" aria-label="${site.name} home"><b>DEKVLOER<span>EXPERT</span></b><small>ZANDCEMENT DEKVLOEREN</small></a>
-<ul class="menu">${items}</ul>
+<ul class="menu" id="hoofdmenu">${items}<li class="menu-cta"><a class="btn btn-teal" href="/offerte">Offerte aanvragen</a><a class="btn btn-wa" href="${wa()}" target="_blank" rel="noopener">${waIcon} WhatsApp</a><a class="btn btn-ghost" href="${tel}">${icon('phone')} Bel ${site.phoneDisplay}</a></li></ul>
 <div class="nav-actions">
 <a class="icon-btn" href="${tel}" aria-label="Bel ${site.phoneDisplay}">${icon('phone')}</a>
 <a class="icon-btn wa" href="${wa()}" target="_blank" rel="noopener" aria-label="WhatsApp">${waIcon}</a>
-<a class="btn btn-teal" href="/offerte">Offerte aanvragen</a>
+<a class="btn btn-teal nav-cta" href="/offerte">Offerte aanvragen</a>
+<a class="btn btn-teal nav-cta-m" href="/offerte">Offerte</a>
 </div>
-<button class="burger" type="button" aria-label="Menu openen" aria-expanded="false">${icon('menu')}</button>
+<button class="burger" type="button" aria-label="Menu openen" aria-expanded="false" aria-controls="hoofdmenu"><span class="b-open">${icon('menu')}</span><span class="b-close">${icon('close')}</span></button>
 </nav></header>`;
 }
 
@@ -108,7 +110,7 @@ ${footerPlaces.length ? `<div class="f-places"><h4>Zandcement dekvloer in onder 
 <div class="f-bottom"><span>© ${new Date().getFullYear()} ${site.name}. Alle rechten voorbehouden.${site.kvk ? ` KvK ${site.kvk}.` : ''} <a href="/privacy">Privacy</a> · <a href="/fotoverantwoording">Fotoverantwoording</a></span><span>Website door <b><a href="${site.builtBy.url}" target="_blank" rel="noopener">${site.builtBy.name}</a></b></span></div>
 </div></footer>
 <a class="wa-fab" href="${wa()}" target="_blank" rel="noopener" aria-label="Stuur een WhatsApp-bericht">${waIcon}</a>
-<nav class="mbar" aria-label="Snel contact"><a href="${tel}">${icon('phone')}<span>Bellen</span></a><a href="${wa()}" target="_blank" rel="noopener">${waIcon}<span>WhatsApp</span></a><a class="go" href="/offerte">${icon('arrow')}<span>Offerte</span></a></nav>`;
+<nav class="mbar" aria-label="Snel contact"><a class="call" href="${tel}">${icon('phone')}<span>Bel direct</span></a><a class="go" href="/offerte">${icon('doc')}<span>Offerte</span></a><a class="wa" href="${wa()}" target="_blank" rel="noopener">${waIcon}<span>WhatsApp</span></a></nav>`;
 }
 
 export const businessLd = () => ({
@@ -164,9 +166,9 @@ ${footer(footerPlaces)}
 }
 
 // ───────────────────────── Herbruikbare blokken
-export function hero({ crumbs, pill = 'Zandcement dekvloeren · Landelijk actief', h1, lead, img = '/assets/img/hero.jpg', video = '', checks, buttons, sub = true, extra = '', aside = '' }) {
+export function hero({ crumbs, pill = 'Zandcement dekvloeren · Landelijk actief', h1, lead, img = '/assets/img/hero.jpg', video = '', videoWebm = '', poster = '', checks, buttons, sub = true, extra = '', aside = '' }) {
   return `<section class="hero${sub ? ' sub' : ''}${aside ? ' has-aside' : ''}">
-<div class="hero-bg" style="background-image:url('${img}')">${video ? `<video autoplay muted loop playsinline preload="metadata" poster="${img}"><source src="${video}" type="video/mp4"></video>` : ''}</div>
+<div class="hero-bg${video ? ' has-video' : ''}" style="background-image:url('${poster || img}')">${video ? `<video autoplay muted loop playsinline preload="auto" poster="${poster || img}" aria-hidden="true"><source src="${video}" type="video/mp4">${videoWebm ? `<source src="${videoWebm}" type="video/webm">` : ''}</video>` : ''}</div>
 <div class="hero-sweep" aria-hidden="true"></div>
 <div class="wrap hero-grid"><div class="hero-inner">
 ${crumbs ? breadcrumb(crumbs) : ''}
@@ -192,7 +194,7 @@ export const faqLd = qa => ({
 });
 export const faqHtml = qa => `<div class="faq">${qa.map(([q, a], i) => `<details${i === 0 ? ' open' : ''}><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</div>`;
 
-export function cta(lead = 'Vraag een offerte aan, of stel eerst uw vraag. Wij denken graag met u mee. De offerte komt direct op uw WhatsApp.', title = 'Klaar voor een <span class="accent">kaarsrechte basis?</span>') {
+export function cta(lead = 'Vertel ons wat u wilt laten leggen. U ontvangt een offerte op maat, direct op uw WhatsApp.', title = 'Zullen we <span class="accent">beginnen?</span>') {
   return `<section><div class="wrap"><div class="cta-card reveal">
 <span class="eyebrow">Vrijblijvende offerte</span>
 

@@ -694,3 +694,67 @@ h2{font-size:clamp(2rem,4.2vw,3.5rem);line-height:1.02}
 /* Menu: knoppen niet laten afbreken */
 .nav .btn,.menu a,.menu button{white-space:nowrap}
 @media (max-width:1320px){.nav{gap:12px}.menu a,.menu button{padding:10px 8px;font-size:.95rem}.nav .btn{padding:13px 18px}}
+
+/* v6: feedback klant — mobiel menu, actiebalk, video bovenin, steden, reviews */
+.burger .b-close{display:none}
+.nav.open .burger .b-open{display:none}
+.nav.open .burger .b-close{display:inline}
+.burger span{display:inline-flex}
+.menu-cta,.nav-cta-m{display:none!important}
+.track .dup{display:contents}
+@media (max-width:1020px){
+  .nav{position:relative;z-index:1}
+  .nav.open{backdrop-filter:none;-webkit-backdrop-filter:none;background:#111514}
+  .nav.open .menu{position:fixed;inset:0;z-index:-1;margin:0;border:0;display:flex;flex-direction:column;gap:0;padding:104px 22px calc(28px + env(safe-area-inset-bottom,0px));background:#0d100f;overflow-y:auto;overscroll-behavior:contain}
+  .nav.open .menu>li>a,.nav.open .menu>li>button{display:flex;align-items:center;justify-content:space-between;width:100%;padding:16px 4px;font-size:1.4rem;font-weight:700;letter-spacing:-.01em;color:#fff;border-bottom:1px solid rgba(255,255,255,.08);text-align:left}
+  .nav.open .menu>li:not(.has-drop):not(.menu-cta)>a::after{content:"›";position:static;background:none;height:auto;width:auto;color:var(--teal);font-size:1.9rem;font-weight:400;line-height:1}
+  .nav.open .menu>li>button svg{color:var(--teal);width:24px;height:24px}
+  .nav.open .menu>li>a[aria-current="page"]{color:var(--teal)}
+  .nav.open .dropdown{margin:4px 0 8px}
+  .nav.open .dropdown a{font-size:1.08rem;padding:11px 4px;color:#cfd7d4}
+  .nav.open .menu-cta{display:grid!important;gap:12px;margin-top:auto;padding-top:30px}
+  .nav.open .menu-cta .btn{display:flex;justify-content:center;width:100%;padding:17px 20px;font-size:1.05rem;border-bottom:0}
+  .nav.open .menu-cta .btn-teal{background:linear-gradient(180deg,#13a487,#0d8a71)}
+  .nav.open .menu-cta .btn-wa{background:var(--wa)}
+  .nav.open .menu-cta .btn-ghost{background:#1b2120;border:1px solid rgba(255,255,255,.12)}
+  .nav.open .menu-cta svg{width:18px;height:18px}
+  .nav-actions .nav-cta{display:none!important}
+  .nav-actions .nav-cta-m{display:inline-flex!important;padding:11px 18px;font-size:.95rem}
+  body.menu-open{overflow:hidden}
+  body.menu-open .mbar,body.menu-open .wa-fab{display:none}
+}
+@media (max-width:680px){
+  .nav-actions .icon-btn{display:none}
+  .nav{padding:8px 6px 8px 16px}
+  .mbar{grid-template-columns:1fr 1fr 1fr;gap:6px;padding:6px;border-radius:16px}
+  .mbar a{flex-direction:column;gap:4px;padding:10px 4px;font-size:.84rem;color:#fff}
+  .mbar a:nth-child(2){color:#fff}
+  .mbar a.call{background:#1f2624}
+  .mbar a.go{background:linear-gradient(180deg,#13a487,#0d8a71)}
+  .mbar a.wa{background:var(--wa)}
+  .mbar a svg{width:20px;height:20px}
+}
+
+/* Video bovenin de hero */
+.hero-bg.has-video{opacity:.6;background-color:#0d100f}
+.hero-bg.has-video video{object-fit:cover}
+@media (max-width:680px){.hero-bg.has-video{opacity:.5}}
+
+/* Steden in de werkwijze */
+.city-band{margin-top:64px}
+.city-band-lbl{text-align:center;color:var(--muted-d,#a3aeaa);font-size:.95rem;letter-spacing:.02em;margin:0 0 4px}
+.city-band .marquee{margin-top:14px}
+.city-track{gap:12px;padding:2px 0;animation-duration:80s}
+.city-track.rev{animation-duration:95s}
+.city-chip{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:999px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:#e9eeec;text-decoration:none;font-weight:600;white-space:nowrap;transition:border-color .2s,color .2s}
+.city-chip::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--teal)}
+.city-chip:hover{border-color:var(--teal);color:var(--teal)}
+section:not(.dark) .city-chip{border-color:rgba(0,0,0,.1);background:#fff;color:#16201d}
+section:not(.dark) .city-band-lbl{color:#5d6a66}
+
+/* CTA "Zullen we beginnen?" */
+@media (max-width:680px){
+  .cta-card{padding:56px 18px}
+  .cta-card .btn-row{flex-direction:column;gap:10px}
+  .cta-card h2{font-size:2.3rem}
+}
