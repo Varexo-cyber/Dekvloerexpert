@@ -1,4 +1,10 @@
 import { site } from './config.mjs';
+import { readFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+
+// Versie op CSS/JS-links: na elke wijziging laadt de browser meteen de nieuwe versie.
+const ver = f => createHash('md5').update(readFileSync(new URL('../public' + f, import.meta.url))).digest('hex').slice(0, 8);
+const CSS_V = ver('/assets/css/site.css'), JS_V = ver('/assets/js/site.js');
 
 export const esc = s => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 export const abs = path => site.url + (path === '/' ? '/' : path);
@@ -150,7 +156,7 @@ ${noindex || process.env.DEMO ? '<meta name="robots" content="noindex,nofollow,n
 <link rel="preload" href="/assets/fonts/inter-tight.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/fonts/fonts.css">
-<link rel="stylesheet" href="/assets/css/site.css">
+<link rel="stylesheet" href="/assets/css/site.css?v=${CSS_V}">
 <script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@graph': graph })}</script>
 </head>
 <body>
@@ -159,7 +165,7 @@ ${header(active)}
 ${body}
 </main>
 ${footer(footerPlaces)}
-<script src="/assets/js/site.js" defer></script>
+<script src="/assets/js/site.js?v=${JS_V}" defer></script>
 </body>
 </html>
 `;
