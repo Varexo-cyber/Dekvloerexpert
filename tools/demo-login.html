@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>/*[|template_title|]*/0</title>
+<style>
+:root{--bg:#0d100f;--card:#151a19;--line:rgba(255,255,255,.1);--fg:#fff;--muted:#a3aeaa;--teal:#22d1ad;--btn:#0f9479;--err:#ff8a7a}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;display:grid;place-items:center;padding:24px 16px}
+.hidden{display:none!important}
+.box{width:100%;max-width:420px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:36px 30px;box-shadow:0 30px 60px -30px rgba(0,0,0,.7)}
+.logo{line-height:1;margin-bottom:28px}
+.logo b{display:block;font-weight:900;font-size:1.5rem;letter-spacing:.01em}
+.logo b span{color:var(--teal)}
+.logo small{display:block;font-size:.6rem;font-weight:700;letter-spacing:.42em;margin-top:5px;color:#d6dcda}
+h1{font-size:1.35rem;margin:0 0 6px;letter-spacing:-.01em}
+p{margin:0 0 22px;color:var(--muted);font-size:.95rem}
+label{display:block;font-weight:600;font-size:.9rem;margin-bottom:8px}
+.pw{position:relative}
+input[type=password],input[type=text]{width:100%;padding:14px 46px 14px 16px;border-radius:10px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.05);color:#fff;font:inherit;font-size:1rem}
+input:focus{outline:2px solid rgba(34,209,173,.5);border-color:var(--teal)}
+.eye{position:absolute;right:12px;top:50%;transform:translateY(-50%);width:22px;height:22px;opacity:.6;cursor:pointer;filter:invert(1)}
+button{margin-top:16px;width:100%;padding:15px;border:0;border-radius:999px;background:var(--btn);color:#fff;font:700 1rem/1 inherit;cursor:pointer;font-family:inherit}
+button:hover{background:#0b7f68}
+.err{color:var(--err);font-size:.9rem;margin:12px 0 0;min-height:1.2em}
+.foot{margin-top:22px;font-size:.8rem;color:#6f7d78;text-align:center}
+.loading{color:var(--muted)}
+</style>
+</head>
+<body>
+<div id="staticrypt_loading" class="loading">Laden…</div>
+<div id="staticrypt_content" class="hidden">
+  <div class="box">
+    <div class="logo"><b>DEKVLOER<span>EXPERT</span></b><small>ZANDCEMENT DEKVLOEREN</small></div>
+    <h1>Preview</h1>
+    <p>/*[|template_instructions|]*/0</p>
+    <form id="staticrypt-form" action="#" method="post">
+      <label for="staticrypt-password">Wachtwoord</label>
+      <div class="pw">
+        <input id="staticrypt-password" type="password" name="password" placeholder="/*[|template_placeholder|]*/0" autocomplete="off" autofocus>
+        <img class="staticrypt-toggle-password-visibility eye" alt="/*[|template_toggle_show|]*/0" title="/*[|template_toggle_show|]*/0" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiPjxwYXRoIGQ9Ik0xIDEyczQtOCAxMS04IDExIDggMTEgOC00IDgtMTEgOC0xMS04LTExLTh6Ii8+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMyIvPjwvc3ZnPg==">
+      </div>
+      <input id="staticrypt-remember" type="checkbox" name="remember" checked class="hidden">
+      <button type="submit">/*[|template_button|]*/0</button>
+      <p class="err" id="err" role="alert"></p>
+    </form>
+    <div class="foot">Website door Varexo · alleen voor de opdrachtgever</div>
+  </div>
+</div>
+<script>
+const staticryptInitiator = /*[|js_staticrypt|]*/ 0;
+const templateError = "/*[|template_error|]*/0",
+  templateToggleAltShow = "/*[|template_toggle_show|]*/0",
+  templateToggleAltHide = "/*[|template_toggle_hide|]*/0",
+  isRememberEnabled = /*[|is_remember_enabled|]*/ 0,
+  staticryptConfig = /*[|staticrypt_config|]*/ 0;
+const templateConfig = { rememberExpirationKey: "dve_expiration", rememberPassphraseKey: "dve_passphrase", replaceHtmlCallback: null, clearLocalStorageCallback: null };
+const staticrypt = staticryptInitiator.init(staticryptConfig, templateConfig);
+window.onload = async function () {
+  const { isSuccessful } = await staticrypt.handleDecryptOnLoad();
+  if (!isSuccessful) {
+    document.getElementById("staticrypt_loading").classList.add("hidden");
+    document.getElementById("staticrypt_content").classList.remove("hidden");
+    document.getElementById("staticrypt-password").focus();
+  }
+};
+const toggle = document.querySelector(".staticrypt-toggle-password-visibility");
+toggle.addEventListener("click", function () {
+  const i = document.getElementById("staticrypt-password");
+  i.type = i.type === "password" ? "text" : "password";
+  toggle.title = toggle.alt = i.type === "password" ? templateToggleAltShow : templateToggleAltHide;
+});
+document.getElementById("staticrypt-form").addEventListener("submit", async function (e) {
+  e.preventDefault();
+  const pw = document.getElementById("staticrypt-password").value;
+  // Altijd onthouden: één keer invoeren is genoeg voor alle pagina's.
+  const { isSuccessful } = await staticrypt.handleDecryptionOfPage(pw, true);
+  if (!isSuccessful) document.getElementById("err").textContent = templateError;
+});
+</script>
+</body>
+</html>

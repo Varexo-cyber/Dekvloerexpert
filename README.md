@@ -16,6 +16,21 @@ npm run check      # controleert links, dubbele titels en hoe uniek de plaatspag
 Geen dependencies, alleen Node 18+. Op Vercel werkt het zonder instellingen:
 `vercel.json` geeft het buildcommando, de outputmap, nette URL's (zonder `.html`) en de redirects.
 
+## Demo voor de klant (Netlify, met wachtwoord)
+
+`netlify.toml` bouwt met `npm run build:demo`: de gewone build, en daarna worden alle pagina's
+versleuteld met [StatiCrypt](https://github.com/robinmoisson/staticrypt) (AES-256). Zonder wachtwoord
+staat er in de broncode alleen versleutelde tekst. Na één keer het wachtwoord invoeren gaan alle
+pagina's open; het wordt (gehasht) in de browser onthouden. Het inlogscherm staat in `tools/demo-login.html`.
+
+- Wachtwoord: omgevingsvariabele `DEMO_PASSWORD` in Netlify, anders `123`.
+- De demo wordt niet geïndexeerd (robots.txt, `noindex`, `X-Robots-Tag`).
+- Afbeeldingen en video's zijn niet versleuteld: wie de exacte bestandsnaam kent, kan ze openen.
+  De pagina's, teksten en code zijn wel afgeschermd.
+- `.staticrypt.json` bevat de salt; die is niet geheim en zorgt dat het onthouden wachtwoord na een nieuwe deploy blijft werken.
+
+Lokaal testen: `npm install && npm run build:demo`, daarna `dist/` serveren.
+
 ## Wat er gebouwd wordt (634 pagina's)
 
 | Soort | Aantal | URL |

@@ -74,7 +74,17 @@ writeFileSync(join(out, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>
 ${urls.map(([u, pr]) => `<url><loc>${site.url}${u === '/' ? '/' : u}</loc><lastmod>${today}</lastmod><priority>${pr.toFixed(1)}</priority></url>`).join('\n')}
 </urlset>
 `);
-writeFileSync(join(out, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${site.url}/sitemap.xml\n`);
+// Demo (wachtwoord-preview voor de klant): niet indexeren.
+const DEMO = !!process.env.DEMO;
+writeFileSync(join(out, 'robots.txt'), DEMO ? 'User-agent: *\nDisallow: /\n' : `User-agent: *\nAllow: /\n\nSitemap: ${site.url}/sitemap.xml\n`);
+
+// Netlify: redirects voor de "Zone"-regels uit de CSV (Netlify kent geen regex, dus één regel per slug)
+// en de headers. Vercel gebruikt vercel.json.
+const csvRows = readFileSync(join(root, 'data/plaatsen.csv'), 'utf8').split(/\r?\n/).slice(1).map(l => l.split(',')[0]).filter(Boolean);
+const zoneRedirects = csvRows.filter(s => /-zone-\d+$/.test(s)).map(s => `/${s}  /${s.replace(/-zone-\d+$/, '')}  301`);
+const legacy = data.legacySlugs.map(([from, to]) => `/${encodeURI(from)}  /${to}  301`);
+writeFileSync(join(out, '_redirects'), ['/index  /  301', ...legacy, ...zoneRedirects].join('\n') + '\n');
+writeFileSync(join(out, '_headers'), `/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n${DEMO ? '  X-Robots-Tag: noindex, nofollow, noarchive\n' : ''}/assets/*\n  Cache-Control: public, max-age=2592000\n`);
 
 // vercel.json staat in de projectmap: nette URL's zonder .html en 301's voor de "Zone"-regels.
 if (data.legacySlugs.length > 1) console.warn('Let op: nieuwe afwijkende slugs in de CSV, voeg redirects toe aan vercel.json:', data.legacySlugs);

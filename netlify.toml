@@ -1,0 +1,14 @@
+# Netlify: wachtwoord-demo voor de klant.
+# Alle pagina's worden versleuteld (StatiCrypt, AES-256); wachtwoord via de omgevingsvariabele
+# DEMO_PASSWORD in Netlify, of standaard "123".
+[build]
+  command = "npm run build:demo"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow, noarchive"

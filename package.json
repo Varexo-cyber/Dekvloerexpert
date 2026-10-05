@@ -4,7 +4,15 @@
   "type": "module",
   "scripts": {
     "build": "node build.mjs",
+    "build:demo": "DEMO=1 node build.mjs && node tools/encrypt.mjs",
     "preview": "node build.mjs --serve",
-    "check": "node tools/uniqueness.mjs"
+    "check": "node tools/uniqueness.mjs",
+    "video": "node preview-video/record.cjs"
+  },
+  "devDependencies": {
+    "staticrypt": "^3.5.4"
+  },
+  "engines": {
+    "node": ">=18"
   }
 }

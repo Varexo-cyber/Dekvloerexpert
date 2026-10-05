@@ -133,7 +133,7 @@ export function page({ path, title, description, active, body, ld = [], footerPl
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
 <link rel="canonical" href="${abs(path)}">
-${noindex ? '<meta name="robots" content="noindex">' : '<meta name="robots" content="index,follow,max-image-preview:large">'}
+${noindex || process.env.DEMO ? '<meta name="robots" content="noindex,nofollow,noarchive">' : '<meta name="robots" content="index,follow,max-image-preview:large">'}
 <meta property="og:type" content="website">
 <meta property="og:locale" content="nl_NL">
 <meta property="og:site_name" content="${site.name}">

@@ -690,3 +690,7 @@ h2{font-size:clamp(2rem,4.2vw,3.5rem);line-height:1.02}
 .otool .calc-note a{color:var(--teal)}
 .ot-send{width:100%;justify-content:center}
 @media (max-width:680px){.ot-cm{grid-template-columns:repeat(4,1fr)}.ot-extras{grid-template-columns:1fr}}
+
+/* Menu: knoppen niet laten afbreken */
+.nav .btn,.menu a,.menu button{white-space:nowrap}
+@media (max-width:1320px){.nav{gap:12px}.menu a,.menu button{padding:10px 8px;font-size:.95rem}.nav .btn{padding:13px 18px}}
