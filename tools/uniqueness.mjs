@@ -7,7 +7,7 @@ import { join } from 'node:path';
 
 const dist = new URL('../dist/', import.meta.url).pathname;
 const files = [];
-(function walk(d) { for (const f of readdirSync(d)) { const p = join(d, f); if (statSync(p).isDirectory()) { if (f !== 'assets') walk(p); } else if (f.endsWith('.html')) files.push(p); } })(dist);
+(function walk(d) { for (const f of readdirSync(d)) { const p = join(d, f); if (statSync(p).isDirectory()) { if (f !== 'assets') walk(p); } else if (f.endsWith('.html') && f !== 'formulieren.html') files.push(p); } })(dist);
 
 const exists = href => {
   const p = href.split(/[?#]/)[0];

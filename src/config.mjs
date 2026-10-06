@@ -11,6 +11,8 @@ export const site = {
   // Optioneel: endpoint voor het offerteformulier (bijv. Formspree of Web3Forms).
   // Leeg = de aanvraag wordt als kant-en-klaar WhatsApp-bericht verstuurd.
   formEndpoint: '',
+  // Netlify Forms: aanvragen komen als nette e-mail binnen (Netlify → Forms → Notifications).
+  netlifyForms: true,
   // Link naar het Google Bedrijfsprofiel (voor de reviewbadge). Leeg = badge linkt naar de reviewsectie.
   googleReviewsUrl: '',
   // Echte Google-reviews: [['tekst', 'soort project'], …]. Leeg = geen reviewsectie.

@@ -82,6 +82,18 @@
       ['Naam', val('naam')], ['Telefoon', val('telefoon')], ['E-mail', val('email')], ['Plaats', val('plaats')], ['Toelichting', val('toelichting')]
     ].filter(function (f) { return f[1] && f[1] !== ' m²'; });
 
+    var waText = 'Offerteaanvraag via de website\n\n' + fields.map(function (f) { return f[0] + ': ' + f[1]; }).join('\n');
+    var waLink = form.parentNode.querySelector('.sent-wa') || document.querySelector('.sent-wa');
+    if (waLink) { waLink.href = 'https://wa.me/' + form.dataset.wa + '?text=' + encodeURIComponent(waText); waLink.hidden = false; }
+    var nf = form.dataset.netlifyForm;
+    if (nf) {
+      var keys = { 'Dienst': 'dienst', 'Ruimte': 'ruimte', 'Verdieping': 'verdieping', 'Oppervlakte': 'oppervlakte', 'Laagdikte': 'laagdikte', 'Vloerverwarming': 'vloerverwarming', 'Type project': 'type_project', 'Uitvoerperiode': 'uitvoerperiode', 'Opties': 'opties', 'Naam': 'naam', 'Telefoon': 'telefoon', 'E-mail': 'email', 'Plaats': 'plaats', 'Toelichting': 'toelichting' };
+      var body = 'form-name=' + encodeURIComponent(nf) + fields.map(function (f) { return '&' + keys[f[0]] + '=' + encodeURIComponent(f[1]); }).join('');
+      fetch('/formulieren.html', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: body })
+        .then(function (r) { if (!r.ok) throw 0; document.getElementById('sentMsg').classList.add('show'); form.querySelector('button[type=submit]').disabled = true; })
+        .catch(function () { sendWa(); });
+      return;
+    }
     var endpoint = form.dataset.endpoint;
     var done = function () { document.getElementById('sentMsg').classList.add('show'); form.querySelector('button[type=submit]').disabled = true; };
     if (endpoint) {
@@ -159,12 +171,14 @@
       var a = Math.max(1, Math.round(+m2.value || 0)), d = Math.min(30, Math.max(2, +String(cm.value).replace(',', '.') || 0));
       var x = Array.prototype.map.call(f.querySelectorAll('.ot-extras input:checked'), function (i) { return i.value; });
       var place = f.dataset.place || (pl && pl.value.trim()) || '';
+      var et = f.querySelector('.ot-etage input:checked'); et = et ? et.value : '';
+      sum('e').textContent = et || '-';
       sum('m2').textContent = a + ' m²'; sum('cm').textContent = String(d).replace('.', ',') + ' cm'; sum('x').textContent = x.length ? x.join(', ') : 'Geen';
       m2r.style.setProperty('--fill', ((Math.min(1000, a) - 5) / 995 * 100) + '%');
       f.querySelectorAll('.ot-cm button').forEach(function (b) { b.classList.toggle('on', +b.dataset.cm === d); });
-      var msg = 'Hallo Dekvloerexpert, ik wil graag een offerte voor een zandcement dekvloer.\n\nOppervlakte: ' + a + ' m²\nDikte: ' + String(d).replace('.', ',') + ' cm\nExtra\'s: ' + (x.length ? x.join(', ') : 'geen') + (place ? '\nPlaats: ' + place : '');
+      var msg = 'Hallo Dekvloerexpert, ik wil graag een offerte voor een zandcement dekvloer.\n\nOppervlakte: ' + a + ' m²\nDikte: ' + String(d).replace('.', ',') + ' cm' + (et ? '\nEtage: ' + et : '') + '\nExtra\'s: ' + (x.length ? x.join(', ') : 'geen') + (place ? '\nPlaats: ' + place : '');
       send.href = 'https://wa.me/' + f.dataset.wa + '?text=' + encodeURIComponent(msg);
-      form.href = '/offerte?m2=' + a + '&cm=' + d + (place ? '&plaats=' + encodeURIComponent(place) : '') + (x.length ? '&opties=' + encodeURIComponent(x.join('|')) : '');
+      form.href = '/offerte?m2=' + a + '&cm=' + d + (place ? '&plaats=' + encodeURIComponent(place) : '') + (x.length ? '&opties=' + encodeURIComponent(x.join('|')) : '') + (et ? '&etage=' + encodeURIComponent(et) : '');
     };
     m2r.addEventListener('input', function () { m2.value = m2r.value; update(); });
     m2.addEventListener('input', function () { if (+m2.value >= 5 && +m2.value <= 1000) m2r.value = m2.value; update(); });
@@ -186,6 +200,8 @@
       form.querySelectorAll('input[name=laagdikte]').forEach(function (r) { if (r.value === q.get('cm') + ' cm') { r.checked = true; hit = true; } });
       if (!hit) { form.querySelectorAll('input[name=laagdikte]').forEach(function (r) { if (r.value.indexOf('zelf') > -1) r.checked = true; }); form.dikte_zelf.value = q.get('cm'); }
     }
+    if (q.get('etage')) form.querySelectorAll('input[name=verdieping]').forEach(function (r) { if (r.value.toLowerCase() === q.get('etage').toLowerCase()) r.checked = true; });
+    if (q.get('plaats') && form.plaats && !form.plaats.value) form.plaats.value = q.get('plaats');
     if (q.get('opties')) {
       var want = q.get('opties').toLowerCase();
       form.querySelectorAll('input[name=opties]').forEach(function (o) { if (want.indexOf(o.value.toLowerCase()) > -1) o.checked = true; });

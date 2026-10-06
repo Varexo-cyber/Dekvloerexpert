@@ -33,6 +33,22 @@ function neighbours(p) {
   return { siblings, others };
 }
 
+// Zoektermen waarop klanten zoeken, per plaats net anders verwoord, met links naar de kennisbank.
+function kwBlock(p) {
+  const n = esc(p.name);
+  const open = C.pick([
+    `Zoekt u een cementdekvloer, een zand cement vloer of een cement dekvloer in ${n}?`,
+    `Cementdekvloer, zandcement vloer of cement dekvloer: in ${n} bedoelen klanten er vaak hetzelfde mee.`,
+    `Of u het nu een zandcement vloer, cementdekvloer of zand cement vloer noemt: in ${n} leggen we hem kaarsrecht.`,
+  ], p.slug, 'kw1');
+  const mid = C.pick([
+    'Het gaat om dezelfde vloer: een mengsel van zand, cement en water, gepompt en strak afgereid.',
+    'Het is steeds een vloer van zand, cement en water die we pompen en vlak afreien.',
+    'In alle gevallen gaat het om een gepompte mortel van zand en cement die we waterpas afwerken.',
+  ], p.slug, 'kw2');
+  return `<div class="kw-note reveal"><p>${open} ${mid} Lees meer over <a href="/cementdekvloer-kosten-per-m2">cementdekvloer kosten per m²</a>, de <a href="/cementdekvloer-droogtijd">droogtijd van een cementdekvloer</a>, <a href="/vloeibaar-zandcement">vloeibaar zandcement</a> of waarom u een <a href="/zandcement-dekvloer-zelf-maken">zandcement dekvloer beter niet zelf maakt</a>.</p></div>`;
+}
+
 export function placePage(p, ctx) {
   const v = C.vars(p);
   const m = p.muniRef, pv = m.provinceRef;
@@ -61,7 +77,7 @@ export function placePage(p, ctx) {
     : '';
 
   const title = `Zandcement dekvloer ${p.label} | ${C.pick(['Prijs & offerte', 'Vakkundig gelegd', 'Kaarsrecht & legklaar'], p.slug, 'tt')}`;
-  const description = `Zandcement dekvloer laten leggen in ${p.inLabel}? ${C.pick([
+  const description = `${C.pick(['Zandcement dekvloer', 'Cementdekvloer', 'Zandcement dekvloer of cementdekvloer'], p.slug, 'mdk')} laten leggen in ${p.inLabel}? ${C.pick([
     'Offerte op maat, direct via WhatsApp.',
     'Voor nieuwbouw, renovatie en utiliteit, ook met vloerverwarming.',
     'Scherpe prijs vooraf, ervaren team en eigen materieel.',
@@ -118,6 +134,7 @@ ${stepsHtml(C.STEP_VARIANTS.map(([t, vs], i) => [t, fill(C.pick(vs, p.slug, 'st'
 <section class="paper"><div class="wrap">
 <div class="sec-head reveal"><h2>Vragen over een dekvloer in ${esc(p.name)}</h2></div>
 ${faqHtml(faq)}
+${kwBlock(p)}
 </div></section>
 
 <section><div class="wrap">

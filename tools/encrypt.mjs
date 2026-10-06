@@ -9,7 +9,7 @@ const root = new URL('..', import.meta.url).pathname;
 const dist = join(root, 'dist');
 const password = process.env.DEMO_PASSWORD || '123';
 const files = [];
-(function walk(d) { for (const f of readdirSync(d)) { const p = join(d, f); if (statSync(p).isDirectory()) { if (f !== 'assets') walk(p); } else if (f.endsWith('.html')) files.push(p); } })(dist);
+(function walk(d) { for (const f of readdirSync(d)) { const p = join(d, f); if (statSync(p).isDirectory()) { if (f !== 'assets') walk(p); } else if (f.endsWith('.html') && f !== 'formulieren.html') files.push(p); } })(dist);
 
 const bin = join(root, 'node_modules/.bin/staticrypt');
 if (!existsSync(bin)) throw new Error('StatiCrypt ontbreekt: draai eerst npm install');

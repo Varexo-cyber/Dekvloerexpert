@@ -769,7 +769,7 @@ section:not(.dark) .city-band-lbl{color:#5d6a66}
 }
 
 /* Hamburgermenu tot 1140px: tussen 1020 en 1140 paste het volledige menu niet */
-@media (min-width:1021px) and (max-width:1140px){
+@media (min-width:1021px) and (max-width:1260px){
   .burger{display:block;order:3}
   .nav{flex-wrap:wrap;padding:10px 10px 10px 20px;position:relative;z-index:1}
   .nav-actions{margin-left:auto}
@@ -792,7 +792,7 @@ section:not(.dark) .city-band-lbl{color:#5d6a66}
 }
 
 /* Hamburgermenu tot 1140px: daartussen paste het volledige menu niet */
-@media (min-width:1021px) and (max-width:1140px){
+@media (min-width:1021px) and (max-width:1260px){
   .burger{display:block;order:3}
   .nav{position:relative;z-index:1}
   .nav-actions{margin-left:auto}
@@ -811,4 +811,74 @@ section:not(.dark) .city-band-lbl{color:#5d6a66}
   .nav.open .menu-cta .btn-wa{background:var(--wa)}
   .nav.open .menu-cta .btn-ghost{background:#1b2120}
   body.menu-open{overflow:hidden}
+}
+
+/* v7: hero zoals de demo — kleinere letters, helderder beeld, cijfers in de hero */
+.hero:not(.sub){padding:150px 0 70px}
+.hero:not(.sub) h1{font-family:'Inter',system-ui,sans-serif;font-weight:700;letter-spacing:-.025em;font-size:clamp(2.3rem,4.3vw,4.1rem);line-height:1.08;margin-bottom:22px}
+.hero:not(.sub) p.lead{font-size:1.18rem;max-width:540px}
+.hero:not(.sub) .checks{margin:24px 0 24px;gap:10px 26px}
+.hero:not(.sub) .checks li{font-size:1rem}
+.hero:not(.sub) .gbadge{margin-bottom:24px}
+.hero-bg.has-video{opacity:1}
+@media (min-width:700px){.hero-bg.has-video{background-image:var(--wide-poster)!important}}
+.hero:not(.sub)::after{background:linear-gradient(90deg,rgba(9,12,11,.88) 0%,rgba(9,12,11,.62) 45%,rgba(9,12,11,.18) 100%),linear-gradient(0deg,rgba(9,12,11,.75),transparent 30%)}
+.hero-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin-top:44px;padding-top:30px;border-top:1px solid rgba(255,255,255,.14);max-width:780px}
+.hstat b{display:block;font-family:'Inter',system-ui,sans-serif;font-size:clamp(1.9rem,2.8vw,2.6rem);font-weight:800;letter-spacing:-.02em;color:var(--teal);line-height:1.1}
+.hstat span{color:#c9d2cf;font-size:.95rem}
+@media (max-width:680px){
+  .hero:not(.sub){padding:120px 0 40px}
+  .hero:not(.sub) h1{font-size:2.35rem}
+  .hero:not(.sub) p.lead{font-size:1.05rem}
+  .hero:not(.sub)::after{background:linear-gradient(180deg,rgba(9,12,11,.55),rgba(9,12,11,.45) 40%,rgba(9,12,11,.85))}
+  .hero-stats{grid-template-columns:1fr 1fr;border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:0;overflow:hidden;background:rgba(9,12,11,.55)}
+  .hstat{padding:22px 16px;border-right:1px solid rgba(255,255,255,.12);border-bottom:1px solid rgba(255,255,255,.12)}
+  .hstat:nth-child(2n){border-right:0}
+  .hstat:nth-child(n+3){border-bottom:0}
+  .hstat span{font-size:.88rem}
+}
+
+/* Recent werk: foto's bewegen rustig naar links en rechts, zoals in de demo */
+@keyframes galpan{0%{transform:scale(1.18) translateX(-6%)}100%{transform:scale(1.18) translateX(6%)}}
+.gal .gal-item img{animation:galpan 9s ease-in-out infinite alternate;will-change:transform}
+.gal .gal-item:nth-child(2n) img{animation-direction:alternate-reverse;animation-duration:11s}
+.gal .gal-item:nth-child(3n) img{animation-duration:13s;animation-delay:-4s}
+.gal .gal-item:hover img{filter:saturate(1.1)}
+@media (prefers-reduced-motion:reduce){.gal .gal-item img{animation:none}}
+
+/* Offerte tool: extra's links, etage rechts */
+.ot-cols{display:grid;grid-template-columns:1fr 1fr;gap:0 24px}
+.ot-cols .ot-extras,.ot-cols .ot-etage{display:grid;grid-template-columns:1fr;gap:10px}
+@media (max-width:680px){.ot-cols{gap:0 12px}.ot-cols label{font-size:.93rem}}
+
+/* Steden: locatieteken en kaartje met Den Haag */
+.city-chip::before{display:none}
+.city-chip .pin{width:16px;height:16px;fill:var(--teal);flex:none}
+.nl-map{position:relative;width:120px;margin:0 auto 14px}
+.nl-map svg{width:100%;height:auto;display:block;overflow:visible}
+.nl-land{fill:rgba(20,168,138,.14);stroke:var(--teal);stroke-width:2.5;stroke-linejoin:round}
+.nl-pin path{fill:var(--teal)}
+.nl-pulse{fill:var(--teal);opacity:.35;transform-box:fill-box;transform-origin:center;animation:nlpulse 2.2s ease-out infinite}
+@keyframes nlpulse{0%{transform:scale(.4);opacity:.6}100%{transform:scale(2.4);opacity:0}}
+.nl-map-lbl{position:absolute;left:-58px;top:44%;font-size:.78rem;font-weight:700;color:var(--teal);letter-spacing:.02em}
+section:not(.dark) .nl-land{fill:rgba(20,168,138,.1)}
+@media (prefers-reduced-motion:reduce){.nl-pulse{animation:none}}
+.kw-note{max-width:900px;margin:34px auto 0;color:#4f5d58;font-size:1rem}
+.kw-note a{color:var(--teal-deep,#0d8a71);font-weight:600}
+
+/* Menu met Werkgebied en FAQ: compacter zodat alles op één regel past */
+@media (max-width:1600px){.nav{gap:10px;padding-left:22px}.menu a,.menu button{padding:10px 8px;font-size:.95rem}.nav .btn.nav-cta{padding:13px 18px;font-size:.95rem}}
+@media (max-width:1480px){.nav-actions .icon-btn{display:none}}
+@media (min-width:1261px) and (max-width:1340px){.menu a,.menu button{padding:10px 6px;font-size:.92rem}.logo b{font-size:1.25rem}}
+@media (max-width:680px){.socials{gap:8px;flex-wrap:nowrap}.socials a{width:44px;height:44px}.socials svg{width:19px;height:19px}}
+/* Mobiele hero: kleiner, zoals de demo */
+@media (max-width:680px){
+  .hero:not(.sub) h1{font-size:2.05rem;margin-bottom:16px}
+  .hero:not(.sub) p.lead{font-size:.98rem}
+  .hero:not(.sub) .pill{font-size:.8rem;padding:7px 12px}
+  .hero:not(.sub) .checks{gap:8px 16px;margin:18px 0}
+  .hero:not(.sub) .checks li{font-size:.9rem;gap:8px}
+  .hero:not(.sub) .checks .tick{width:22px;height:22px}
+  .hero:not(.sub) .gbadge{transform:scale(.85);transform-origin:left center;margin-bottom:14px}
+  .hero:not(.sub) .btn-row .btn{padding:14px 18px;font-size:.98rem}
 }

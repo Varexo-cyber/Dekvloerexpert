@@ -121,21 +121,26 @@ ${l.pipes ? Array.from({ length: 16 }, (_, i) => `<circle cx="${44 + i * 32}" cy
 
 // Offerte samenstellen: geen prijs, de aanvraag gaat als kant-en-klaar bericht naar WhatsApp.
 export const EXTRAS = ['Versneller', 'Verharder', 'Vezels', 'Duremit', 'Krimpnetten', 'Randisolatie'];
+export const ETAGES = ['Kelder', 'Begane grond', '1e verdieping', '2e verdieping', '3e verdieping'];
 export function offerteTool(place = '') {
   return `<form class="calc otool" data-wa="${site.whatsapp}" data-place="${esc(place)}" onsubmit="return false">
 <div class="calc-in">
 <div class="calc-row"><label for="otM2">Oppervlakte</label><span class="ot-num"><input id="otM2" type="number" min="1" max="20000" value="60" inputmode="numeric"> m²</span></div>
 <input id="otM2r" type="range" min="5" max="1000" step="1" value="60" aria-label="Oppervlakte in m²">
 <div class="calc-row" style="margin-top:26px"><label for="otCm">Dikte</label><span class="ot-num"><input id="otCm" type="number" min="2" max="30" step="0.5" value="6" inputmode="decimal"> cm</span></div>
-<div class="seg-btns ot-cm" role="group" aria-label="Snelkeuze dikte">${[5, 6, 7, 8, 10, 15, 20, 30].map(c => `<button type="button" data-cm="${c}"${c === 6 ? ' class="on"' : ''}>${c}</button>`).join('')}</div>
+<div class="seg-btns ot-cm" role="group" aria-label="Snelkeuze dikte">${[5, 6, 7, 8, 9, 10, 11, 12].map(c => `<button type="button" data-cm="${c}"${c === 6 ? ' class="on"' : ''}>${c}</button>`).join('')}</div>
 <p class="ot-hint">Vloeren kunnen tot wel 30 cm dik zijn. Vul gerust zelf in.</p>
-<div class="calc-row" style="margin-top:22px"><span class="flabel">Extra's</span></div>
-<div class="calc-opts ot-extras">${EXTRAS.map(x => `<label><input type="checkbox" value="${x}"> ${x}</label>`).join('')}</div>
-${place ? '' : '<div class="calc-row" style="margin-top:22px"><label for="otPlace">Plaats of postcode</label></div><input id="otPlace" class="ot-text" type="text" autocomplete="address-level2" placeholder="Bijvoorbeeld Alkmaar">'}
+<div class="ot-cols">
+<div><div class="calc-row" style="margin-top:22px"><span class="flabel">Extra's</span></div>
+<div class="calc-opts ot-extras">${EXTRAS.map(x => `<label><input type="checkbox" value="${x}"> ${x}</label>`).join('')}</div></div>
+<div><div class="calc-row" style="margin-top:22px"><span class="flabel">Etage</span></div>
+<div class="calc-opts ot-etage">${ETAGES.map(x => `<label><input type="radio" name="ot_etage" value="${x}"${x === 'Begane grond' ? ' checked' : ''}> ${x}</label>`).join('')}</div></div>
+</div>
+${place ? '' : '<div class="calc-row" style="margin-top:22px"><label for="otPlace">Plaatsnaam</label></div><input id="otPlace" class="ot-text" type="text" autocomplete="address-level2" placeholder="Bijvoorbeeld Alkmaar">'}
 </div>
 <div class="calc-out">
 <span class="calc-lbl">Uw aanvraag${place ? ' in ' + esc(place) : ''}</span>
-<ul class="ot-sum" aria-live="polite"><li><span>Oppervlakte</span><b data-k="m2">60 m²</b></li><li><span>Dikte</span><b data-k="cm">6 cm</b></li><li><span>Extra's</span><b data-k="x">Geen</b></li></ul>
+<ul class="ot-sum" aria-live="polite"><li><span>Oppervlakte</span><b data-k="m2">60 m²</b></li><li><span>Dikte</span><b data-k="cm">6 cm</b></li><li><span>Etage</span><b data-k="e">Begane grond</b></li><li><span>Extra's</span><b data-k="x">Geen</b></li></ul>
 <a class="btn btn-wa ot-send" href="#" target="_blank" rel="noopener">${waIcon} Offerte aanvragen via WhatsApp</a>
 <p class="calc-note">Wij sturen u een passende offerte, direct op uw WhatsApp. Liever een formulier? <a class="ot-form" href="/offerte">Vul het offerteformulier in</a>.</p>
 </div>
@@ -160,11 +165,13 @@ export const videoSection = (videos, { title = 'Van zandaanvoer tot legklare vlo
 </div></section>`;
 
 // Schuivende band met plaatsnamen (links naar de plaatspagina's), bij de werkwijze.
+const PIN = '<svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s7-6.6 7-12.2A7 7 0 0 0 5 9.8C5 15.4 12 22 12 22z"/><circle cx="12" cy="9.8" r="2.6" fill="#fff"/></svg>';
 export function cityBand(ctx) {
   const mains = ctx.places.filter(p => p.isMain);
   const rows = [mains.filter((_, i) => i % 2 === 0), mains.filter((_, i) => i % 2 === 1)];
-  const chip = p => `<a class="city-chip" href="/${p.slug}">${esc(p.name)}</a>`;
+  const chip = p => `<a class="city-chip" href="/${p.slug}">${PIN}${esc(p.name)}</a>`;
   return `<div class="city-band" aria-label="Plaatsen waar wij werken">
+<div class="nl-map" aria-hidden="true"><svg viewBox="-6 6 256 290"><path class="nl-land" d="M4 223 L34 239 L58 223 L70 213 L91 210 L111 217 L136 231 L157 245 L152 264 L148 284 L168 285 L171 268 L160 255 L177 244 L171 236 L180 224 L180 208 L172 195 L163 179 L177 176 L191 177 L211 170 L217 158 L209 157 L232 136 L230 120 L209 112 L227 96 L231 95 L241 36 L240 30 L222 15 L185 18 L160 20 L129 35 L129 50 L108 65 L89 64 L80 100 L75 125 L62 148 L49 162 L34 178 L25 190 L9 205 L15 216Z"/><g class="nl-pin" transform="translate(62 152)"><circle class="nl-pulse" r="10"/><path d="M0 0c-9-11-14-17-14-24a14 14 0 0 1 28 0c0 7-5 13-14 24z" transform="translate(0 0)"/><circle cy="-24" r="5" fill="#0d100f"/></g></svg><span class="nl-map-lbl">Den Haag</span></div>
 <p class="city-band-lbl">Actief in heel Nederland, onder meer in</p>
 ${rows.map((row, i) => `<div class="marquee"><div class="track city-track${i ? ' rev' : ''}">${row.map(chip).join('')}<div class="dup" aria-hidden="true">${row.map(p => chip(p).replace('<a ', '<a tabindex="-1" ')).join('')}</div></div></div>`).join('')}
 </div>`;

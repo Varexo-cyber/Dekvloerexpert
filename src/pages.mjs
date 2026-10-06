@@ -6,17 +6,17 @@ import { OPTIONS, STEPS, stepsHtml, optionCards, reviewsSection, PROJECTS, proje
 
 // ───────────────────────── Home
 export function home(ctx) {
-  const stats = `<div class="stats"><div class="wrap">${site.stats.map(([b, s]) => `<div class="stat"><b>${b}</b><span>${s}</span></div>`).join('')}</div></div>`;
+  const stats = `<div class="hero-stats">${site.stats.map(([b, s]) => `<div class="hstat"><b>${b}</b><span>${s}</span></div>`).join('')}</div>`;
   const body = `
 ${hero({
     sub: false, video: ctx.media.heroVideo, videoWebm: ctx.media.heroWebm, poster: ctx.media.heroVideoPoster, img: ctx.media.heroPoster,
+    wide: ctx.media.heroWide, wideWebm: ctx.media.heroWideWebm, widePoster: ctx.media.heroWidePoster, after: stats,
     h1: 'Zandcement dekvloeren:<br><span class="accent">De perfecte basis voor elk project</span>',
     lead: 'Een strakke, duurzame en kaarsrechte vloer begint bij de basis. Voor nieuwbouw, utiliteit en renovatie, door heel Nederland.',
     checks: ['Specialist in zandcementdekvloeren', 'Door heel Nederland', 'Gratis offerte', 'Voor particulieren &amp; aannemers'],
     extra: `<a class="gbadge" href="${site.googleReviewsUrl || '#reviews'}">${googleWord}<span class="stars">★★★★★</span>Reviews</a>`,
     buttons: `<div class="btn-row"><a class="btn btn-teal" href="/offerte">Offerte aanvragen ${icon('arrow')}</a><a class="btn btn-wa" href="${wa()}" target="_blank" rel="noopener">${waIcon} WhatsApp</a><a class="btn btn-ghost" href="${tel}">${icon('phone')} Bel direct</a></div>`,
   })}
-${stats}
 
 <section><div class="wrap split">
 <div class="reveal">
@@ -87,13 +87,6 @@ ${stepsHtml()}
 ${cityBand(ctx)}
 </section>
 
-<section class="paper" id="opbouw"><div class="wrap">
-<div class="center sec-head reveal"><span class="eyebrow">Zo is een vloer opgebouwd</span>
-<h2>Van beton tot <span class="accent">legklare vloer</span></h2>
-<p class="lead">Klik op een laag voor uitleg.</p></div>
-${buildUp()}
-</div></section>
-
 ${reviewsSection()}
 
 <section class="paper"><div class="wrap">
@@ -104,7 +97,7 @@ ${reviewsSection()}
 <div class="center" style="margin-top:34px"><a class="text-link" href="/werkgebied">Bekijk alle ${ctx.places.length} plaatsen ${icon('arrow')}</a></div>
 </div></section>
 
-<section><div class="wrap">
+<section id="faq"><div class="wrap">
 <div class="center sec-head reveal"><span class="eyebrow">Veelgestelde vragen</span><h2>Goed om te <span class="accent">weten</span></h2></div>
 ${faqHtml(HOME_FAQ)}
 </div></section>
@@ -143,7 +136,7 @@ ${s.link ? `<p style="margin-top:30px"><a class="text-link" href="${s.link[0]}">
 </div></section>
 ${s.features ? `<section class="paper"><div class="wrap"><div class="sec-head reveal"><h2>${s.featuresTitle}</h2></div>${featureList(s.features)}</div></section>` : ''}
 ${(s.sections || []).map((sec, i) => `<section class="${i % 2 ? 'paper' : ''}"><div class="wrap prose reveal" style="max-width:900px">${sec.eyebrow ? `` : ''}<h2>${sec.h2}</h2>${sec.html}</div></section>`).join('')}
-${s.slug === 'zandcement' ? `<section class="paper"><div class="wrap"><div class="sec-head reveal"><h2>Zo ligt uw vloer opgebouwd</h2></div>${buildUp()}</div></section>` : ''}
+
 ${s.kb && s.slug === 'cementdekvloer-kosten-per-m2' ? `<section class="dark"><div class="wrap"><div class="sec-head reveal"><h2>Stel uw vloer <span class="accent">samen</span></h2></div>${offerteTool()}</div></section>` : ''}
 ${s.showOptions ? `<section class="dark"><div class="wrap"><div class="sec-head reveal"><h2>Extra opties voor uw dekvloer</h2><p class="lead">Elk bouwproject stelt andere eisen aan een vloer. Deze opties bestelt u direct bij ons mee.</p></div>${optionCards(OPTIONS)}</div></section>` : ''}
 ${s.faq ? `<section><div class="wrap"><div class="sec-head reveal"><h2>${s.faqTitle || 'Vragen over ' + s.crumb.toLowerCase()}</h2></div>${faqHtml(s.faq)}</div></section>` : ''}
@@ -423,7 +416,7 @@ export function offerte(ctx) {
 <h1>Offerte aanvragen</h1>
 <p class="lead">Vraag een scherpe, vrijblijvende prijsopgave aan. Vul in wat u weet; wat nog niet bekend is, bespreken we samen.</p></div></div></section>
 <section class="paper" style="padding-top:70px"><div class="wrap offer-layout">
-<form class="form-card" id="offerForm" novalidate data-endpoint="${esc(site.formEndpoint)}" data-wa="${site.whatsapp}">
+<form class="form-card" id="offerForm" novalidate data-endpoint="${esc(site.formEndpoint)}" data-netlify-form="${site.netlifyForms ? 'offerte' : ''}" data-wa="${site.whatsapp}">
 <div class="svc-box"><div class="svc-head"><span class="ic">${icon('layers')}</span><div><small>Geselecteerde dienst</small><b id="svcName">Zandcement dekvloeren</b></div></div>
 <div class="chipset" role="radiogroup" aria-label="Dienst">${SERVICES.map((s, i) => `<label><input type="radio" name="dienst" value="${s.nav}"${i === 0 ? ' checked' : ''}>${s.nav}</label>`).join('')}</div></div>
 <div class="fstep"><span>01</span><h3>Uw project</h3></div>
@@ -444,13 +437,13 @@ ${chips('opties', [...EXTRAS, 'Graag advies'], { multi: true })}
 <div class="fgroup"><label for="naam">Naam <span class="req">*</span></label><input id="naam" name="naam" autocomplete="name" required><p class="err">Vul uw naam in.</p></div>
 <div class="fgroup"><label for="tel">Telefoon <span class="req">*</span></label><input id="tel" name="telefoon" type="tel" autocomplete="tel" required><p class="err">Vul een telefoonnummer in.</p></div>
 <div class="fgroup"><label for="email">E-mail</label><input id="email" name="email" type="email" autocomplete="email"></div>
-<div class="fgroup"><label for="plaats">Plaats of postcode <span class="req">*</span></label><input id="plaats" name="plaats" autocomplete="address-level2" required list="plaatsen"><p class="err">Vul de plaats in.</p></div>
+<div class="fgroup"><label for="plaats">Plaatsnaam <span class="req">*</span></label><input id="plaats" name="plaats" autocomplete="address-level2" required list="plaatsen"><p class="err">Vul de plaats in.</p></div>
 <div class="fgroup full"><label for="toelichting">Toelichting</label><textarea id="toelichting" name="toelichting" placeholder="Bijvoorbeeld: ondergrond, bereikbaarheid, gewenste afwerking"></textarea></div>
 </div>
 <datalist id="plaatsen">${ctx.places.filter(p => p.kind !== 'deel').map(p => `<option value="${esc(p.name)}">`).join('')}</datalist>
 <button class="btn btn-teal" type="submit" style="margin-top:10px">Offerte aanvragen ${icon('arrow')}</button>
-<p class="form-note">${site.formEndpoint ? 'Na verzenden nemen we zo snel mogelijk contact met u op.' : 'Na verzenden opent WhatsApp met uw aanvraag als bericht. U tikt op verzenden en ontvangt de offerte daarna ook op WhatsApp.'}</p>
-<div class="sent" role="status" id="sentMsg"><b>Bedankt voor uw aanvraag!</b><br>We nemen zo snel mogelijk contact met u op.</div>
+<p class="form-note">${site.formEndpoint || site.netlifyForms ? 'Na verzenden nemen we zo snel mogelijk contact met u op.' : 'Na verzenden opent WhatsApp met uw aanvraag als bericht. U tikt op verzenden en ontvangt de offerte daarna ook op WhatsApp.'}</p>
+<div class="sent" role="status" id="sentMsg"><b>Bedankt voor uw aanvraag!</b><br>We hebben alles ontvangen en sturen de offerte zo snel mogelijk, ook op uw WhatsApp. <a class="sent-wa" href="#" target="_blank" rel="noopener" hidden>Of stuur uw aanvraag direct via WhatsApp</a></div>
 </form>
 <aside class="offer-side">
 <div class="dc"><h3>Direct contact</h3>
@@ -490,6 +483,20 @@ export function privacy(ctx) {
 </div></section>`;
   return page({ path: '/privacy', title: 'Privacyverklaring | Dekvloerexpert', description: 'Privacyverklaring van Dekvloerexpert.', body, footerPlaces: ctx.footerPlaces, ld: [crumbLd(crumbs)] });
 }
+
+export function faq(ctx) {
+  const crumbs = [['/', 'Home'], ['/veelgestelde-vragen', 'Veelgestelde vragen']];
+  const kb = SERVICES_KB.map(([slug, label]) => `<li><a href="/${slug}">${label}</a></li>`).join('');
+  const body = `${hero({ crumbs, h1: 'Veelgestelde <span class="accent">vragen</span>', lead: 'Antwoorden op de vragen die we het vaakst krijgen over zandcement dekvloeren, dikte, droogtijd en de offerte.' })}
+<section><div class="wrap" style="max-width:900px">
+<div class="center sec-head reveal"><span class="eyebrow">Veelgestelde vragen</span><h2>Goed om te <span class="accent">weten</span></h2></div>
+${faqHtml(HOME_FAQ)}
+<div class="center" style="margin-top:44px"><h3>Meer weten?</h3><ul class="chips" style="justify-content:center">${kb}</ul></div>
+</div></section>
+${cta()}`;
+  return page({ path: '/veelgestelde-vragen', title: 'Veelgestelde vragen over zandcement dekvloeren | Dekvloerexpert', description: 'Antwoorden op veelgestelde vragen over zandcement dekvloeren: dikte, droogtijd, vloerverwarming, opties en de offerte.', body, footerPlaces: ctx.footerPlaces, ld: [crumbLd(crumbs), faqLd(HOME_FAQ)] });
+}
+const SERVICES_KB = [['cementdekvloer-kosten-per-m2', 'Cementdekvloer kosten per m²'], ['cementdekvloer-droogtijd', 'Droogtijd cementdekvloer'], ['zandcement-dekvloer-zelf-maken', 'Zandcement dekvloer zelf maken'], ['vloeibaar-zandcement', 'Vloeibaar zandcement'], ['cement-dekvloer', 'Cementdekvloer'], ['kennisbank', 'Alle artikelen']];
 
 export function notFound(ctx) {
   const body = `${hero({ h1: 'Pagina niet gevonden', lead: 'Deze pagina bestaat niet (meer). Zoekt u een plaats? Bekijk dan ons werkgebied.', buttons: `<div class="btn-row"><a class="btn btn-teal" href="/werkgebied">Naar werkgebied ${icon('arrow')}</a><a class="btn btn-ghost" href="/">Naar home</a></div>` })}`;

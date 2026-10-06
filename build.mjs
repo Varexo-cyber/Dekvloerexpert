@@ -54,6 +54,7 @@ write('/werkwijze', P.werkwijze(ctx), 0.6);
 write('/over-ons', P.overOns(ctx), 0.5);
 write('/offerte', P.offerte(ctx), 0.8);
 write('/contact', P.contact(ctx), 0.7);
+write('/veelgestelde-vragen', P.faq(ctx), 0.6);
 write('/privacy', P.privacy(ctx), 0.2);
 if (media.credits.length) write('/fotoverantwoording', P.fotoverantwoording(ctx), 0.1);
 write('/werkgebied', werkgebied(ctx), 0.8);
@@ -62,6 +63,11 @@ write('/404', P.notFound(ctx));
 for (const pv of data.provinces) write(`/werkgebied/${pv.slug}`, provincePage(pv, ctx), 0.7);
 for (const m of data.munis) if (m.hubOnly) write(`/${m.slug}`, muniHub(m, ctx), 0.7);
 for (const p of data.places) write(`/${p.slug}`, placePage(p, ctx), p.isMain ? 0.8 : 0.6);
+
+// Netlify Forms herkent formulieren alleen in gewone (onversleutelde) HTML: hier staat een verborgen kopie.
+if (site.netlifyForms) writeFileSync(join(out, 'formulieren.html'), `<!doctype html><html lang="nl"><head><meta charset="utf-8"><meta name="robots" content="noindex"><title>Formulieren</title></head><body>
+<form name="offerte" data-netlify="true" netlify-honeypot="bot-field" hidden>${['dienst', 'ruimte', 'verdieping', 'oppervlakte', 'laagdikte', 'vloerverwarming', 'type_project', 'uitvoerperiode', 'opties', 'naam', 'telefoon', 'email', 'plaats', 'toelichting', 'bot-field'].map(n => `<input name="${n}">`).join('')}</form>
+</body></html>`);
 
 // Dubbele URL's voorkomen
 const seen = new Set();

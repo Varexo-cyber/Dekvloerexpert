@@ -60,7 +60,7 @@ export const SERVICES = [
 
 const NAV = [
   ['/', 'Home'], ['/zandcement', 'Zandcement'], ['/projecten', 'Projecten'], ['/opties', 'Opties'],
-  ['DIENSTEN'], ['/werkwijze', 'Werkwijze'], ['/contact', 'Contact'],
+  ['DIENSTEN'], ['/werkwijze', 'Werkwijze'], ['/werkgebied', 'Werkgebied'], ['/veelgestelde-vragen', 'FAQ'], ['/contact', 'Contact'],
 ];
 
 export function header(active) {
@@ -91,9 +91,9 @@ export function footer(footerPlaces = []) {
   const soc = [
     ['WhatsApp', wa(), waIcon, 'wa'],
     ['Bellen', tel, icon('phone')],
-    site.socials.instagram && ['Instagram', site.socials.instagram, icon('instagram')],
-    site.socials.tiktok && ['TikTok', site.socials.tiktok, icon('tiktok')],
-    site.socials.youtube && ['YouTube', site.socials.youtube, icon('youtube')],
+    ['Instagram', site.socials.instagram || 'https://www.instagram.com/', icon('instagram')],
+    ['TikTok', site.socials.tiktok || 'https://www.tiktok.com/', icon('tiktok')],
+    ['YouTube', site.socials.youtube || 'https://www.youtube.com/', icon('youtube')],
     ['Over ons', '/over-ons', icon('info')],
   ].filter(Boolean).map(([l, h, i, c]) => `<a${c ? ` class="${c}"` : ''} href="${h}" aria-label="${l}"${h.startsWith('http') ? ' target="_blank" rel="noopener"' : ''}>${i}</a>`).join('');
   return `<footer class="site-footer"><div class="wrap">
@@ -172,9 +172,9 @@ ${footer(footerPlaces)}
 }
 
 // ───────────────────────── Herbruikbare blokken
-export function hero({ crumbs, pill = 'Zandcement dekvloeren · Landelijk actief', h1, lead, img = '/assets/img/hero.jpg', video = '', videoWebm = '', poster = '', checks, buttons, sub = true, extra = '', aside = '' }) {
+export function hero({ crumbs, pill = 'Zandcement dekvloeren · Landelijk actief', h1, lead, img = '/assets/img/hero.jpg', video = '', videoWebm = '', poster = '', wide = '', wideWebm = '', widePoster = '', checks, buttons, sub = true, extra = '', after = '', aside = '' }) {
   return `<section class="hero${sub ? ' sub' : ''}${aside ? ' has-aside' : ''}">
-<div class="hero-bg${video ? ' has-video' : ''}" style="background-image:url('${poster || img}')">${video ? `<video autoplay muted loop playsinline preload="auto" poster="${poster || img}" aria-hidden="true"><source src="${video}" type="video/mp4">${videoWebm ? `<source src="${videoWebm}" type="video/webm">` : ''}</video>` : ''}</div>
+<div class="hero-bg${video ? ' has-video' : ''}" style="background-image:url('${poster || img}')${widePoster ? `;--wide-poster:url('${widePoster}')` : ''}">${video ? `<video autoplay muted loop playsinline preload="auto" aria-hidden="true">${wide ? `<source src="${wide}" type="video/mp4" media="(min-width:700px)">` : ''}${wideWebm ? `<source src="${wideWebm}" type="video/webm" media="(min-width:700px)">` : ''}<source src="${video}" type="video/mp4">${videoWebm ? `<source src="${videoWebm}" type="video/webm">` : ''}</video>` : ''}</div>
 <div class="hero-sweep" aria-hidden="true"></div>
 <div class="wrap hero-grid"><div class="hero-inner">
 ${crumbs ? breadcrumb(crumbs) : ''}
@@ -184,6 +184,7 @@ ${lead ? `<p class="lead">${lead}</p>` : ''}
 ${checks ? `<ul class="checks">${checks.map(c => `<li><span class="tick">${icon('check')}</span>${c}</li>`).join('')}</ul>` : ''}
 ${extra}
 ${buttons ?? `<div class="btn-row"><a class="btn btn-teal" href="/offerte">Vrijblijvende offerte ${icon('arrow')}</a><a class="btn btn-ghost" href="${tel}">${icon('phone')} Bel direct</a></div>`}
+${after}
 </div>${aside}</div></section>`;
 }
 
