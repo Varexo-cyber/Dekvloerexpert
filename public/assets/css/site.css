@@ -839,12 +839,12 @@ section:not(.dark) .city-band-lbl{color:#5d6a66}
 }
 
 /* Recent werk: foto's bewegen rustig naar links en rechts, zoals in de demo */
-@keyframes galpan{0%{transform:scale(1.18) translateX(-6%)}100%{transform:scale(1.18) translateX(6%)}}
-.gal .gal-item img{animation:galpan 9s ease-in-out infinite alternate;will-change:transform}
-.gal .gal-item:nth-child(2n) img{animation-direction:alternate-reverse;animation-duration:11s}
-.gal .gal-item:nth-child(3n) img{animation-duration:13s;animation-delay:-4s}
+@keyframes galpan{0%{transform:scale(1.22) translateX(-8%)}100%{transform:scale(1.22) translateX(8%)}}
+.gal .gal-item img,.gal .gal-item:hover img{animation:galpan 7s ease-in-out infinite alternate!important;will-change:transform}
+.gal .gal-item:nth-child(2n) img{animation-direction:alternate-reverse!important;animation-duration:9s!important}
+.gal .gal-item:nth-child(3n) img{animation-duration:11s!important;animation-delay:-4s!important}
 .gal .gal-item:hover img{filter:saturate(1.1)}
-@media (prefers-reduced-motion:reduce){.gal .gal-item img{animation:none}}
+
 
 /* Offerte tool: extra's links, etage rechts */
 .ot-cols{display:grid;grid-template-columns:1fr 1fr;gap:0 24px}
@@ -854,7 +854,7 @@ section:not(.dark) .city-band-lbl{color:#5d6a66}
 /* Steden: locatieteken en kaartje met Den Haag */
 .city-chip::before{display:none}
 .city-chip .pin{width:16px;height:16px;fill:var(--teal);flex:none}
-.nl-map{position:relative;width:120px;margin:0 auto 14px}
+.nl-map{position:relative;width:min(300px,78vw);margin:0 auto 18px}
 .nl-map svg{width:100%;height:auto;display:block;overflow:visible}
 .nl-land{fill:rgba(20,168,138,.14);stroke:var(--teal);stroke-width:2.5;stroke-linejoin:round}
 .nl-pin path{fill:var(--teal)}
@@ -879,6 +879,66 @@ section:not(.dark) .nl-land{fill:rgba(20,168,138,.1)}
   .hero:not(.sub) .checks{gap:8px 16px;margin:18px 0}
   .hero:not(.sub) .checks li{font-size:.9rem;gap:8px}
   .hero:not(.sub) .checks .tick{width:22px;height:22px}
-  .hero:not(.sub) .gbadge{transform:scale(.85);transform-origin:left center;margin-bottom:14px}
   .hero:not(.sub) .btn-row .btn{padding:14px 18px;font-size:.98rem}
 }
+
+.nl-pin path{fill:var(--teal);transition:fill .2s}
+.nl-pin g{transform-box:fill-box;transform-origin:50% 100%;animation:nldrop .6s cubic-bezier(.2,.8,.3,1.3) both;animation-delay:var(--d)}
+.nl-pin:hover path{fill:#0b6b58}
+@keyframes nldrop{from{opacity:0;translate:0 -10px}to{opacity:1;translate:0 0}}
+@media (prefers-reduced-motion:reduce){.nl-pin g{animation:none}}
+
+/* v8: feedback — compactere mobiele weergave zoals de demo */
+.hero .gbadge{gap:8px;padding:7px 14px;border-radius:999px;font-size:.85rem;margin-bottom:22px;box-shadow:0 6px 18px -8px rgba(0,0,0,.4)}
+.hero .gbadge .stars{font-size:.8rem;letter-spacing:1px}
+@media (max-width:680px){
+  html{font-size:14.5px}
+  body{font-size:15px}
+  section{padding:60px 0}
+  .hero:not(.sub) .checks{flex-direction:column;flex-wrap:nowrap;gap:9px}
+  .hero-btns{display:grid!important;grid-template-columns:1fr 1fr;gap:10px}
+  .hero-btns .btn{width:auto!important;padding:13px 10px!important;font-size:.95rem!important}
+  .hero-btns .btn-teal{grid-column:1/-1}
+  .site-footer{padding-top:56px}
+  .site-footer .logo b{font-size:1.35rem}
+  .site-footer h4{font-size:1rem;margin-bottom:14px}
+  .site-footer li{margin-bottom:9px}
+  .site-footer li a{font-size:.9rem}
+  .f-about{font-size:.92rem}
+  .f-places a{font-size:.85rem}
+  .f-bottom{font-size:.82rem}
+}
+.hero .gbadge .gword{font-size:1.05rem}
+.nl-pin g path{transform:scale(.62);transform-origin:0 0}
+.nl-pin g circle{transform:scale(.62);transform-origin:0 0}
+.nl-map{width:min(260px,70vw)}
+
+/* v8: desktop-hero zoals de demo: smallere balk, compacter, alles in beeld */
+@media (min-width:1021px){
+  .nav{max-width:1290px}
+  .hero:not(.sub){padding:140px 0 60px;min-height:100vh}
+  .hero:not(.sub) .wrap{max-width:1180px}
+  .hero:not(.sub) h1{font-size:clamp(2.6rem,3.4vw,4rem);max-width:11em;line-height:1.1}
+  .hero:not(.sub) p.lead{font-size:1.2rem;max-width:520px}
+  .hero:not(.sub) .checks li{font-size:.98rem}
+  .hero:not(.sub) .checks{margin:22px 0 22px}
+  .hero:not(.sub) .gbadge{margin-bottom:28px}
+  .hero-btns .btn{padding:15px 28px;font-size:1.02rem}
+  .hero-stats{margin-top:40px;padding-top:34px}
+}
+/* v8: alles iets kleiner, zoals de demo */
+html{font-size:15px}
+body{font-size:16px}
+@media (min-width:1261px){
+  .nav{max-width:1400px;gap:10px;padding:10px 12px 10px 24px;border-radius:18px}
+  .logo b{font-size:1.3rem}
+  .logo small{font-size:.5rem}
+  .menu a,.menu button{font-size:.95rem!important;padding:9px 9px!important}
+  .nav-actions{gap:8px}
+  .nav-actions .icon-btn{width:42px;height:42px;display:grid}
+  .nav .btn.nav-cta{padding:12px 20px!important;font-size:.95rem!important}
+}
+@media (min-width:1261px) and (max-width:1420px){.nav-actions .icon-btn{display:none!important}.menu a,.menu button{padding:9px 7px!important}}
+@media (max-width:680px){html{font-size:14.5px}body{font-size:15px}}
+@media (min-width:1021px){.hero:not(.sub) h1{max-width:none}.hero:not(.sub){padding-top:130px}}
+@media (max-width:1020px){.br-d{display:none}}

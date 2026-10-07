@@ -37,6 +37,7 @@ const P = {
   doc: '<path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/>',
   mail: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>',
   instagram: '<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/>',
+  facebook: '<path d="M14 8h3V4h-3a4 4 0 0 0-4 4v3H7v4h3v6h4v-6h3l1-4h-4V8z"/>',
   tiktok: '<path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M14 3c.5 2.5 2.5 4.5 5 5"/>',
   youtube: '<rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="m10 9.5 5 2.5-5 2.5z"/>',
   pillar: '<path d="M7 3h10M7 21h10M9 3v18M15 3v18"/>',
@@ -94,7 +95,7 @@ export function footer(footerPlaces = []) {
     ['Instagram', site.socials.instagram || 'https://www.instagram.com/', icon('instagram')],
     ['TikTok', site.socials.tiktok || 'https://www.tiktok.com/', icon('tiktok')],
     ['YouTube', site.socials.youtube || 'https://www.youtube.com/', icon('youtube')],
-    ['Over ons', '/over-ons', icon('info')],
+    ['Facebook', site.socials.facebook || 'https://www.facebook.com/', icon('facebook')],
   ].filter(Boolean).map(([l, h, i, c]) => `<a${c ? ` class="${c}"` : ''} href="${h}" aria-label="${l}"${h.startsWith('http') ? ' target="_blank" rel="noopener"' : ''}>${i}</a>`).join('');
   return `<footer class="site-footer"><div class="wrap">
 <div class="f-grid">

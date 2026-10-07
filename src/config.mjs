@@ -23,14 +23,15 @@ export const site = {
     instagram: '',
     tiktok: '',
     youtube: '',
+    facebook: '',
   },
   kvk: '',
   // Cijfers uit de hero-balk. Laat de klant deze bevestigen voor livegang.
   stats: [
     ['15+', 'Jaar ervaring'],
-    ['2500+', 'Projecten opgeleverd'],
-    ['100%', 'Kaarsrecht & legklaar'],
-    ['NL', 'Landelijk actief'],
+    ['2500+', 'Projecten'],
+    ['100%', 'Tevredenheid'],
+    ['NL', 'Landelijke dekking'],
   ],
   // Prijsindicatie per m² (incl. materiaal en aanbrengen, excl. btw) voor 5 cm.
   // Basis voor de rekenvoorbeelden op de plaatspagina's en de kostenpagina.

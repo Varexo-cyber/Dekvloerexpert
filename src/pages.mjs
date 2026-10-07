@@ -11,11 +11,11 @@ export function home(ctx) {
 ${hero({
     sub: false, video: ctx.media.heroVideo, videoWebm: ctx.media.heroWebm, poster: ctx.media.heroVideoPoster, img: ctx.media.heroPoster,
     wide: ctx.media.heroWide, wideWebm: ctx.media.heroWideWebm, widePoster: ctx.media.heroWidePoster, after: stats,
-    h1: 'Zandcement dekvloeren:<br><span class="accent">De perfecte basis voor elk project</span>',
+    h1: 'Zandcement dekvloeren:<br><span class="accent">De perfecte basis<br class="br-d"> voor elk project</span>',
     lead: 'Een strakke, duurzame en kaarsrechte vloer begint bij de basis. Voor nieuwbouw, utiliteit en renovatie, door heel Nederland.',
     checks: ['Specialist in zandcementdekvloeren', 'Door heel Nederland', 'Gratis offerte', 'Voor particulieren &amp; aannemers'],
     extra: `<a class="gbadge" href="${site.googleReviewsUrl || '#reviews'}">${googleWord}<span class="stars">★★★★★</span>Reviews</a>`,
-    buttons: `<div class="btn-row"><a class="btn btn-teal" href="/offerte">Offerte aanvragen ${icon('arrow')}</a><a class="btn btn-wa" href="${wa()}" target="_blank" rel="noopener">${waIcon} WhatsApp</a><a class="btn btn-ghost" href="${tel}">${icon('phone')} Bel direct</a></div>`,
+    buttons: `<div class="btn-row hero-btns"><a class="btn btn-teal" href="/offerte">Offerte aanvragen ${icon('arrow')}</a><a class="btn btn-wa" href="${wa()}" target="_blank" rel="noopener">${waIcon} WhatsApp</a><a class="btn btn-ghost" href="${tel}">${icon('phone')} Bel direct</a></div>`,
   })}
 
 <section><div class="wrap split">
@@ -89,26 +89,13 @@ ${cityBand(ctx)}
 
 ${reviewsSection()}
 
-<section class="paper"><div class="wrap">
-<div class="center sec-head reveal"><span class="eyebrow">Werkgebied</span>
-<h2>Zandcement dekvloeren <span class="accent">in heel Nederland</span></h2>
-<p class="lead">Wij werken in alle twaalf provincies. Kies uw provincie of plaats.</p></div>
-<div class="prov-grid reveal">${ctx.provinces.map(pv => `<a class="prov" href="/werkgebied/${pv.slug}">${pv.name}<span>${pv.munis.reduce((n, m) => n + m.places.length, 0)} plaatsen</span></a>`).join('')}</div>
-<div class="center" style="margin-top:34px"><a class="text-link" href="/werkgebied">Bekijk alle ${ctx.places.length} plaatsen ${icon('arrow')}</a></div>
-</div></section>
-
-<section id="faq"><div class="wrap">
-<div class="center sec-head reveal"><span class="eyebrow">Veelgestelde vragen</span><h2>Goed om te <span class="accent">weten</span></h2></div>
-${faqHtml(HOME_FAQ)}
-</div></section>
-
 ${cta()}`;
   return page({
     path: '/', active: '/',
     title: 'Zandcement dekvloer laten leggen | Dekvloerexpert, landelijk actief',
     description: 'Zandcement dekvloeren voor nieuwbouw, renovatie en utiliteit in heel Nederland. Kaarsrecht en legklaar, met vloerverwarming en extra opties. Vraag een offerte aan, direct via WhatsApp.',
     body, footerPlaces: ctx.footerPlaces,
-    ld: [faqLd(HOME_FAQ), { '@type': 'WebSite', name: site.name, url: site.url + '/' }],
+    ld: [{ '@type': 'WebSite', name: site.name, url: site.url + '/' }],
   });
 }
 
