@@ -1,5 +1,6 @@
 // Vaste pagina's: home, diensten, opties, projecten, werkwijze, kennisbank, offerte, contact.
 import { site } from './config.mjs';
+import { PROJECT_LIST, MORE_PHOTOS } from './projects.mjs';
 import { page, hero, cta, icon, waIcon, wa, tel, esc, googleWord, crumbLd, faqLd, faqHtml, SERVICES } from './layout.mjs';
 import { OPTIONS, STEPS, stepsHtml, optionCards, reviewsSection, PROJECTS, projectCard, featureList, keywordBand, ruler, heroCard, buildUp, calculator, offerteTool, gallery, galleryBand, videoSection, EXTRAS, cityBand } from './blocks.mjs';
 
@@ -34,11 +35,15 @@ ${featureList([
 <!--photo--><div class="photo reveal"><img src="/assets/img/dekvloer-2.jpg" alt="Vers gelegde zandcement dekvloer" width="1200" height="1400" loading="lazy"></div><!--/photo-->
 </div></section>
 
-${videoSection(ctx.media.videos, { title: 'Van zandaanvoer <span class="accent">tot legklare vloer.</span>', lead: 'Nieuwbouw, utiliteit en renovatie: wij laten de werkplek netjes achter en werken met modern materieel.' })}
-<!--media--><section class="dark" style="padding-top:0"><div class="wrap">
-<div class="reveal" style="display:flex;justify-content:space-between;align-items:baseline;gap:20px;flex-wrap:wrap"><h3 style="margin:0;font-size:1.5rem">Recent werk</h3><a class="text-link" href="/projecten">Bekijk alle projectfoto's ${icon('arrow')}</a></div>
-<div class="gal-band-wrap">${galleryBand(ctx.media.gallery)}</div>
-</div></section><!--/media-->
+<!--media--><section class="dark ons-werk"><div class="wrap reveal">
+<span class="eyebrow">Ons werk</span>
+<h2>Van zandaanvoer<br><span class="accent">tot legklare vloer.</span></h2>
+<p class="lead" style="max-width:600px">Nieuwbouw, utiliteit en renovatie: wij laten de werkplek netjes achter en werken met modern materieel.</p>
+<a class="text-link" href="/projecten">Bekijk alle projectfoto's ${icon('arrow')}</a>
+</div>
+<div class="gal-band-wrap full">${galleryBand(PROJECT_LIST.map(p => ({ src: p.img, caption: p.title, video: false })).concat(MORE_PHOTOS.slice(0, 4).map(([src, caption]) => ({ src, caption, video: false }))))}</div>
+</section><!--/media-->
+${videoSection(ctx.media.videos, { title: 'Filmpjes van <span class="accent">de bouw</span>', lead: 'Zo gaat het op de bouw: het zand komt binnen, de mixer maakt de mortel en de pomp brengt hem naar binnen.' })}
 
 <section class="paper"><div class="wrap split rev">
 <!--photo--><div class="photo reveal"><img src="/assets/img/dekvloer-1.jpg" alt="Dekvloer in een bedrijfspand" width="1200" height="900" loading="lazy">
@@ -353,12 +358,15 @@ ${cta()}`;
 // ───────────────────────── Projecten
 export function projecten(ctx) {
   const crumbs = [['/', 'Home'], ['/projecten', 'Projecten']];
-  const body = `${hero({ crumbs, h1: 'Van zandaanvoer tot legklare vloer', lead: 'Nieuwbouw, utiliteit en renovatie: een greep uit ons werk door heel Nederland.', img: '/assets/img/project-5.jpg' })}
-${site.ownMedia ? '' : `<section><div class="wrap prose" style="max-width:820px"><h2>Projectfoto's</h2><p>${ctx.media.real ? 'Hieronder ziet u hoe een zandcement dekvloer wordt opgebouwd. Foto\'s van onze eigen recente vloeren volgen.' : 'Hier komen foto\'s en filmpjes van recente vloeren.'} Wilt u eerder gelegde vloeren zien of een referentie spreken? Vraag het ons via WhatsApp, dan sturen we voorbeelden uit uw buurt.</p><p><a class="btn btn-wa" href="${wa('Hallo, kunnen jullie foto\'s sturen van eerder gelegde dekvloeren?')}" target="_blank" rel="noopener">${waIcon} Vraag foto's op via WhatsApp</a></p></div></section>`}
+  const card = p => `<button type="button" class="proj gal-item reveal" data-src="${p.img}" data-video="0" data-caption="${esc(p.title + ' · ' + p.desc)}" aria-label="Bekijk ${esc(p.title)}"><img src="${p.img}" alt="${esc(p.title)}: ${esc(p.desc)}" loading="lazy"><span class="ptag">${esc(p.tag)}</span><span class="pcap"><b>${esc(p.title)}</b><span>${p.place ? esc(p.place) + (p.m2 ? ' · ' + p.m2 + ' m²' : '') : esc(p.desc)}</span></span></button>`;
+  const more = MORE_PHOTOS.map(([src, cap], i) => `<button type="button" class="gal-item more-item${i % 5 === 0 ? ' tall' : ''}" data-src="${src}" data-video="0" data-caption="${esc(cap)}" aria-label="Bekijk ${esc(cap)}"><img src="${src}" alt="${esc(cap)}" loading="lazy"><span class="more-plus" aria-hidden="true">+</span></button>`).join('');
+  const body = `${hero({ crumbs, pill: 'Projecten', h1: 'Onze <span class="accent">projecten</span>', lead: 'Van zandaanvoer en vloerverwarming tot een legklare vloer: een greep uit ons werk in woningen, kantoren en bedrijfspanden.', img: '/assets/media/projecten/02-kantoorvloer-in-een-keer-gelegd.jpg' })}
+<section><div class="wrap"><div class="proj-grid">${PROJECT_LIST.map(card).join('')}</div></div></section>
+<section class="paper" style="padding-top:0"><div class="wrap"><div class="sec-head reveal"><h2>Meer foto's <span class="accent">van ons werk</span></h2></div><div class="more-grid">${more}</div></div></section>
 ${videoSection(ctx.media.videos, { title: 'Filmpjes van de bouw', lead: 'Zandaanvoer, mixer en pomp, en de vloer die erin gaat.' })}
-${ctx.media.real ? `<section class="paper"><div class="wrap"><div class="sec-head reveal"><h2>Foto\'s</h2></div>${gallery(ctx.media.gallery)}</div></section>` : ''}
+<dialog class="lightbox" id="lightbox" aria-label="Foto vergroot"><button type="button" class="lb-close" aria-label="Sluiten">×</button><button type="button" class="lb-prev" aria-label="Vorige">‹</button><div class="lb-stage"></div><button type="button" class="lb-next" aria-label="Volgende">›</button><p class="lb-cap"></p></dialog>
 ${cta()}`;
-  return page({ path: '/projecten', active: '/projecten', title: 'Projecten: zandcement dekvloeren in heel Nederland | Dekvloerexpert', description: 'Bekijk onze projecten: kantoren, woningen, bedrijfshallen en renovaties. Zandcement dekvloeren, vloerverwarming en meer.', body, footerPlaces: ctx.footerPlaces, ld: [crumbLd(crumbs)] });
+  return page({ path: '/projecten', active: '/projecten', title: 'Projecten: zandcement dekvloeren in heel Nederland | Dekvloerexpert', description: 'Bekijk onze projecten: kantoren, woningen met vloerverwarming, bedrijfspanden en nieuwbouw. Zandcement dekvloeren, kaarsrecht gelegd.', body, footerPlaces: ctx.footerPlaces, ld: [crumbLd(crumbs)] });
 }
 
 // ───────────────────────── Werkwijze
@@ -430,7 +438,7 @@ ${chips('opties', [...EXTRAS, 'Graag advies'], { multi: true })}
 <datalist id="plaatsen">${ctx.places.filter(p => p.kind !== 'deel').map(p => `<option value="${esc(p.name)}">`).join('')}</datalist>
 <button class="btn btn-teal" type="submit" style="margin-top:10px">Offerte aanvragen ${icon('arrow')}</button>
 <p class="form-note">${site.formEndpoint || site.netlifyForms ? 'Na verzenden nemen we zo snel mogelijk contact met u op.' : 'Na verzenden opent WhatsApp met uw aanvraag als bericht. U tikt op verzenden en ontvangt de offerte daarna ook op WhatsApp.'}</p>
-<div class="sent" role="status" id="sentMsg"><b>Bedankt voor uw aanvraag!</b><br>We hebben alles ontvangen en sturen de offerte zo snel mogelijk, ook op uw WhatsApp. <a class="sent-wa" href="#" target="_blank" rel="noopener" hidden>Of stuur uw aanvraag direct via WhatsApp</a></div>
+<div class="sent" role="status" id="sentMsg"><b>Bedankt voor uw aanvraag!</b><br>WhatsApp is geopend met uw aanvraag: tik daar op verzenden. U ontvangt de offerte op uw WhatsApp. <a class="sent-wa" href="#" target="_blank" rel="noopener" hidden>Opende WhatsApp niet? Tik hier.</a></div>
 </form>
 <aside class="offer-side">
 <div class="dc"><h3>Direct contact</h3>

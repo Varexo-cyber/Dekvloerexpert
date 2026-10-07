@@ -82,16 +82,24 @@
       ['Naam', val('naam')], ['Telefoon', val('telefoon')], ['E-mail', val('email')], ['Plaats', val('plaats')], ['Toelichting', val('toelichting')]
     ].filter(function (f) { return f[1] && f[1] !== ' m²'; });
 
-    var waText = 'Offerteaanvraag via de website\n\n' + fields.map(function (f) { return f[0] + ': ' + f[1]; }).join('\n');
-    var waLink = form.parentNode.querySelector('.sent-wa') || document.querySelector('.sent-wa');
-    if (waLink) { waLink.href = 'https://wa.me/' + form.dataset.wa + '?text=' + encodeURIComponent(waText); waLink.hidden = false; }
+    // WhatsApp-bericht: contactgegevens bovenaan, vetgedrukt, daarna de werkzaamheden
+    var get = function (k) { var f = fields.filter(function (x) { return x[0] === k; })[0]; return f ? f[1] : ''; };
+    var contact = ['Naam', 'Telefoon', 'E-mail', 'Plaats'], waText = '*Nieuwe offerteaanvraag via de website*\n\n*CONTACTGEGEVENS*\n' +
+      contact.filter(get).map(function (k) { return '*' + k + ':* ' + get(k); }).join('\n') +
+      '\n\n*WERKZAAMHEDEN*\n' + fields.filter(function (f) { return contact.indexOf(f[0]) < 0 && f[0] !== 'Toelichting'; }).map(function (f) { return '*' + f[0] + ':* ' + f[1]; }).join('\n') +
+      (get('Toelichting') ? '\n\n*TOELICHTING*\n' + get('Toelichting') : '');
+    var waUrl = 'https://wa.me/' + form.dataset.wa + '?text=' + encodeURIComponent(waText);
+    var waLink = document.querySelector('.sent-wa');
+    if (waLink) { waLink.href = waUrl; waLink.hidden = false; }
     var nf = form.dataset.netlifyForm;
     if (nf) {
+      // Eerst WhatsApp openen (direct na de klik, anders blokkeert de telefoon het), e-mail gaat op de achtergrond mee
+      var win = window.open(waUrl, '_blank');
+      if (!win) location.href = waUrl;
       var keys = { 'Dienst': 'dienst', 'Ruimte': 'ruimte', 'Verdieping': 'verdieping', 'Oppervlakte': 'oppervlakte', 'Laagdikte': 'laagdikte', 'Vloerverwarming': 'vloerverwarming', 'Type project': 'type_project', 'Uitvoerperiode': 'uitvoerperiode', 'Opties': 'opties', 'Naam': 'naam', 'Telefoon': 'telefoon', 'E-mail': 'email', 'Plaats': 'plaats', 'Toelichting': 'toelichting' };
       var body = 'form-name=' + encodeURIComponent(nf) + fields.map(function (f) { return '&' + keys[f[0]] + '=' + encodeURIComponent(f[1]); }).join('');
-      fetch('/formulieren.html', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: body })
-        .then(function (r) { if (!r.ok) throw 0; document.getElementById('sentMsg').classList.add('show'); form.querySelector('button[type=submit]').disabled = true; })
-        .catch(function () { sendWa(); });
+      fetch('/formulieren.html', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: body }).catch(function () {});
+      document.getElementById('sentMsg').classList.add('show'); form.querySelector('button[type=submit]').disabled = true;
       return;
     }
     var endpoint = form.dataset.endpoint;
@@ -104,8 +112,7 @@
     } else sendWa();
 
     function sendWa() {
-      var text = 'Offerteaanvraag via de website\n\n' + fields.map(function (f) { return f[0] + ': ' + f[1]; }).join('\n');
-      window.open('https://wa.me/' + form.dataset.wa + '?text=' + encodeURIComponent(text), '_blank');
+      window.open(waUrl, '_blank');
       done();
     }
   });
