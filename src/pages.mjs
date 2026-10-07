@@ -1,7 +1,7 @@
 // Vaste pagina's: home, diensten, opties, projecten, werkwijze, kennisbank, offerte, contact.
 import { site } from './config.mjs';
 import { page, hero, cta, icon, waIcon, wa, tel, esc, googleWord, crumbLd, faqLd, faqHtml, SERVICES } from './layout.mjs';
-import { OPTIONS, STEPS, stepsHtml, optionCards, reviewsSection, PROJECTS, projectCard, featureList, keywordBand, ruler, heroCard, buildUp, calculator, offerteTool, gallery, videoSection, EXTRAS, cityBand } from './blocks.mjs';
+import { OPTIONS, STEPS, stepsHtml, optionCards, reviewsSection, PROJECTS, projectCard, featureList, keywordBand, ruler, heroCard, buildUp, calculator, offerteTool, gallery, galleryBand, videoSection, EXTRAS, cityBand } from './blocks.mjs';
 
 
 // ───────────────────────── Home
@@ -37,7 +37,7 @@ ${featureList([
 ${videoSection(ctx.media.videos, { title: 'Van zandaanvoer <span class="accent">tot legklare vloer.</span>', lead: 'Nieuwbouw, utiliteit en renovatie: wij laten de werkplek netjes achter en werken met modern materieel.' })}
 <!--media--><section class="dark" style="padding-top:0"><div class="wrap">
 <div class="reveal" style="display:flex;justify-content:space-between;align-items:baseline;gap:20px;flex-wrap:wrap"><h3 style="margin:0;font-size:1.5rem">Recent werk</h3><a class="text-link" href="/projecten">Bekijk alle projectfoto's ${icon('arrow')}</a></div>
-<div style="margin-top:28px">${gallery(ctx.media.gallery, 9)}</div>
+<div class="gal-band-wrap">${galleryBand(ctx.media.gallery)}</div>
 </div></section><!--/media-->
 
 <section class="paper"><div class="wrap split rev">

@@ -942,3 +942,19 @@ body{font-size:16px}
 @media (max-width:680px){html{font-size:14.5px}body{font-size:15px}}
 @media (min-width:1021px){.hero:not(.sub) h1{max-width:none}.hero:not(.sub){padding-top:130px}}
 @media (max-width:1020px){.br-d{display:none}}
+
+/* Recent werk: bewegende fotoband (twee rijen, tegengesteld) */
+.gal-band-wrap{margin-top:28px;display:grid;gap:14px}
+.gal-band{margin-top:0;mask-image:none;-webkit-mask-image:none}
+.gal-band .track{gap:14px;padding:0;animation-duration:45s}
+.gal-band .track.rev{animation-duration:52s}
+.gal-band:hover .track{animation-play-state:running}
+.band-tile{flex:none;width:300px;height:230px;border-radius:16px}
+.band-tile.wide{width:440px}
+.band-tile img{width:100%;height:100%;object-fit:cover;animation:none!important;transform:none!important}
+.band-tile .gal-cap{opacity:0;transition:opacity .25s}
+.band-tile:hover .gal-cap,.band-tile:focus-visible .gal-cap{opacity:1}
+@media (max-width:680px){.gal-band-wrap{gap:10px;margin-left:-16px;margin-right:-16px}.gal-band .track{gap:10px;animation-duration:32s}.gal-band .track.rev{animation-duration:38s}.band-tile{width:150px;height:130px;border-radius:12px}.band-tile.wide{width:230px}}
+/* Google Reviews op mobiel even breed als de offerteknop */
+@media (max-width:680px){.hero .gbadge{display:flex;width:100%;justify-content:center;padding:10px 16px;font-size:1rem;gap:12px;margin-bottom:12px}.hero .gbadge .gword{font-size:1.2rem}.hero .gbadge .stars{font-size:.95rem}}
+@media (prefers-reduced-motion:reduce){.gal-band .track{animation:slide 45s linear infinite!important}.gal-band .track.rev{animation-direction:reverse!important}}

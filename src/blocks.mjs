@@ -158,6 +158,19 @@ ${list.some(m => m.credit) ? '<p class="gal-note">Licentievrije beelden met naam
 <dialog class="lightbox" id="lightbox" aria-label="Foto of video vergroot"><button type="button" class="lb-close" aria-label="Sluiten">×</button><button type="button" class="lb-prev" aria-label="Vorige">‹</button><div class="lb-stage"></div><button type="button" class="lb-next" aria-label="Volgende">›</button><p class="lb-cap"></p></dialog>`;
 }
 
+// Recent werk als bewegende band: twee rijen die naar links en rechts schuiven, zoals in de demo.
+export function galleryBand(items) {
+  const pics = items.filter(m => !m.video);
+  if (!pics.length) return '';
+  const tile = (m, i, dup) => `<button type="button" class="gal-item band-tile${i % 3 === 0 ? ' wide' : ''}"${dup ? ' tabindex="-1" data-dup="1"' : ''} data-src="${m.src}" data-video="0" data-caption="${esc(m.caption)}" aria-label="Bekijk ${esc(m.caption)}"><img src="${m.src}" alt="${dup ? '' : esc(m.caption)}" loading="lazy"><span class="gal-cap">${esc(m.caption)}</span></button>`;
+  // Genoeg tegels per rij zodat de band altijd het scherm vult
+  const fill = arr => { let out = []; while (out.length < 8) out = out.concat(arr); return out; };
+  const rowA = fill(pics), rowB = fill(pics.slice().reverse());
+  const row = (arr, rev) => `<div class="marquee gal-band"><div class="track${rev ? ' rev' : ''}">${arr.map((m, i) => tile(m, i, i >= pics.length)).join('')}<div class="dup" aria-hidden="true">${arr.map((m, i) => tile(m, i, true)).join('')}</div></div></div>`;
+  return `${row(rowA, false)}${row(rowB, true)}
+<dialog class="lightbox" id="lightbox" aria-label="Foto vergroot"><button type="button" class="lb-close" aria-label="Sluiten">×</button><button type="button" class="lb-prev" aria-label="Vorige">‹</button><div class="lb-stage"></div><button type="button" class="lb-next" aria-label="Volgende">›</button><p class="lb-cap"></p></dialog>`;
+}
+
 // Staande filmpjes van de klant, naast elkaar als telefoonbeeld. Klik opent ze groot, met geluid.
 export const videoSection = (videos, { title = 'Van zandaanvoer tot legklare vloer', lead = 'Zo gaat het op de bouw: het zand komt binnen, de mixer maakt de mortel en de pomp brengt hem naar binnen.' } = {}) => !videos.length ? '' : `<section class="dark vids"><div class="wrap vids-grid">
 <div class="vids-text reveal"><h2>${title}</h2><p class="lead">${lead}</p><p class="vids-note">Klik op een filmpje om het met geluid te bekijken.</p></div>

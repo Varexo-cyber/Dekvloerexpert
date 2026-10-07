@@ -135,14 +135,14 @@
   });
 
   // Tellers in de cijferbalk
-  var stats = document.querySelectorAll('.stat b');
-  if (stats.length && 'IntersectionObserver' in window && !reduce) {
+  var stats = document.querySelectorAll('.stat b, .hstat b');
+  if (stats.length && 'IntersectionObserver' in window) {
     var so = new IntersectionObserver(function (es) {
       es.forEach(function (en) {
         if (!en.isIntersecting) return; so.unobserve(en.target);
         var el = en.target, m = el.textContent.match(/^(\d+)(.*)$/); if (!m) return;
         var end = +m[1], suf = m[2], t0 = performance.now();
-        (function tick(t) { var k = Math.min(1, (t - t0) / 1400), e = 1 - Math.pow(1 - k, 3); el.textContent = Math.round(end * e) + suf; if (k < 1) requestAnimationFrame(tick); })(t0);
+        (function tick(t) { var k = Math.min(1, (t - t0) / 1800), e = 1 - Math.pow(1 - k, 3); el.textContent = Math.round(end * e) + suf; if (k < 1) requestAnimationFrame(tick); })(t0);
       });
     }, { threshold: .6 });
     stats.forEach(function (s) { so.observe(s); });
@@ -211,14 +211,17 @@
   // Galerij + lightbox
   var lb = document.getElementById('lightbox');
   if (lb && lb.showModal) {
-    var items = Array.prototype.slice.call(document.querySelectorAll('.gal-item')), idx = 0;
+    var all = Array.prototype.slice.call(document.querySelectorAll('.gal-item'));
+    var items = all.filter(function (it) { return !it.dataset.dup; }), idx = 0;
     var stage = lb.querySelector('.lb-stage'), cap = lb.querySelector('.lb-cap');
     var show = function (i) {
       idx = (i + items.length) % items.length; var it = items[idx];
       stage.innerHTML = it.dataset.video === '1' ? '<video controls autoplay playsinline><source src="' + it.dataset.src + '" type="video/mp4">' + (it.dataset.webm ? '<source src="' + it.dataset.webm + '" type="video/webm">' : '') + '</video>' : '<img src="' + it.dataset.src + '" alt="">';
       stage.firstChild.alt = it.dataset.caption; cap.textContent = it.dataset.caption;
     };
-    items.forEach(function (it, i) { it.addEventListener('click', function () { show(i); lb.showModal(); }); });
+    all.forEach(function (it) { it.addEventListener('click', function () {
+      var i = items.indexOf(it); if (i < 0) items.forEach(function (o, j) { if (i < 0 && o.dataset.src === it.dataset.src) i = j; });
+      show(Math.max(0, i)); lb.showModal(); }); });
     lb.querySelector('.lb-close').addEventListener('click', function () { lb.close(); });
     lb.querySelector('.lb-prev').addEventListener('click', function () { show(idx - 1); });
     lb.querySelector('.lb-next').addEventListener('click', function () { show(idx + 1); });
