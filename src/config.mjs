@@ -3,7 +3,7 @@ export const site = {
   name: 'Dekvloerexpert',
   tagline: 'Zandcement dekvloeren',
   // Definitieve domeinnaam, zonder slash aan het eind. Wordt gebruikt voor canonical-URL's en de sitemap.
-  url: 'https://www.dekvloerexpert.nl',
+  url: 'https://www.dekvloerexperts.nl',
   phoneDisplay: '06 51 77 63 99',
   phoneIntl: '+31651776399',
   whatsapp: '31651776399',

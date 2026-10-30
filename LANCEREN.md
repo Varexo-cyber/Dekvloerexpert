@@ -1,13 +1,13 @@
-# Lanceren: dekvloerexpert.nl
+# Lanceren: dekvloerexperts.nl
 
 De site bouwt automatisch op Netlify bij elke push naar `main` (`npm run build`, map `dist`).
 De wachtwoord-demo staat uit; alle pagina's zijn openbaar en mogen door Google geïndexeerd worden.
 
 ## 1. Domein koppelen (Netlify)
 
-1. Netlify → site **dekvloerexpert** → *Domain management* → *Add a domain* → `dekvloerexpert.nl`.
-2. Kies `www.dekvloerexpert.nl` als **primary domain** (de canonical-URL's en de sitemap gebruiken www).
-   Netlify stuurt `dekvloerexpert.nl` en `dekvloerexpert.netlify.app` dan automatisch door.
+1. Netlify → site **dekvloerexpert** → *Domain management* → *Add a domain* → `dekvloerexperts.nl`.
+2. Kies `www.dekvloerexperts.nl` als **primary domain** (de canonical-URL's en de sitemap gebruiken www).
+   Netlify stuurt `dekvloerexperts.nl` en `dekvloerexpert.netlify.app` dan automatisch door.
 3. DNS bij de registrar (als je de DNS daar houdt):
 
    | Type  | Naam | Waarde                         |
@@ -40,9 +40,9 @@ Aanvragen gaan daarnaast altijd via WhatsApp.
 
 ## 4. Google
 
-1. [Google Search Console](https://search.google.com/search-console) → *Domein-property* `dekvloerexpert.nl`
+1. [Google Search Console](https://search.google.com/search-console) → *Domein-property* `dekvloerexperts.nl`
    (verifiëren met een TXT-record in de DNS) — met het Google-account van de klant.
-2. *Sitemaps* → `https://www.dekvloerexpert.nl/sitemap.xml` indienen.
+2. *Sitemaps* → `https://www.dekvloerexperts.nl/sitemap.xml` indienen.
    Dit is een sitemap-index met een aparte sitemap per provincie (alle gemeente- en plaatspagina's),
    zodat je per regio ziet hoeveel pagina's geïndexeerd zijn.
 3. *URL-inspectie* → home, `/werkgebied` en een paar grote steden → *Indexering aanvragen*.
