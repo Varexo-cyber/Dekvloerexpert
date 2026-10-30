@@ -203,7 +203,7 @@ ${C.PROVINCE_PARAS[pv.name].map(t => `<p>${esc(t)}</p>`).join('')}
 <section class="paper"><div class="wrap"><div class="sec-head reveal"><h2>Alle plaatsen in ${esc(pv.name)}</h2></div>
 <div class="muni-grid">${pv.munis.map(m => `<div class="muni"><h3><a href="/${m.slug}">${esc(m.name)}</a></h3><ul>${m.places.filter(p => p.slug !== m.slug).map(p => `<li><a href="/${p.slug}">${esc(p.name)}</a></li>`).join('')}</ul></div>`).join('')}</div></div></section>
 ${cta()}`;
-  return page({ path: `/werkgebied/${pv.slug}`, title: `Zandcement dekvloer provincie ${pv.name} | ${n} plaatsen | Dekvloerexpert`, description: `Zandcement dekvloer laten leggen in de provincie ${pv.name}? Wij werken in ${pv.munis.length} gemeenten, waaronder ${C.listNl(pv.munis.slice(0, 3).map(m => m.name))}. Vraag een vrijblijvende offerte aan.`, body, footerPlaces: ctx.footerPlaces, ld: [crumbLd(crumbs)] });
+  return page({ path: `/werkgebied/${pv.slug}`, title: `Zandcement dekvloer provincie ${pv.name} | ${n} plaatsen | Dekvloerexperts`, description: `Zandcement dekvloer laten leggen in de provincie ${pv.name}? Wij werken in ${pv.munis.length} gemeenten, waaronder ${C.listNl(pv.munis.slice(0, 3).map(m => m.name))}. Vraag een vrijblijvende offerte aan.`, body, footerPlaces: ctx.footerPlaces, ld: [crumbLd(crumbs)] });
 }
 
 export function werkgebied(ctx) {
@@ -215,5 +215,5 @@ ${hero({ crumbs, h1: 'Ons werkgebied', lead: `Landelijk actief: wij leggen zandc
 ${ctx.provinces.map(pv => `<h2 style="margin:50px 0 24px;font-size:1.8rem"><a href="/werkgebied/${pv.slug}" style="text-decoration:none">${esc(pv.name)}</a></h2>
 <div class="muni-grid">${pv.munis.map(m => `<div class="muni"><h3><a href="/${m.slug}">${esc(m.name)}</a></h3><ul>${m.places.filter(p => p.slug !== m.slug).map(p => `<li><a href="/${p.slug}">${esc(p.name)}</a></li>`).join('')}</ul></div>`).join('')}</div>`).join('')}
 </div></section>${cta()}`;
-  return page({ path: '/werkgebied', title: 'Werkgebied: zandcement dekvloeren in heel Nederland | Dekvloerexpert', description: `Dekvloerexpert is landelijk actief in alle provincies, in ${ctx.places.length} plaatsen en wijken. Vind uw plaats en vraag een offerte aan.`, body, footerPlaces: ctx.footerPlaces, ld: [crumbLd(crumbs)] });
+  return page({ path: '/werkgebied', title: 'Werkgebied: zandcement dekvloeren in heel Nederland | Dekvloerexperts', description: `Dekvloerexperts is landelijk actief in alle provincies, in ${ctx.places.length} plaatsen en wijken. Vind uw plaats en vraag een offerte aan.`, body, footerPlaces: ctx.footerPlaces, ld: [crumbLd(crumbs)] });
 }

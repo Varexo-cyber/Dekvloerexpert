@@ -18,7 +18,7 @@ De wachtwoord-demo staat uit; alle pagina's zijn openbaar en mogen door Google g
    Of zet de nameservers van het domein op Netlify DNS (dan regelt Netlify dit zelf).
 4. Netlify → *HTTPS* → het certificaat (Let's Encrypt) wordt automatisch aangemaakt.
 
-## 2. E-mail: info@dekvloerexpert.nl via Zoho Mail (EU)
+## 2. E-mail: info@dekvloerexperts.nl via Zoho Mail (EU)
 
 Voeg in de DNS toe (waarden staan ook in het Zoho-beheerpaneel; die zijn leidend):
 
@@ -30,12 +30,12 @@ Voeg in de DNS toe (waarden staan ook in het Zoho-beheerpaneel; die zijn leidend
 | MX   | @ | mx3.zoho.eu | 50 |
 | TXT  | @ | `v=spf1 include:zohomail.eu ~all` | |
 | TXT  | `zmail._domainkey` | DKIM-sleutel uit Zoho | |
-| TXT  | `_dmarc` | `v=DMARC1; p=none; rua=mailto:info@dekvloerexpert.nl` | |
+| TXT  | `_dmarc` | `v=DMARC1; p=none; rua=mailto:info@dekvloerexperts.nl` | |
 
 ## 3. Offerte per e-mail (Netlify Forms)
 
 Netlify → *Forms* → *Enable form detection* → één keer opnieuw deployen →
-*Form notifications* → *Add notification* → *Email notification* → `info@dekvloerexpert.nl`.
+*Form notifications* → *Add notification* → *Email notification* → `info@dekvloerexperts.nl`.
 Aanvragen gaan daarnaast altijd via WhatsApp.
 
 ## 4. Google

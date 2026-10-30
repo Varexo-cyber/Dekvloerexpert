@@ -1,13 +1,13 @@
 // Alle bedrijfsgegevens op één plek. Pas hier aan; daarna `npm run build`.
 export const site = {
-  name: 'Dekvloerexpert',
+  name: 'Dekvloerexperts',
   tagline: 'Zandcement dekvloeren',
   // Definitieve domeinnaam, zonder slash aan het eind. Wordt gebruikt voor canonical-URL's en de sitemap.
   url: 'https://www.dekvloerexperts.nl',
   phoneDisplay: '06 51 77 63 99',
   phoneIntl: '+31651776399',
   whatsapp: '31651776399',
-  email: 'info@dekvloerexpert.nl',
+  email: 'info@dekvloerexperts.nl',
   // Optioneel: endpoint voor het offerteformulier (bijv. Formspree of Web3Forms).
   // Leeg = de aanvraag wordt als kant-en-klaar WhatsApp-bericht verstuurd.
   formEndpoint: '',

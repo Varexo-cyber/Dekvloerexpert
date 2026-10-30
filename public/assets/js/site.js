@@ -183,7 +183,7 @@
       sum('m2').textContent = a + ' m²'; sum('cm').textContent = String(d).replace('.', ',') + ' cm'; sum('x').textContent = x.length ? x.join(', ') : 'Geen';
       m2r.style.setProperty('--fill', ((Math.min(1000, a) - 5) / 995 * 100) + '%');
       f.querySelectorAll('.ot-cm button').forEach(function (b) { b.classList.toggle('on', +b.dataset.cm === d); });
-      var msg = 'Hallo Dekvloerexpert, ik wil graag een offerte voor een zandcement dekvloer.\n\nOppervlakte: ' + a + ' m²\nDikte: ' + String(d).replace('.', ',') + ' cm' + (et ? '\nEtage: ' + et : '') + '\nExtra\'s: ' + (x.length ? x.join(', ') : 'geen') + (place ? '\nPlaats: ' + place : '');
+      var msg = 'Hallo Dekvloerexperts, ik wil graag een offerte voor een zandcement dekvloer.\n\nOppervlakte: ' + a + ' m²\nDikte: ' + String(d).replace('.', ',') + ' cm' + (et ? '\nEtage: ' + et : '') + '\nExtra\'s: ' + (x.length ? x.join(', ') : 'geen') + (place ? '\nPlaats: ' + place : '');
       send.href = 'https://wa.me/' + f.dataset.wa + '?text=' + encodeURIComponent(msg);
       form.href = '/offerte?m2=' + a + '&cm=' + d + (place ? '&plaats=' + encodeURIComponent(place) : '') + (x.length ? '&opties=' + encodeURIComponent(x.join('|')) : '') + (et ? '&etage=' + encodeURIComponent(et) : '');
     };

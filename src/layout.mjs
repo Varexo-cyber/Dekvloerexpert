@@ -9,7 +9,7 @@ const CSS_V = ver('/assets/css/site.css'), JS_V = ver('/assets/js/site.js');
 export const esc = s => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 export const abs = path => site.url + (path === '/' ? '/' : path);
 export const tel = `tel:${site.phoneIntl}`;
-export const wa = (text = 'Hallo Dekvloerexpert, ik heb een vraag over een dekvloer.') => `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(text)}`;
+export const wa = (text = 'Hallo Dekvloerexperts, ik heb een vraag over een dekvloer.') => `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(text)}`;
 
 // Eén lijnstijl, 24×24, stroke = currentColor.
 const P = {
@@ -76,7 +76,7 @@ export function header(active) {
   return `<a class="skip" href="#main">Naar inhoud</a>
 <div class="progress" aria-hidden="true"><span></span></div>
 <header class="site-header"><nav class="nav" aria-label="Hoofdmenu">
-<a class="logo" href="/" aria-label="${site.name} home"><b>DEKVLOER<span>EXPERT</span></b><small>ZANDCEMENT DEKVLOEREN</small></a>
+<a class="logo" href="/" aria-label="${site.name} home"><b>DEKVLOER<span>EXPERTS</span></b><small>ZANDCEMENT DEKVLOEREN</small></a>
 <ul class="menu" id="hoofdmenu">${items}<li class="menu-cta"><a class="btn btn-teal" href="/offerte">Offerte aanvragen</a><a class="btn btn-wa" href="${wa()}" target="_blank" rel="noopener">${waIcon} WhatsApp</a><a class="btn btn-ghost" href="${tel}">${icon('phone')} Bel ${site.phoneDisplay}</a></li></ul>
 <div class="nav-actions">
 <a class="icon-btn" href="${tel}" aria-label="Bel ${site.phoneDisplay}">${icon('phone')}</a>
@@ -99,7 +99,7 @@ export function footer(footerPlaces = []) {
   ].filter(Boolean).map(([l, h, i, c]) => `<a${c ? ` class="${c}"` : ''} href="${h}" aria-label="${l}"${h.startsWith('http') ? ' target="_blank" rel="noopener"' : ''}>${i}</a>`).join('');
   return `<footer class="site-footer"><div class="wrap">
 <div class="f-grid">
-<div><a class="logo" href="/"><b>DEKVLOER<span>EXPERT</span></b><small>ZANDCEMENT DEKVLOEREN</small></a>
+<div><a class="logo" href="/"><b>DEKVLOER<span>EXPERTS</span></b><small>ZANDCEMENT DEKVLOEREN</small></a>
 <p class="f-about">Zandcement dekvloeren · Landelijk actief. Voor aannemers en particulieren. Strakke vloeren, sterke basis!</p>
 <div class="socials">${soc}</div></div>
 <div><h4>Diensten</h4><ul>${SERVICES.map(s => `<li><a href="/${s.slug}">${s.nav}</a></li>`).join('')}<li><a class="strong" href="/diensten">Alle diensten</a></li></ul></div>
@@ -113,7 +113,7 @@ export function footer(footerPlaces = []) {
 <p style="margin-top:26px"><a class="btn btn-teal btn-sm" href="/offerte">Offerte aanvragen</a></p></div>
 </div>
 ${footerPlaces.length ? `<div class="f-places"><h4>Zandcement dekvloer in onder meer</h4><ul>${footerPlaces.map(p => `<li><a href="/${p.slug}">${esc(p.name)}</a></li>`).join('')}<li><a class="strong" href="/werkgebied">Alle plaatsen</a></li></ul></div>` : ''}
-<div class="wordmark" aria-hidden="true">DEKVLOER<span>EXPERT</span></div>
+<div class="wordmark" aria-hidden="true">DEKVLOER<span>EXPERTS</span></div>
 <div class="f-bottom"><span>© ${new Date().getFullYear()} ${site.name}. Alle rechten voorbehouden.${site.kvk ? ` KvK ${site.kvk}.` : ''} <a href="/privacy">Privacy</a> · <a href="/fotoverantwoording">Fotoverantwoording</a></span><span>Website door <b><a href="${site.builtBy.url}" target="_blank" rel="noopener">${site.builtBy.name}</a></b></span></div>
 </div></footer>
 <a class="wa-fab" href="${wa()}" target="_blank" rel="noopener" aria-label="Stuur een WhatsApp-bericht">${waIcon}</a>

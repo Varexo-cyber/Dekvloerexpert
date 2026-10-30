@@ -97,7 +97,7 @@ ${reviewsSection()}
 ${cta()}`;
   return page({
     path: '/', active: '/',
-    title: 'Zandcement dekvloer laten leggen | Dekvloerexpert',
+    title: 'Zandcement dekvloer laten leggen | Dekvloerexperts',
     description: 'Zandcement dekvloeren voor nieuwbouw, renovatie en utiliteit in heel Nederland. Kaarsrecht en legklaar, met vloerverwarming en extra opties. Vraag een offerte aan, direct via WhatsApp.',
     body, footerPlaces: ctx.footerPlaces,
     ld: [{ '@type': 'WebSite', name: site.name, url: site.url + '/' }],
@@ -155,7 +155,7 @@ const KB_LINKS = [
 export const SERVICE_DEFS = [
   {
     slug: 'zandcement', crumb: 'Zandcement dekvloeren', h1: 'Zandcement dekvloeren: de perfecte basis',
-    title: 'Zandcement dekvloer | Prijs, dikte en droogtijd | Dekvloerexpert',
+    title: 'Zandcement dekvloer | Prijs, dikte en droogtijd | Dekvloerexperts',
     description: `Alles over de zandcement dekvloer: opbouw, dikte, droogtijd en kosten. Kaarsrecht gelegd door heel Nederland. Vraag een vrijblijvende offerte aan.`,
     lead: 'Een strakke, duurzame en kaarsrechte vloer begint bij de basis. Wij leggen zandcement dekvloeren voor nieuwbouw, utiliteit en renovatie, door heel Nederland.',
     eyebrow: 'Onze hoofddienst', h2: 'Zandcement dekvloeren van topkwaliteit',
@@ -188,7 +188,7 @@ export const SERVICE_DEFS = [
   },
   {
     slug: 'anhydrietvloeren', crumb: 'Anhydrietvloeren', h1: 'Anhydrietvloeren: vloeibaar en vlak',
-    title: 'Anhydriet gietvloer laten leggen | Dekvloerexpert',
+    title: 'Anhydriet gietvloer laten leggen | Dekvloerexperts',
     description: 'Anhydriet dekvloer laten storten? Vloeibaar, zelfnivellerend en ideaal met vloerverwarming. Lees het verschil met zandcement en vraag een vrijblijvende offerte aan.',
     lead: 'Een vloeibare dekvloer die zichzelf egaliseert, dunner kan dan zandcement en vloerverwarming optimaal omsluit.',
     eyebrow: 'Dienst', h2: 'Wat is een anhydrietvloer?',
@@ -202,7 +202,7 @@ export const SERVICE_DEFS = [
   },
   {
     slug: 'vloerverwarming', crumb: 'Vloerverwarming', h1: 'Vloerverwarming in één pakket',
-    title: 'Vloerverwarming en dekvloer in één pakket | Dekvloerexpert',
+    title: 'Vloerverwarming en dekvloer in één pakket | Dekvloerexperts',
     description: 'Vloerverwarming laten aanleggen samen met uw zandcement dekvloer: één planning, één aanspreekpunt. Inclusief krimpnetten en opstookprotocol.',
     lead: 'Uw woning verduurzamen en klaarmaken voor de toekomst is een slimme investering. Wij maken het proces zo eenvoudig mogelijk voor u.',
     eyebrow: 'Extra service', h2: 'Vloerverwarming in één pakket', photo: 'project-4',
@@ -216,7 +216,7 @@ export const SERVICE_DEFS = [
   },
   {
     slug: 'egaliseren', crumb: 'Egaliseren', h1: 'Vloer egaliseren: glad en vlak',
-    title: 'Vloer laten egaliseren | Dekvloerexpert',
+    title: 'Vloer laten egaliseren | Dekvloerexperts',
     description: 'Vloer laten egaliseren voor pvc, laminaat of een gietvloer. Een egalisatielaag maakt een dekvloer of betonvloer glad en vlak. Vraag een prijsopgave aan.',
     lead: 'Een egalisatielaag maakt de ondergrond spiegelglad, de perfecte basis voor pvc, laminaat, linoleum of een gietvloer.',
     eyebrow: 'Dienst', h2: 'Wanneer egaliseren?',
@@ -225,7 +225,7 @@ export const SERVICE_DEFS = [
   },
   {
     slug: 'beton-en-fundering', crumb: 'Beton & Fundering', h1: 'Beton &amp; fundering: een sterke basis',
-    title: 'Beton en fundering storten | Dekvloerexpert',
+    title: 'Beton en fundering storten | Dekvloerexperts',
     description: 'Betonvloeren en funderingen storten voor aanbouw, garage of bedrijfspand. Inclusief wapening en bekisting. Vraag een vrijblijvende offerte aan.',
     lead: 'Funderingen, betonvloeren en ondervloeren voor aanbouwen, garages en bedrijfspanden. Met wapening, bekisting en een strakke afwerking.',
     eyebrow: 'Dienst', h2: 'Van fundering tot afgewerkte vloer',
@@ -233,7 +233,7 @@ export const SERVICE_DEFS = [
   },
   {
     slug: 'schuimbeton', crumb: 'Schuimbeton', h1: 'Schuimbeton: licht en isolerend',
-    title: 'Schuimbeton storten | Dekvloerexpert',
+    title: 'Schuimbeton storten | Dekvloerexperts',
     description: 'Schuimbeton als lichte, isolerende ondervloer: ideaal om leidingen weg te werken en hoogte op te vullen. Snel aangebracht en direct vlak.',
     lead: 'Een lichte, vloeibare vulling die leidingen wegwerkt, hoogte opvult en tegelijk isoleert.',
     eyebrow: 'Dienst', h2: 'Waarom schuimbeton?',
@@ -241,7 +241,7 @@ export const SERVICE_DEFS = [
   },
   {
     slug: 'heipalen', crumb: 'Heipalen', h1: 'Heipalen: stevig gefundeerd',
-    title: 'Heipalen voor aanbouw en nieuwbouw | Dekvloerexpert',
+    title: 'Heipalen voor aanbouw en nieuwbouw | Dekvloerexperts',
     description: 'Heipalen of schroefpalen voor uw aanbouw of nieuwbouw, in samenwerking met gespecialiseerde partners. Eén aanspreekpunt van fundering tot dekvloer.',
     lead: 'Op slappe grond is een paalfundering onmisbaar. Wij regelen het heiwerk samen met gespecialiseerde partners, met één aanspreekpunt.',
     eyebrow: 'Dienst', h2: 'Fundering op palen',
@@ -250,7 +250,7 @@ export const SERVICE_DEFS = [
   // Kennisbank (zoekwoorden uit de klantlijst)
   {
     kb: true, slug: 'cementdekvloer-kosten-per-m2', crumb: 'Cementdekvloer kosten per m²', h1: 'Cementdekvloer <span class="accent">kosten per m²</span>',
-    title: 'Cementdekvloer kosten per m²: waar hangt de prijs van af? | Dekvloerexpert',
+    title: 'Cementdekvloer kosten per m²: waar hangt de prijs van af? | Dekvloerexperts',
     description: 'Wat kost een cementdekvloer per m²? De prijs hangt af van oppervlakte, dikte (tot wel 30 cm), bereikbaarheid en extra\'s. Stel uw vloer samen en ontvang een offerte via WhatsApp.',
     lead: 'Wat kost een zandcement dekvloer, en waar hangt de prijs van af? Hier leest u het, en u stelt direct uw eigen vloer samen.',
     eyebrow: 'Kennisbank', h2: 'Waar hangt <span class="accent">de prijs</span> van af?',
@@ -262,7 +262,7 @@ export const SERVICE_DEFS = [
   },
   {
     kb: true, slug: 'cementdekvloer-droogtijd', crumb: 'Droogtijd cementdekvloer', h1: 'Droogtijd cementdekvloer',
-    title: 'Droogtijd cementdekvloer: hoe lang moet hij drogen? | Dekvloerexpert',
+    title: 'Droogtijd cementdekvloer: hoe lang moet hij drogen? | Dekvloerexperts',
     description: 'De droogtijd van een cementdekvloer: een week per cm tot 4 cm, daarna twee weken per cm. Met een droogtijdversneller in 10 tot 15 dagen legklaar.',
     lead: 'Hoe lang moet een cementdekvloer drogen voordat u kunt tegelen, pvc kunt leggen of parket kunt plaatsen?',
     eyebrow: 'Kennisbank', h2: 'De vuistregel',
@@ -276,7 +276,7 @@ export const SERVICE_DEFS = [
   },
   {
     kb: true, slug: 'zandcement-dekvloer-zelf-maken', crumb: 'Zandcement dekvloer zelf maken', h1: 'Zandcement dekvloer zelf maken?',
-    title: 'Zandcement dekvloer zelf maken: mengverhouding en tips | Dekvloerexpert',
+    title: 'Zandcement dekvloer zelf maken: mengverhouding en tips | Dekvloerexperts',
     description: 'Zelf een zandcement dekvloer maken? Mengverhouding 1:4 à 1:5, benodigdheden, stappenplan en de valkuilen. Plus: wanneer uitbesteden goedkoper is.',
     lead: 'Een kleine vloer zelf leggen kan. Hier leest u hoe, en waar het in de praktijk vaak misgaat.',
     eyebrow: 'Kennisbank', h2: 'Zo pakt u het aan',
@@ -322,14 +322,14 @@ export function dienstenOverview(ctx) {
 <section class="paper"><div class="wrap"><div class="cards light-cards">${SERVICES.map(s => `<a class="card reveal" href="/${s.slug}"><span class="ck">${icon(s.icon)}</span><div><h3>${s.nav}</h3><p>${esc(desc[s.slug])}</p></div></a>`).join('')}</div></div></section>
 <section><div class="wrap"><div class="sec-head reveal"><h2>Veelgezocht</h2></div><div class="cards light-cards">${KB_LINKS.map(([h, t, d]) => `<a class="card reveal" href="${h}"><span class="ck">${icon('info')}</span><div><h3>${t}</h3><p>${d}</p></div></a>`).join('')}</div></div></section>
 ${cta()}`;
-  return page({ path: '/diensten', active: 'dienst', title: 'Diensten: dekvloeren, vloerverwarming en meer | Dekvloerexpert', description: 'Zandcement- en anhydrietvloeren, vloerverwarming, egaliseren, beton en fundering, schuimbeton en heipalen. Alles onder één dak.', body, footerPlaces: ctx.footerPlaces, ld: [crumbLd(crumbs)] });
+  return page({ path: '/diensten', active: 'dienst', title: 'Diensten: dekvloeren, vloerverwarming en meer | Dekvloerexperts', description: 'Zandcement- en anhydrietvloeren, vloerverwarming, egaliseren, beton en fundering, schuimbeton en heipalen. Alles onder één dak.', body, footerPlaces: ctx.footerPlaces, ld: [crumbLd(crumbs)] });
 }
 
 export function kennisbank(ctx) {
   const crumbs = [['/', 'Home'], ['/kennisbank', 'Kennisbank']];
   const body = `${hero({ crumbs, h1: 'Kennisbank', lead: 'Antwoorden op de vragen die we het vaakst krijgen: over kosten, droogtijd, dikte en zelf doen.' })}
 <section class="paper"><div class="wrap"><div class="cards light-cards">${KB_LINKS.map(([h, t, d]) => `<a class="card reveal" href="${h}"><span class="ck">${icon('info')}</span><div><h3>${t}</h3><p>${d}</p></div></a>`).join('')}</div></div></section>${cta()}`;
-  return page({ path: '/kennisbank', title: 'Kennisbank dekvloeren: kosten, droogtijd en tips | Dekvloerexpert', description: 'Alles over de zandcement dekvloer: kosten per m², droogtijd, zelf maken, vloeibaar zandcement en meer.', body, footerPlaces: ctx.footerPlaces, ld: [crumbLd(crumbs)] });
+  return page({ path: '/kennisbank', title: 'Kennisbank dekvloeren: kosten, droogtijd en tips | Dekvloerexperts', description: 'Alles over de zandcement dekvloer: kosten per m², droogtijd, zelf maken, vloeibaar zandcement en meer.', body, footerPlaces: ctx.footerPlaces, ld: [crumbLd(crumbs)] });
 }
 
 // ───────────────────────── Opties
@@ -352,7 +352,7 @@ export function opties(ctx) {
 <tr><td>Dikke laag of ongelijke ondergrond</td><td>Krimpvezels</td></tr>
 </tbody></table></div></div></section>
 ${cta()}`;
-  return page({ path: '/opties', active: '/opties', title: 'Opties voor uw dekvloer: versneller, verharder, vezels | Dekvloerexpert', description: 'Droogtijdversneller, verharder, krimpvezels, Duremit, krimpnetten, randisolatie en Vlevopol. Lees welke optie bij uw dekvloer past.', body, footerPlaces: ctx.footerPlaces, ld: [crumbLd(crumbs)] });
+  return page({ path: '/opties', active: '/opties', title: 'Opties voor uw dekvloer: versneller, verharder, vezels | Dekvloerexperts', description: 'Droogtijdversneller, verharder, krimpvezels, Duremit, krimpnetten, randisolatie en Vlevopol. Lees welke optie bij uw dekvloer past.', body, footerPlaces: ctx.footerPlaces, ld: [crumbLd(crumbs)] });
 }
 
 // ───────────────────────── Projecten
@@ -366,7 +366,7 @@ export function projecten(ctx) {
 ${videoSection(ctx.media.videos, { title: 'Filmpjes van de bouw', lead: 'Zandaanvoer, mixer en pomp, en de vloer die erin gaat.' })}
 <dialog class="lightbox" id="lightbox" aria-label="Foto vergroot"><button type="button" class="lb-close" aria-label="Sluiten">×</button><button type="button" class="lb-prev" aria-label="Vorige">‹</button><div class="lb-stage"></div><button type="button" class="lb-next" aria-label="Volgende">›</button><p class="lb-cap"></p></dialog>
 ${cta()}`;
-  return page({ path: '/projecten', active: '/projecten', title: 'Projecten: zandcement dekvloeren in heel Nederland | Dekvloerexpert', description: 'Bekijk onze projecten: kantoren, woningen met vloerverwarming, bedrijfspanden en nieuwbouw. Zandcement dekvloeren, kaarsrecht gelegd.', body, footerPlaces: ctx.footerPlaces, ld: [crumbLd(crumbs)] });
+  return page({ path: '/projecten', active: '/projecten', title: 'Projecten: zandcement dekvloeren in heel Nederland | Dekvloerexperts', description: 'Bekijk onze projecten: kantoren, woningen met vloerverwarming, bedrijfspanden en nieuwbouw. Zandcement dekvloeren, kaarsrecht gelegd.', body, footerPlaces: ctx.footerPlaces, ld: [crumbLd(crumbs)] });
 }
 
 // ───────────────────────── Werkwijze
@@ -385,19 +385,19 @@ export function werkwijze(ctx) {
 <p>Al het andere nemen wij mee: materiaal, randisolatie, folie en gereedschap.</p></div>
 <!--photo--><div class="photo wide reveal"><img src="/assets/img/project-2.jpg" alt="Voorbereiding van een dekvloer met vloerverwarming" loading="lazy"></div><!--/photo--></div></section>
 ${cta()}`;
-  return page({ path: '/werkwijze', active: '/werkwijze', title: 'Werkwijze: van advies tot legklare vloer | Dekvloerexpert', description: 'Zo werken wij: advies vooraf, een heldere prijsopgave, uitvoering volgens planning en een kaarsrechte, legklare vloer.', body, footerPlaces: ctx.footerPlaces, ld: [crumbLd(crumbs)] });
+  return page({ path: '/werkwijze', active: '/werkwijze', title: 'Werkwijze: van advies tot legklare vloer | Dekvloerexperts', description: 'Zo werken wij: advies vooraf, een heldere prijsopgave, uitvoering volgens planning en een kaarsrechte, legklare vloer.', body, footerPlaces: ctx.footerPlaces, ld: [crumbLd(crumbs)] });
 }
 
 // ───────────────────────── Over ons
 export function overOns(ctx) {
   const crumbs = [['/', 'Home'], ['/over-ons', 'Over ons']];
-  const body = `${hero({ crumbs, h1: 'Over Dekvloerexpert', lead: 'Specialist in zandcement dekvloeren, voor aannemers en particulieren door heel Nederland.' })}
+  const body = `${hero({ crumbs, h1: 'Over Dekvloerexperts', lead: 'Specialist in zandcement dekvloeren, voor aannemers en particulieren door heel Nederland.' })}
 <section><div class="wrap split"><div class="reveal prose"><h2>Strakke vloeren, sterke basis</h2>
-<p>Dekvloerexpert legt zandcement dekvloeren voor nieuwbouw, renovatie en utiliteit. We werken met eigen mixers, pompen en een vast team, zodat we de kwaliteit en de planning in eigen hand houden.</p>
+<p>Dekvloerexperts legt zandcement dekvloeren voor nieuwbouw, renovatie en utiliteit. We werken met eigen mixers, pompen en een vast team, zodat we de kwaliteit en de planning in eigen hand houden.</p>
 <p>Voor aannemers zijn we een betrouwbare schakel in de bouwplanning. Voor particulieren nemen we de zorg voor de vloer volledig uit handen: van advies over dikte en opties tot een vloer die kaarsrecht en legklaar wordt opgeleverd.</p></div>
-<!--photo--><div class="photo reveal"><img src="/assets/img/dekvloer-2.jpg" alt="Team van Dekvloerexpert aan het werk" loading="lazy"></div><!--/photo--></div></section>
+<!--photo--><div class="photo reveal"><img src="/assets/img/dekvloer-2.jpg" alt="Team van Dekvloerexperts aan het werk" loading="lazy"></div><!--/photo--></div></section>
 ${reviewsSection()}${cta()}`;
-  return page({ path: '/over-ons', title: 'Over ons | Dekvloerexpert', description: 'Dekvloerexpert: specialist in zandcement dekvloeren voor aannemers en particulieren, landelijk actief met eigen materieel.', body, footerPlaces: ctx.footerPlaces, ld: [crumbLd(crumbs)] });
+  return page({ path: '/over-ons', title: 'Over ons | Dekvloerexperts', description: 'Dekvloerexperts: specialist in zandcement dekvloeren voor aannemers en particulieren, landelijk actief met eigen materieel.', body, footerPlaces: ctx.footerPlaces, ld: [crumbLd(crumbs)] });
 }
 
 // ───────────────────────── Offerte
@@ -445,10 +445,10 @@ ${chips('opties', [...EXTRAS, 'Graag advies'], { multi: true })}
 <a href="${tel}"><span class="ic">${icon('phone')}</span><span><small>Telefoon</small><b>${site.phoneDisplay}</b></span></a>
 <a href="${wa()}" target="_blank" rel="noopener"><span class="ic">${waIcon}</span><span><small>WhatsApp</small><b>Stuur een bericht</b></span></a>
 <a href="/werkgebied"><span class="ic">${icon('pin')}</span><span><small>Werkgebied</small><b>Heel Nederland</b></span></a></div>
-<div class="why"><h3>Waarom Dekvloerexpert?</h3><ul>${['Vrijblijvende prijsopgave', 'Duidelijk advies vooraf', 'Transparante, eerlijke prijzen', 'Alles onder één dak', 'Landelijk actief', 'Jarenlange ervaring'].map(t => `<li><span class="tick">${icon('check')}</span>${t}</li>`).join('')}</ul></div>
+<div class="why"><h3>Waarom Dekvloerexperts?</h3><ul>${['Vrijblijvende prijsopgave', 'Duidelijk advies vooraf', 'Transparante, eerlijke prijzen', 'Alles onder één dak', 'Landelijk actief', 'Jarenlange ervaring'].map(t => `<li><span class="tick">${icon('check')}</span>${t}</li>`).join('')}</ul></div>
 </aside>
 </div></section>`;
-  return page({ path: '/offerte', title: 'Offerte aanvragen | Dekvloerexpert', description: 'Vraag een scherpe, vrijblijvende prijsopgave aan voor uw zandcement dekvloer, vloerverwarming of andere vloerklus. Snel antwoord.', body, footerPlaces: ctx.footerPlaces, ld: [crumbLd(crumbs)] });
+  return page({ path: '/offerte', title: 'Offerte aanvragen | Dekvloerexperts', description: 'Vraag een scherpe, vrijblijvende prijsopgave aan voor uw zandcement dekvloer, vloerverwarming of andere vloerklus. Snel antwoord.', body, footerPlaces: ctx.footerPlaces, ld: [crumbLd(crumbs)] });
 }
 
 // ───────────────────────── Contact
@@ -465,7 +465,7 @@ export function contact(ctx) {
 </ul></div>
 <div class="dc reveal"><h3>Snel een prijs?</h3><p style="color:var(--muted-d)">Stuur via WhatsApp de oppervlakte, de gewenste dikte, uw postcode en een foto van de ruimte. Dan sturen we u zo snel mogelijk een eerste indicatie.</p><a class="btn btn-wa" href="${wa('Hallo, ik wil graag een prijsindicatie voor een dekvloer. Oppervlakte: … m², dikte: … cm, postcode: …')}" target="_blank" rel="noopener">${waIcon} Start WhatsApp</a></div>
 </div></section>${cta()}`;
-  return page({ path: '/contact', active: '/contact', title: 'Contact | Dekvloerexpert', description: `Contact met Dekvloerexpert: bel ${site.phoneDisplay}, stuur een WhatsApp of vraag online een vrijblijvende offerte aan voor uw dekvloer.`, body, footerPlaces: ctx.footerPlaces, ld: [crumbLd(crumbs)] });
+  return page({ path: '/contact', active: '/contact', title: 'Contact | Dekvloerexperts', description: `Contact met Dekvloerexperts: bel ${site.phoneDisplay}, stuur een WhatsApp of vraag online een vrijblijvende offerte aan voor uw dekvloer.`, body, footerPlaces: ctx.footerPlaces, ld: [crumbLd(crumbs)] });
 }
 
 export function privacy(ctx) {
@@ -476,7 +476,7 @@ export function privacy(ctx) {
 <p>We bewaren offerteaanvragen niet langer dan nodig, en facturen zo lang als de wet voorschrijft. U kunt altijd vragen welke gegevens wij van u hebben, en vragen om ze aan te passen of te verwijderen: mail naar <a href="mailto:${site.email}">${site.email}</a>.</p>
 <p>Deze website plaatst geen cookies en gebruikt geen trackers. De lettertypen staan op onze eigen server; er worden geen gegevens naar derden gestuurd om de website te tonen.</p>
 </div></section>`;
-  return page({ path: '/privacy', title: 'Privacyverklaring | Dekvloerexpert', description: 'Privacyverklaring van Dekvloerexpert: welke gegevens wij gebruiken als u een offerte aanvraagt, en hoe u ze kunt inzien of laten verwijderen.', body, footerPlaces: ctx.footerPlaces, ld: [crumbLd(crumbs)] });
+  return page({ path: '/privacy', title: 'Privacyverklaring | Dekvloerexperts', description: 'Privacyverklaring van Dekvloerexperts: welke gegevens wij gebruiken als u een offerte aanvraagt, en hoe u ze kunt inzien of laten verwijderen.', body, footerPlaces: ctx.footerPlaces, ld: [crumbLd(crumbs)] });
 }
 
 export function faq(ctx) {
@@ -489,13 +489,13 @@ ${faqHtml(HOME_FAQ)}
 <div class="center" style="margin-top:44px"><h3>Meer weten?</h3><ul class="chips" style="justify-content:center">${kb}</ul></div>
 </div></section>
 ${cta()}`;
-  return page({ path: '/veelgestelde-vragen', title: 'Veelgestelde vragen over zandcement dekvloeren | Dekvloerexpert', description: 'Antwoorden op veelgestelde vragen over zandcement dekvloeren: dikte, droogtijd, vloerverwarming, opties en de offerte.', body, footerPlaces: ctx.footerPlaces, ld: [crumbLd(crumbs), faqLd(HOME_FAQ)] });
+  return page({ path: '/veelgestelde-vragen', title: 'Veelgestelde vragen over zandcement dekvloeren | Dekvloerexperts', description: 'Antwoorden op veelgestelde vragen over zandcement dekvloeren: dikte, droogtijd, vloerverwarming, opties en de offerte.', body, footerPlaces: ctx.footerPlaces, ld: [crumbLd(crumbs), faqLd(HOME_FAQ)] });
 }
 const SERVICES_KB = [['cementdekvloer-kosten-per-m2', 'Cementdekvloer kosten per m²'], ['cementdekvloer-droogtijd', 'Droogtijd cementdekvloer'], ['zandcement-dekvloer-zelf-maken', 'Zandcement dekvloer zelf maken'], ['vloeibaar-zandcement', 'Vloeibaar zandcement'], ['cement-dekvloer', 'Cementdekvloer'], ['kennisbank', 'Alle artikelen']];
 
 export function notFound(ctx) {
   const body = `${hero({ h1: 'Pagina niet gevonden', lead: 'Deze pagina bestaat niet (meer). Zoekt u een plaats? Bekijk dan ons werkgebied.', buttons: `<div class="btn-row"><a class="btn btn-teal" href="/werkgebied">Naar werkgebied ${icon('arrow')}</a><a class="btn btn-ghost" href="/">Naar home</a></div>` })}`;
-  return page({ path: '/404', title: 'Pagina niet gevonden | Dekvloerexpert', description: 'Deze pagina bestaat niet (meer). Bekijk ons werkgebied of vraag direct een offerte aan voor uw zandcement dekvloer.', body, noindex: true, footerPlaces: ctx.footerPlaces });
+  return page({ path: '/404', title: 'Pagina niet gevonden | Dekvloerexperts', description: 'Deze pagina bestaat niet (meer). Bekijk ons werkgebied of vraag direct een offerte aan voor uw zandcement dekvloer.', body, noindex: true, footerPlaces: ctx.footerPlaces });
 }
 
 export function fotoverantwoording(ctx) {
@@ -504,5 +504,5 @@ export function fotoverantwoording(ctx) {
   const body = `${hero({ crumbs, h1: 'Fotoverantwoording', lead: 'Een deel van de foto\'s op deze site is gemaakt door anderen en gedeeld onder een Creative Commons-licentie. Hieronder staat per foto wie hem maakte en onder welke licentie.', buttons: '' })}
 <section><div class="wrap"><div class="table-scroll"><table class="ptable"><thead><tr><th>Foto</th><th>Titel</th><th>Maker</th><th>Licentie</th><th></th></tr></thead><tbody>${rows || '<tr><td colspan="5">Alle foto\'s op deze site zijn eigen werk.</td></tr>'}</tbody></table></div>
 <p class="note">De foto's zijn niet bewerkt, alleen verkleind voor het web.</p></div></section>`;
-  return page({ path: '/fotoverantwoording', title: 'Fotoverantwoording | Dekvloerexpert', description: 'Makers en licenties van de foto\'s op deze website.', body, footerPlaces: ctx.footerPlaces, ld: [crumbLd(crumbs)] });
+  return page({ path: '/fotoverantwoording', title: 'Fotoverantwoording | Dekvloerexperts', description: 'Makers en licenties van de foto\'s op deze website.', body, footerPlaces: ctx.footerPlaces, ld: [crumbLd(crumbs)] });
 }
