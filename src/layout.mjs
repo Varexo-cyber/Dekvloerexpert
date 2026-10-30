@@ -162,9 +162,10 @@ ${noindex || process.env.DEMO ? '<meta name="robots" content="noindex,nofollow,n
 <meta property="og:image" content="${site.url}${ogImage}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#111514">
-<link rel="icon" href="/favicon.ico" sizes="32x32">
-<link rel="icon" href="/assets/img/favicon.svg?v=2" type="image/svg+xml">
-<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="icon" href="/favicon.ico?v=3" sizes="16x16 32x32 48x48">
+<link rel="icon" href="/assets/img/favicon-32.png?v=3" type="image/png" sizes="32x32">
+<link rel="icon" href="/assets/img/favicon-16.png?v=3" type="image/png" sizes="16x16">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png?v=3">
 <link rel="manifest" href="/site.webmanifest">
 <script>document.documentElement.classList.add('js')</script>
 <link rel="preload" href="/assets/fonts/inter-tight.woff2" as="font" type="font/woff2" crossorigin>
