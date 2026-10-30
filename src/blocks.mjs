@@ -41,7 +41,8 @@ const REVIEWS = [
   ['Snel geschakeld en de afspraken nagekomen, precies volgens planning.', 'Nieuwbouw'],
 ];
 const reviewCard = ([q, t]) => !site.reviews?.length ? `<article class="review"><div class="r-top"><span class="r-av">G</span><div><b>Klant via Google</b><span class="stars" aria-label="5 sterren">★★★★★</span></div><span class="r-tag">Voorbeeld</span></div><q>${esc(q)}</q><small>${esc(t)}</small></article>` : `<article class="review"><div class="r-top"><span class="r-av">G</span><div><b>Klant via Google</b><span class="stars" aria-label="5 sterren">★★★★★</span></div></div><q>${esc(q)}</q><small>${esc(t)}</small></article>`;
-export const reviewsSection = () => `<section class="dark" id="reviews"><div class="wrap center">
+// Live alleen echte reviews; de voorbeeldkaarten verschijnen uitsluitend in de wachtwoord-demo.
+export const reviewsSection = () => !site.reviews?.length && !process.env.DEMO ? '' : `<section class="dark" id="reviews"><div class="wrap center">
 <a class="gbadge" href="${site.googleReviewsUrl || '#reviews'}"${site.googleReviewsUrl ? ' target="_blank" rel="noopener"' : ''}>${googleWord}<span class="stars">★★★★★</span>Reviews</a>
 <h2>Wat onze klanten <span class="accent">zeggen</span></h2>
 ${site.reviews?.length ? '' : '<p class="lead">Voorbeeldweergave: zodra uw Google Bedrijfsprofiel is gekoppeld, verschijnen hier de echte beoordelingen van uw klanten.</p>'}

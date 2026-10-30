@@ -92,10 +92,10 @@ export function footer(footerPlaces = []) {
   const soc = [
     ['WhatsApp', wa(), waIcon, 'wa'],
     ['Bellen', tel, icon('phone')],
-    ['Instagram', site.socials.instagram || 'https://www.instagram.com/', icon('instagram')],
-    ['TikTok', site.socials.tiktok || 'https://www.tiktok.com/', icon('tiktok')],
-    ['YouTube', site.socials.youtube || 'https://www.youtube.com/', icon('youtube')],
-    ['Facebook', site.socials.facebook || 'https://www.facebook.com/', icon('facebook')],
+    (site.socials.instagram || process.env.DEMO) && ['Instagram', site.socials.instagram || 'https://www.instagram.com/', icon('instagram')],
+    (site.socials.tiktok || process.env.DEMO) && ['TikTok', site.socials.tiktok || 'https://www.tiktok.com/', icon('tiktok')],
+    (site.socials.youtube || process.env.DEMO) && ['YouTube', site.socials.youtube || 'https://www.youtube.com/', icon('youtube')],
+    (site.socials.facebook || process.env.DEMO) && ['Facebook', site.socials.facebook || 'https://www.facebook.com/', icon('facebook')],
   ].filter(Boolean).map(([l, h, i, c]) => `<a${c ? ` class="${c}"` : ''} href="${h}" aria-label="${l}"${h.startsWith('http') ? ' target="_blank" rel="noopener"' : ''}>${i}</a>`).join('');
   return `<footer class="site-footer"><div class="wrap">
 <div class="f-grid">
@@ -132,7 +132,17 @@ export const businessLd = () => ({
   slogan: 'Strakke vloeren, sterke basis!',
 });
 
+// Google toont ~60 tekens titel en ~155 tekens omschrijving: te lange delen netjes inkorten.
+const plain = t => t.replace(/&amp;/g, '&');
+function fitTitle(t) { while (plain(t).length > 65 && t.includes(' | ')) t = t.slice(0, t.lastIndexOf(' | ')); return t; }
+function fitDesc(d) {
+  if (d.length <= 158) return d;
+  d = d.replace('Vraag een vrijblijvende offerte aan.', 'Vraag een offerte aan.');
+  while (d.length > 158 && /[.?!] [^.?!]+[.?!]$/.test(d)) d = d.replace(/ [^.?!]+[.?!]$/, '');
+  return d.length <= 158 ? d : d.slice(0, d.lastIndexOf(' ', 154)) + '…';
+}
 export function page({ path, title, description, active, body, ld = [], footerPlaces, ogImage = '/assets/img/hero.jpg', noindex = false }) {
+  title = fitTitle(title); description = fitDesc(description);
   const graph = [businessLd(), ...ld];
   return `<!doctype html>
 <html lang="nl">
@@ -152,7 +162,10 @@ ${noindex || process.env.DEMO ? '<meta name="robots" content="noindex,nofollow,n
 <meta property="og:image" content="${site.url}${ogImage}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#111514">
-<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/assets/img/favicon.svg?v=2" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
 <script>document.documentElement.classList.add('js')</script>
 <link rel="preload" href="/assets/fonts/inter-tight.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>

@@ -35,13 +35,14 @@ const finish = html => {
   if (media.heroPoster.startsWith('/assets/media/')) html = html.replace(/\/assets\/img\/hero\.jpg/g, media.heroPoster);
   return html.replace(/<!--\/?(photo|media)-->/g, '').replace(/\/assets\/img\/(?:dekvloer|project)-\d\.jpg/g, () => imgs.length ? imgs[photoIdx++ % imgs.length].src : '');
 };
-const write = (path, html, priority = 0.6) => {
+const pvSlug = Object.fromEntries(data.provinces.map(pv => [pv.name, pv.slug]));
+const write = (path, html, priority = 0.6, group = 'paginas') => {
   html = finish(html);
   const file = path === '/' ? 'index.html' : path.slice(1) + '.html';
   const full = join(out, file);
   mkdirSync(dirname(full), { recursive: true });
   writeFileSync(full, html);
-  if (path !== '/404') urls.push([path, priority]);
+  if (path !== '/404') urls.push([path, priority, group]);
 };
 
 write('/', P.home(ctx), 1.0);
@@ -57,12 +58,12 @@ write('/contact', P.contact(ctx), 0.7);
 write('/veelgestelde-vragen', P.faq(ctx), 0.6);
 write('/privacy', P.privacy(ctx), 0.2);
 if (media.credits.length) write('/fotoverantwoording', P.fotoverantwoording(ctx), 0.1);
-write('/werkgebied', werkgebied(ctx), 0.8);
+write('/werkgebied', werkgebied(ctx), 0.8, 'werkgebied');
 write('/404', P.notFound(ctx));
 
-for (const pv of data.provinces) write(`/werkgebied/${pv.slug}`, provincePage(pv, ctx), 0.7);
-for (const m of data.munis) if (m.hubOnly) write(`/${m.slug}`, muniHub(m, ctx), 0.7);
-for (const p of data.places) write(`/${p.slug}`, placePage(p, ctx), p.isMain ? 0.8 : 0.6);
+for (const pv of data.provinces) write(`/werkgebied/${pv.slug}`, provincePage(pv, ctx), 0.7, 'werkgebied');
+for (const m of data.munis) if (m.hubOnly) write(`/${m.slug}`, muniHub(m, ctx), 0.7, 'plaatsen-' + pvSlug[m.province]);
+for (const p of data.places) write(`/${p.slug}`, placePage(p, ctx), p.isMain ? 0.8 : 0.6, 'plaatsen-' + pvSlug[p.province]);
 
 // Netlify Forms herkent formulieren alleen in gewone (onversleutelde) HTML: hier staat een verborgen kopie.
 if (site.netlifyForms) writeFileSync(join(out, 'formulieren.html'), `<!doctype html><html lang="nl"><head><meta charset="utf-8"><meta name="robots" content="noindex"><title>Formulieren</title></head><body>
@@ -75,10 +76,21 @@ for (const [u] of urls) { if (seen.has(u)) throw new Error('Dubbele URL: ' + u);
 
 // Sitemap + robots
 const today = new Date().toISOString().slice(0, 10);
-writeFileSync(join(out, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>
+// Sitemap-index met een aparte sitemap per provincie (alle gemeente- en plaatspagina's), zodat
+// Google Search Console per regio laat zien hoeveel pagina's zijn geïndexeerd.
+const groups = {};
+for (const [u, pr, g] of urls) (groups[g] ||= []).push([u, pr]);
+for (const [g, list] of Object.entries(groups)) {
+  writeFileSync(join(out, `sitemap-${g}.xml`), `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${urls.map(([u, pr]) => `<url><loc>${site.url}${u === '/' ? '/' : u}</loc><lastmod>${today}</lastmod><priority>${pr.toFixed(1)}</priority></url>`).join('\n')}
+${list.map(([u, pr]) => `<url><loc>${site.url}${u === '/' ? '/' : u}</loc><lastmod>${today}</lastmod><priority>${pr.toFixed(1)}</priority></url>`).join('\n')}
 </urlset>
+`);
+}
+writeFileSync(join(out, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${Object.keys(groups).map(g => `<sitemap><loc>${site.url}/sitemap-${g}.xml</loc><lastmod>${today}</lastmod></sitemap>`).join('\n')}
+</sitemapindex>
 `);
 // Demo (wachtwoord-preview voor de klant): niet indexeren.
 const DEMO = !!process.env.DEMO;
@@ -101,7 +113,7 @@ console.log(`  media: ${media.real ? media.gallery.length + ' foto\'s/video\'s u
 console.log(`  ${data.zoneCount} "Zone"-regels uit de CSV → 301 naar de echte plaatspagina`);
 
 if (process.argv.includes('--serve')) {
-  const types = { '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript', '.svg': 'image/svg+xml', '.jpg': 'image/jpeg', '.xml': 'application/xml', '.txt': 'text/plain', '.json': 'application/json', '.mp4': 'video/mp4', '.webm': 'video/webm', '.woff2': 'font/woff2' };
+  const types = { '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript', '.svg': 'image/svg+xml', '.jpg': 'image/jpeg', '.xml': 'application/xml', '.txt': 'text/plain', '.json': 'application/json', '.mp4': 'video/mp4', '.webm': 'video/webm', '.woff2': 'font/woff2', '.png': 'image/png', '.ico': 'image/x-icon', '.webmanifest': 'application/manifest+json' };
   createServer((req, res) => {
     let p = decodeURIComponent(new URL(req.url, 'http://x').pathname);
     const zone = p.match(/^\/(zandcement-dekvloer-.+)-zone-\d+$/);

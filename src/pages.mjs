@@ -15,7 +15,7 @@ ${hero({
     h1: 'Zandcement dekvloeren:<br><span class="accent">De perfecte basis<br class="br-d"> voor elk project</span>',
     lead: 'Een strakke, duurzame en kaarsrechte vloer begint bij de basis. Voor nieuwbouw, utiliteit en renovatie, door heel Nederland.',
     checks: ['Specialist in zandcementdekvloeren', 'Door heel Nederland', 'Gratis offerte', 'Voor particulieren &amp; aannemers'],
-    extra: `<a class="gbadge" href="${site.googleReviewsUrl || '#reviews'}">${googleWord}<span class="stars">★★★★★</span>Reviews</a>`,
+    extra: site.googleReviewsUrl || process.env.DEMO ? `<a class="gbadge" href="${site.googleReviewsUrl || '#reviews'}"${site.googleReviewsUrl ? ' target="_blank" rel="noopener"' : ''}>${googleWord}<span class="stars">★★★★★</span>Reviews</a>` : '',
     buttons: `<div class="btn-row hero-btns"><a class="btn btn-teal" href="/offerte">Offerte aanvragen ${icon('arrow')}</a><a class="btn btn-wa" href="${wa()}" target="_blank" rel="noopener">${waIcon} WhatsApp</a><a class="btn btn-ghost" href="${tel}">${icon('phone')} Bel direct</a></div>`,
   })}
 
@@ -97,7 +97,7 @@ ${reviewsSection()}
 ${cta()}`;
   return page({
     path: '/', active: '/',
-    title: 'Zandcement dekvloer laten leggen | Dekvloerexpert, landelijk actief',
+    title: 'Zandcement dekvloer laten leggen | Dekvloerexpert',
     description: 'Zandcement dekvloeren voor nieuwbouw, renovatie en utiliteit in heel Nederland. Kaarsrecht en legklaar, met vloerverwarming en extra opties. Vraag een offerte aan, direct via WhatsApp.',
     body, footerPlaces: ctx.footerPlaces,
     ld: [{ '@type': 'WebSite', name: site.name, url: site.url + '/' }],
@@ -474,9 +474,9 @@ export function privacy(ctx) {
 <section><div class="wrap prose" style="max-width:860px">
 <p>${site.name} gebruikt de gegevens die u via het offerteformulier, WhatsApp, e-mail of telefoon doorgeeft alleen om uw aanvraag te behandelen en een offerte uit te brengen. We delen ze niet met derden, behalve als dat nodig is voor de uitvoering van de opdracht (bijvoorbeeld met een leverancier) of wettelijk verplicht is.</p>
 <p>We bewaren offerteaanvragen niet langer dan nodig, en facturen zo lang als de wet voorschrijft. U kunt altijd vragen welke gegevens wij van u hebben, en vragen om ze aan te passen of te verwijderen: mail naar <a href="mailto:${site.email}">${site.email}</a>.</p>
-<p>Deze website plaatst geen tracking-cookies. De lettertypen worden geladen via Google Fonts.</p>
+<p>Deze website plaatst geen cookies en gebruikt geen trackers. De lettertypen staan op onze eigen server; er worden geen gegevens naar derden gestuurd om de website te tonen.</p>
 </div></section>`;
-  return page({ path: '/privacy', title: 'Privacyverklaring | Dekvloerexpert', description: 'Privacyverklaring van Dekvloerexpert.', body, footerPlaces: ctx.footerPlaces, ld: [crumbLd(crumbs)] });
+  return page({ path: '/privacy', title: 'Privacyverklaring | Dekvloerexpert', description: 'Privacyverklaring van Dekvloerexpert: welke gegevens wij gebruiken als u een offerte aanvraagt, en hoe u ze kunt inzien of laten verwijderen.', body, footerPlaces: ctx.footerPlaces, ld: [crumbLd(crumbs)] });
 }
 
 export function faq(ctx) {
@@ -495,7 +495,7 @@ const SERVICES_KB = [['cementdekvloer-kosten-per-m2', 'Cementdekvloer kosten per
 
 export function notFound(ctx) {
   const body = `${hero({ h1: 'Pagina niet gevonden', lead: 'Deze pagina bestaat niet (meer). Zoekt u een plaats? Bekijk dan ons werkgebied.', buttons: `<div class="btn-row"><a class="btn btn-teal" href="/werkgebied">Naar werkgebied ${icon('arrow')}</a><a class="btn btn-ghost" href="/">Naar home</a></div>` })}`;
-  return page({ path: '/404', title: 'Pagina niet gevonden | Dekvloerexpert', description: 'Deze pagina bestaat niet.', body, noindex: true, footerPlaces: ctx.footerPlaces });
+  return page({ path: '/404', title: 'Pagina niet gevonden | Dekvloerexpert', description: 'Deze pagina bestaat niet (meer). Bekijk ons werkgebied of vraag direct een offerte aan voor uw zandcement dekvloer.', body, noindex: true, footerPlaces: ctx.footerPlaces });
 }
 
 export function fotoverantwoording(ctx) {
