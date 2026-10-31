@@ -130,6 +130,7 @@ export const businessLd = () => ({
   image: site.url + '/assets/img/hero.jpg',
   areaServed: { '@type': 'Country', name: 'Nederland' },
   slogan: 'Strakke vloeren, sterke basis!',
+  sameAs: Object.values(site.socials).filter(Boolean),
 });
 
 // Google toont ~60 tekens titel en ~155 tekens omschrijving: te lange delen netjes inkorten.

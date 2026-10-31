@@ -20,10 +20,10 @@ export const site = {
   // true zodra de foto's in assets/media/projecten/ van de klant zelf zijn. Dan heten ze "Recent werk".
   ownMedia: true,
   socials: {
-    instagram: '',
-    tiktok: '',
-    youtube: '',
-    facebook: '',
+    instagram: 'https://www.instagram.com/dekvloerexpert/',
+    tiktok: 'https://www.tiktok.com/@dekvloerexpert',
+    youtube: 'https://www.youtube.com/@Dekvloerexpert',
+    facebook: 'https://www.facebook.com/people/Dekvloer-Expert/',
   },
   kvk: '',
   // Cijfers uit de hero-balk. Laat de klant deze bevestigen voor livegang.
