@@ -989,3 +989,5 @@ button.proj:hover img{transform:scale(1.04)}
 .nl-pin .bob{animation:nlbob 2.4s ease-in-out infinite alternate;animation-delay:calc(var(--d) * -1.7)}
 .nl-pin:nth-child(3n) .bob{animation-duration:3.1s}
 .nl-pin:nth-child(4n) .bob{animation-duration:2.8s}
+/* Invoervelden op donkere achtergrond: tekst blijft zichtbaar tijdens typen */
+.dark input:focus,.dark textarea:focus,.otool input:focus,.ot-text:focus{background:rgba(255,255,255,.1);color:#fff}

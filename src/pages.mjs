@@ -416,7 +416,7 @@ export function offerte(ctx) {
 <div class="chipset" role="radiogroup" aria-label="Dienst">${SERVICES.map((s, i) => `<label><input type="radio" name="dienst" value="${s.nav}"${i === 0 ? ' checked' : ''}>${s.nav}</label>`).join('')}</div></div>
 <div class="fstep"><span>01</span><h3>Uw project</h3></div>
 ${grp('Ruimte', chips('ruimte', ['Hele verdieping', 'Badkamer', 'Bedrijfshal of kantoor', 'Anders']), true, 'ruimte')}
-${grp('Verdieping', chips('verdieping', ['Kelder', 'Begane grond', '1e verdieping', '2e verdieping', '3e verdieping', 'Zelf invullen']), true, 'verdieping')}
+${grp('Verdieping', chips('verdieping', ['Kelder', 'Begane grond', '1e verdieping', '2e verdieping', '3e verdieping', 'Zelf invullen']) + '<input id="verdiepingZelf" name="verdieping_zelf" type="text" placeholder="Bijvoorbeeld 4e verdieping of zolder" aria-label="Verdieping zelf invullen" style="margin-top:12px;max-width:340px" hidden>', true, 'verdieping')}
 <div class="fgroup"><label for="m2">Oppervlakte in m² <span class="req">*</span></label><div class="unit" data-unit="m²"><input id="m2" name="oppervlakte" type="number" min="1" inputmode="numeric" placeholder="Bijvoorbeeld 85" required></div><p class="err">Vul de oppervlakte in.</p></div>
 ${grp('Gewenste laagdikte', chips('laagdikte', ['5 cm', '6 cm', '7 cm', '8 cm', '10 cm', 'Dikker / zelf invullen', 'Weet ik nog niet']) + '<div class="unit" data-unit="cm" style="margin-top:12px;max-width:220px"><input id="cmZelf" name="dikte_zelf" type="number" min="2" max="30" step="0.5" placeholder="Tot 30 cm" aria-label="Dikte zelf invullen in cm"></div>', true, 'laagdikte')}
 ${grp('Vloerverwarming', chips('vloerverwarming', ['Ja, ligt er al', 'Ja, moet nog worden aangelegd', 'Nee', 'Weet ik nog niet']), true, 'vloerverwarming')}

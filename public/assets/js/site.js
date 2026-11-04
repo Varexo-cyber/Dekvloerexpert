@@ -43,6 +43,13 @@
   if (pre) form.querySelectorAll('input[name=dienst]').forEach(function (r) { if (r.value === pre) r.checked = true; });
   var plaats = params.get('plaats');
   if (plaats) form.plaats.value = plaats;
+  // Verdieping "Zelf invullen": invulveld tonen en meesturen
+  var vz = form.verdieping_zelf;
+  if (vz) {
+    var syncVz = function () { var c = form.querySelector('input[name=verdieping]:checked'); var on = !!c && c.value === 'Zelf invullen'; vz.hidden = !on; if (on && document.activeElement && document.activeElement.name === 'verdieping') vz.focus(); };
+    form.querySelectorAll('input[name=verdieping]').forEach(function (r) { r.addEventListener('change', syncVz); });
+    syncVz();
+  }
   if (form.dikte_zelf) form.dikte_zelf.addEventListener('input', function () {
     form.querySelectorAll('input[name=laagdikte]').forEach(function (r) { if (r.value.indexOf('zelf') > -1) r.checked = true; });
     var g = form.dikte_zelf.closest('.fgroup'); if (g) g.classList.remove('invalid');
@@ -76,7 +83,7 @@
     if (!ok) { first.scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }
 
     var fields = [
-      ['Dienst', val('dienst')], ['Ruimte', val('ruimte')], ['Verdieping', val('verdieping')],
+      ['Dienst', val('dienst')], ['Ruimte', val('ruimte')], ['Verdieping', val('verdieping') === 'Zelf invullen' && val('verdieping_zelf') ? val('verdieping_zelf') : val('verdieping')],
       ['Oppervlakte', val('oppervlakte') + ' m²'], ['Laagdikte', val('dikte_zelf') ? val('dikte_zelf') + ' cm' : val('laagdikte')], ['Vloerverwarming', val('vloerverwarming')],
       ['Type project', val('type')], ['Uitvoerperiode', val('periode')], ['Opties', val('opties')],
       ['Naam', val('naam')], ['Telefoon', val('telefoon')], ['E-mail', val('email')], ['Plaats', val('plaats')], ['Toelichting', val('toelichting')]
