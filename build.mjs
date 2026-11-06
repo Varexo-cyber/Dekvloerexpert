@@ -6,7 +6,7 @@ import { dirname, join, extname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createServer } from 'node:http';
 import { site } from './src/config.mjs';
-import { loadPlaces, PROVINCES } from './src/places.mjs';
+import { loadPlaces, PROVINCES, DROP } from './src/places.mjs';
 import * as P from './src/pages.mjs';
 import { placePage, muniHub, provincePage, werkgebied } from './src/place-pages.mjs';
 import { loadMedia } from './src/media.mjs';
@@ -57,6 +57,7 @@ write('/offerte', P.offerte(ctx), 0.8);
 write('/contact', P.contact(ctx), 0.7);
 write('/veelgestelde-vragen', P.faq(ctx), 0.6);
 write('/privacy', P.privacy(ctx), 0.2);
+write('/algemene-voorwaarden', P.voorwaarden(ctx), 0.2);
 if (media.credits.length) write('/fotoverantwoording', P.fotoverantwoording(ctx), 0.1);
 write('/werkgebied', werkgebied(ctx), 0.8, 'werkgebied');
 write('/404', P.notFound(ctx));
@@ -99,9 +100,10 @@ writeFileSync(join(out, 'robots.txt'), DEMO ? 'User-agent: *\nDisallow: /\n' : `
 // Netlify: redirects voor de "Zone"-regels uit de CSV (Netlify kent geen regex, dus één regel per slug)
 // en de headers. Vercel gebruikt vercel.json.
 const csvRows = readFileSync(join(root, 'data/plaatsen.csv'), 'utf8').split(/\r?\n/).slice(1).map(l => l.split(',')[0]).filter(Boolean);
-const zoneRedirects = csvRows.filter(s => /-zone-\d+$/.test(s)).map(s => `/${s}  /${s.replace(/-zone-\d+$/, '')}  301`);
+const zoneRedirects = csvRows.filter(s => /-zone-\d+$/.test(s)).map(s => { const t = s.replace(/-zone-\d+$/, ''); return `/${s}  /${DROP[t] || t}  301`; });
+const dropRedirects = Object.entries(DROP).map(([f, t]) => `/${f}  /${t}  301`);
 const legacy = data.legacySlugs.map(([from, to]) => `/${encodeURI(from)}  /${to}  301`);
-writeFileSync(join(out, '_redirects'), ['/index  /  301', ...legacy, ...zoneRedirects].join('\n') + '\n');
+writeFileSync(join(out, '_redirects'), ['/index  /  301', ...legacy, ...dropRedirects, ...zoneRedirects].join('\n') + '\n');
 writeFileSync(join(out, '_headers'), `/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n${DEMO ? '  X-Robots-Tag: noindex, nofollow, noarchive\n' : ''}/assets/*\n  Cache-Control: public, max-age=2592000\n`);
 
 // vercel.json staat in de projectmap: nette URL's zonder .html en 301's voor de "Zone"-regels.

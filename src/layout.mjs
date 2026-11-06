@@ -60,8 +60,8 @@ export const SERVICES = [
 ];
 
 const NAV = [
-  ['/', 'Home'], ['/zandcement', 'Zandcement'], ['/projecten', 'Projecten'], ['/opties', 'Opties'],
-  ['DIENSTEN'], ['/werkwijze', 'Werkwijze'], ['/werkgebied', 'Werkgebied'], ['/veelgestelde-vragen', 'FAQ'], ['/contact', 'Contact'],
+  ['/', 'Home'], ['/zandcement', 'Zandcementdekvloeren'], ['/projecten', 'Projecten'], ['/opties', 'Extra mogelijkheden'],
+  ['/werkwijze', 'Werkwijze'], ['/werkgebied', 'Werkgebied'], ['/veelgestelde-vragen', 'Veelgestelde vragen'], ['/contact', 'Contact'],
 ];
 
 export function header(active) {
@@ -100,21 +100,23 @@ export function footer(footerPlaces = []) {
   return `<footer class="site-footer"><div class="wrap">
 <div class="f-grid">
 <div><a class="logo" href="/"><b>DEKVLOER<span>EXPERT</span></b><small>ZANDCEMENT DEKVLOEREN</small></a>
-<p class="f-about">Zandcement dekvloeren · Landelijk actief. Voor aannemers en particulieren. Strakke vloeren, sterke basis!</p>
+<p class="f-about">Dekvloerexpert is gespecialiseerd in het vakkundig aanbrengen van zandcementdekvloeren voor particulieren, aannemers en bouwbedrijven. Met jarenlange ervaring en oog voor kwaliteit realiseren wij een sterke basis voor ieder project.</p>
+<p class="f-tags">Landelijk actief | Vakmanschap | Betrouwbare afspraken</p>
 <div class="socials">${soc}</div></div>
 <div><h4>Diensten</h4><ul>${SERVICES.map(s => `<li><a href="/${s.slug}">${s.nav}</a></li>`).join('')}<li><a class="strong" href="/diensten">Alle diensten</a></li></ul></div>
 <div><h4>Informatie</h4><ul>
-<li><a href="/projecten">Projecten</a></li><li><a href="/opties">Opties</a></li><li><a href="/werkwijze">Werkwijze</a></li>
+<li><a href="/projecten">Projecten</a></li><li><a href="/opties">Extra mogelijkheden</a></li><li><a href="/werkwijze">Werkwijze</a></li>
 <li><a href="/contact">Contact</a></li><li><a href="/werkgebied">Werkgebied</a></li><li><a href="/over-ons">Over ons</a></li>
-<li><a href="/kennisbank">Kennisbank</a></li><li><a href="/offerte">Offerte aanvragen</a></li></ul></div>
+<li><a href="/veelgestelde-vragen">Veelgestelde vragen</a></li><li><a href="/kennisbank">Kennisbank</a></li><li><a href="/offerte">Offerte aanvragen</a></li></ul></div>
 <div><h4>Contact</h4><ul>
 <li><a href="${tel}">${site.phoneDisplay}</a></li><li><a href="${wa()}" target="_blank" rel="noopener">WhatsApp</a></li>
-<li><a href="mailto:${site.email}">${site.email}</a></li><li><a href="/werkgebied">Heel Nederland</a></li></ul>
+<li><a href="mailto:${site.email}">${site.email}</a></li><li>${site.address.street}<br>${site.address.zip} ${site.address.city}</li>
+<li class="f-legal">KvK: ${site.kvk}<br>Btw: ${site.btw}</li></ul>
 <p style="margin-top:26px"><a class="btn btn-teal btn-sm" href="/offerte">Offerte aanvragen</a></p></div>
 </div>
 ${footerPlaces.length ? `<div class="f-places"><h4>Zandcement dekvloer in onder meer</h4><ul>${footerPlaces.map(p => `<li><a href="/${p.slug}">${esc(p.name)}</a></li>`).join('')}<li><a class="strong" href="/werkgebied">Alle plaatsen</a></li></ul></div>` : ''}
 <div class="wordmark" aria-hidden="true">DEKVLOER<span>EXPERT</span></div>
-<div class="f-bottom"><span>© ${new Date().getFullYear()} ${site.name}. Alle rechten voorbehouden.${site.kvk ? ` KvK ${site.kvk}.` : ''} <a href="/privacy">Privacy</a> · <a href="/fotoverantwoording">Fotoverantwoording</a></span><span>Website door <b><a href="${site.builtBy.url}" target="_blank" rel="noopener">${site.builtBy.name}</a></b></span></div>
+<div class="f-bottom"><span>© ${new Date().getFullYear()} ${site.name}. Alle rechten voorbehouden. KvK ${site.kvk} · Btw ${site.btw} · <a href="/privacy">Privacyverklaring</a> · <a href="/algemene-voorwaarden">Algemene voorwaarden</a> · <a href="/fotoverantwoording">Fotoverantwoording</a></span><span>Website door <b><a href="${site.builtBy.url}" target="_blank" rel="noopener">${site.builtBy.name}</a></b></span></div>
 </div></footer>
 <a class="wa-fab" href="${wa()}" target="_blank" rel="noopener" aria-label="Stuur een WhatsApp-bericht">${waIcon}</a>
 <nav class="mbar" aria-label="Snel contact"><a class="call" href="${tel}">${icon('phone')}<span>Bel direct</span></a><a class="go" href="/offerte">${icon('doc')}<span>Offerte</span></a><a class="wa" href="${wa()}" target="_blank" rel="noopener">${waIcon}<span>WhatsApp</span></a></nav>`;
@@ -127,6 +129,10 @@ export const businessLd = () => ({
   url: site.url + '/',
   telephone: site.phoneIntl,
   email: site.email,
+  legalName: site.legalName,
+  vatID: site.btw,
+  identifier: { '@type': 'PropertyValue', name: 'KvK-nummer', value: site.kvk },
+  address: { '@type': 'PostalAddress', streetAddress: site.address.street, postalCode: site.address.zip, addressLocality: site.address.city, addressCountry: 'NL' },
   image: site.url + '/assets/img/hero.jpg',
   areaServed: { '@type': 'Country', name: 'Nederland' },
   slogan: 'Strakke vloeren, sterke basis!',
@@ -199,7 +205,7 @@ ${crumbs ? breadcrumb(crumbs) : ''}
 ${lead ? `<p class="lead">${lead}</p>` : ''}
 ${checks ? `<ul class="checks">${checks.map(c => `<li><span class="tick">${icon('check')}</span>${c}</li>`).join('')}</ul>` : ''}
 ${extra}
-${buttons ?? `<div class="btn-row"><a class="btn btn-teal" href="/offerte">Vrijblijvende offerte ${icon('arrow')}</a><a class="btn btn-ghost" href="${tel}">${icon('phone')} Bel direct</a></div>`}
+${buttons ?? `<div class="btn-row"><a class="btn btn-teal" href="/offerte">Vraag vrijblijvend een offerte aan ${icon('arrow')}</a><a class="btn btn-ghost" href="${tel}">${icon('phone')} Bel direct</a></div>`}
 ${after}
 </div>${aside}</div></section>`;
 }
@@ -217,13 +223,13 @@ export const faqLd = qa => ({
 });
 export const faqHtml = qa => `<div class="faq">${qa.map(([q, a], i) => `<details${i === 0 ? ' open' : ''}><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</div>`;
 
-export function cta(lead = 'Vertel ons wat u wilt laten leggen. U ontvangt een offerte op maat, direct op uw WhatsApp.', title = 'Zullen we <span class="accent">beginnen?</span>') {
+export function cta(lead = 'Heeft u een zandcementdekvloer nodig voor uw woning, verbouwing of bouwproject? Bij Dekvloerexpert bent u aan het juiste adres. Vertel ons uw wensen en ontvang een vrijblijvende offerte op maat.', title = 'Klaar voor een <span class="accent">sterke basis?</span>') {
   return `<section><div class="wrap"><div class="cta-card reveal">
 <span class="eyebrow">Vrijblijvende offerte</span>
 
 <h2>${title}</h2>
 <p>${lead}</p>
-<div class="btn-row"><a class="btn btn-teal" href="/offerte">Offerte aanvragen ${icon('arrow')}</a><a class="btn btn-wa" href="${wa()}" target="_blank" rel="noopener">${waIcon} WhatsApp</a><a class="btn btn-ghost" href="${tel}">${icon('phone')} Bel ${site.phoneDisplay}</a></div>
-<p class="fine">Zandcement dekvloeren · Landelijk actief · Strakke vloeren, sterke basis!</p>
+<div class="btn-row"><a class="btn btn-teal" href="/offerte">Vraag vrijblijvend een offerte aan ${icon('arrow')}</a><a class="btn btn-wa" href="${wa()}" target="_blank" rel="noopener">${waIcon} WhatsApp</a><a class="btn btn-ghost" href="${tel}">${icon('phone')} Bel ${site.phoneDisplay}</a></div>
+<p class="fine">Zandcementdekvloeren • Landelijk actief<br>Dekvloerexpert – Een sterke basis voor iedere vloer.</p>
 </div></div></section>`;
 }

@@ -7,7 +7,12 @@ export const site = {
   phoneDisplay: '06 51 77 63 99',
   phoneIntl: '+31651776399',
   whatsapp: '31651776399',
-  email: 'info@dekvloerexpert.nl',
+  email: 'dekvloerexpert@gmail.com',
+  // Officiële bedrijfsgegevens (KvK-uittreksel). Verplicht op de website (ACM/KvK).
+  legalName: 'Dekvloerexpert',
+  tradeNames: ['Dekvloerexpert', 'Mb vloeren'],
+  address: { street: 'Katschiplaan 112', zip: '2496 ZN', city: 'Den Haag' },
+  btw: 'NL001721918B16',
   // Optioneel: endpoint voor het offerteformulier (bijv. Formspree of Web3Forms).
   // Leeg = de aanvraag wordt als kant-en-klaar WhatsApp-bericht verstuurd.
   formEndpoint: '',
@@ -25,7 +30,7 @@ export const site = {
     youtube: 'https://www.youtube.com/@Dekvloerexpert',
     facebook: 'https://www.facebook.com/people/Dekvloer-Expert/',
   },
-  kvk: '',
+  kvk: '64204855',
   // Cijfers uit de hero-balk. Laat de klant deze bevestigen voor livegang.
   stats: [
     ['15+', 'Jaar ervaring'],

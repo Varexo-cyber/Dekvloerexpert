@@ -3,20 +3,20 @@ import { icon, esc, googleWord, waIcon } from './layout.mjs';
 import { site } from './config.mjs';
 
 export const OPTIONS = [
-  { key: 'droogtijdversneller', title: 'Droogtijdversneller', icon: 'clock', short: 'Laat de vloer sneller drogen, bijvoorbeeld binnen 10 tot 15 dagen.',
+  { key: 'droogtijdversneller', title: 'Droogtijdversneller', icon: 'clock', short: 'Verkort de droogtijd van uw zandcementdekvloer, zodat u sneller verder kunt met de vloerafwerking.',
     long: 'Normaal gesproken droogt een cementvloer ongeveer 1 centimeter per week. Heeft uw project haast? Met onze droogtijdversneller gaat dat veel sneller, en is de vloer bijvoorbeeld binnen 10 tot 15 dagen legklaar voor de eindafwerking.' },
-  { key: 'verharder', title: 'Verharder', alt: 'Vloerverharder', icon: 'shield', short: 'Voor intensief belaste vloeren of garagevloeren.',
+  { key: 'verharder', title: 'Verharder', alt: 'Vloerverharder', icon: 'shield', short: 'Voor vloeren die extra sterkte en slijtvastheid nodig hebben, bijvoorbeeld bij intensief gebruik.',
     long: 'Deze toevoeging maakt de vloer sterker en beter bestand tegen druk. Ideaal voor ruimtes die intensief belast worden, zoals garages, bedrijfshallen of drukbezochte winkelruimtes.' },
-  { key: 'vezels', title: 'Krimpvezels', alt: 'Vezelversterking', tag: 'Vezelwapening', icon: 'layers', short: 'PP-vezels voorkomen krimpscheuren in de zandcementdekvloer.',
-    long: 'Door speciale kunststof krimpvezels door de specie te mengen, ontstaat een fijn netwerk van wapening door de hele vloer. Dat verkleint de kans op krimpscheuren tijdens het drogen flink.' },
-  { key: 'duremit', title: 'Duremit', icon: 'bolt', short: 'Hoogwaardig additief voor extra sterke en sneldrogende vloeren.',
-    long: 'Duremit is een hoogwaardig additief dat de vloer dichter en sterker maakt en het drogen versnelt. Een goede keuze als u een vloer wilt die eerder belastbaar is en een hogere sterkteklasse haalt.' },
-  { key: 'krimpnetten', title: 'Krimpnetten', icon: 'grid', short: 'Extra constructieve stevigheid, essentieel bij vloerverwarming.',
+  { key: 'vezels', title: 'Krimpvezels', alt: 'Vezelversterking', tag: 'Vezelwapening', icon: 'layers', short: 'PP-vezels helpen krimpscheuren te beperken en verbeteren de samenhang van de zandcementdekvloer.',
+    long: 'Door speciale kunststof krimpvezels door de specie te mengen, ontstaat een fijn netwerk van wapening door de hele vloer. Dat helpt krimpscheuren tijdens het drogen te beperken; volledig voorkomen kan geen enkele toevoeging.' },
+  { key: 'duremit', title: 'Duremit', icon: 'bolt', short: 'Een hoogwaardige toevoeging die de druk- en buigtreksterkte van de dekvloer kan verhogen.',
+    long: 'Duremit is een hoogwaardige toevoeging die de druk- en buigtreksterkte van de dekvloer kan verhogen en de vloer dichter maakt. Een goede keuze als u een vloer wilt met een hogere sterkteklasse.' },
+  { key: 'krimpnetten', title: 'Krimpnetten', icon: 'grid', short: 'Wapeningsnetten helpen scheurvorming te beperken en dragen bij aan een stabiele dekvloer.',
     long: 'Een krimpnet is een gaas dat in de dekvloer wordt meegelegd. Het houdt de vloer bij elkaar als hij werkt door warmte en krimp. Boven vloerverwarming raden we het bijna altijd aan.' },
-  { key: 'randisolatie', title: 'Randisolatie', icon: 'ruler', short: 'Houdt de vloer vrij van muren en kolommen, zodat hij scheurvrij kan werken.',
+  { key: 'randisolatie', title: 'Randisolatie', icon: 'ruler', short: 'Voorkomt direct contact met muren en kolommen en geeft de dekvloer ruimte om te werken.',
     long: 'Langs alle wanden, kolommen en leidingdoorvoeren brengen we een strook randisolatie aan. Zo ligt de dekvloer los van de constructie, kan hij vrij uitzetten en krimpen, en loopt er minder contactgeluid door naar de muren.' },
-  { key: 'vlevopol', title: 'Vlevopol', icon: 'drop', short: 'Primer en toeslagstof voor een superieure hechting.',
-    long: 'Vlevopol is een hechtmiddel dat we gebruiken als de dekvloer direct op een bestaande betonvloer komt. Het zorgt voor een sterke hechting tussen oud en nieuw, zodat er geen holle plekken ontstaan.' },
+  { key: 'vlevopol', title: 'Flevopol', icon: 'drop', short: 'Een hechtmiddel en morteltoevoeging die de hechting en verwerkbaarheid kan verbeteren.',
+    long: 'Flevopol is een hechtmiddel dat we gebruiken als de dekvloer direct op een bestaande betonvloer komt. Het zorgt voor een sterke hechting tussen oud en nieuw, zodat er geen holle plekken ontstaan.' },
 ];
 export const optionByKey = k => OPTIONS.find(o => o.key === k);
 
@@ -28,7 +28,7 @@ export const STEPS = [
 ];
 export const stepsHtml = (steps = STEPS) => `<div class="steps">${steps.map(([t, d], i) => `<div class="step reveal"><div class="num">${String(i + 1).padStart(2, '0')}</div><h3>${t}</h3><p>${d}</p></div>`).join('')}</div>`;
 
-export const optionCards = (opts = OPTIONS, withLink = true) => `<div class="cards">${opts.map(o => `<div class="card reveal"><span class="ck">${icon('check')}</span><div><h3>${o.alt || o.title}</h3><p>${o.short}</p></div></div>`).join('')}${withLink ? `<a class="card link reveal" href="/opties"><div><h3>Alles over de opties</h3><p>Uitleg per optie en wanneer u hem kiest.</p></div><span class="arrow">${icon('arrow')}</span></a>` : ''}</div>`;
+export const optionCards = (opts = OPTIONS, withLink = true) => `<div class="cards">${opts.map(o => `<div class="card reveal"><span class="ck">${icon('check')}</span><div><h3>${o.alt || o.title}</h3><p>${o.short}</p></div></div>`).join('')}${withLink ? `<a class="card link reveal" href="/opties"><div><h3>Meer informatie over de mogelijkheden</h3><p>Uitleg per optie en wanneer u hem kiest.</p></div><span class="arrow">${icon('arrow')}</span></a>` : ''}</div>`;
 
 // Voorbeeldreviews, net als in de demo duidelijk gemarkeerd als voorbeeld.
 // Vervang ze door echte Google-reviews zodra het bedrijfsprofiel gekoppeld is.
@@ -91,7 +91,7 @@ const LAYERS = [
   { id: 'afwerking', name: 'Afwerkvloer', mm: '± 10 mm', h: 22, fill: 'var(--l-finish)', text: 'Tegels, pvc, laminaat, parket of een gietvloer. Hoe vlakker de dekvloer, hoe strakker dit resultaat.' },
   { id: 'dekvloer', name: 'Zandcement dekvloer', mm: '50 – 80 mm', h: 96, fill: 'var(--l-screed)', text: 'De laag die wij leggen: zand, cement en water, gepompt, verdicht en kaarsrecht afgereid. Minimaal 3 à 4 cm boven de leidingen.', pipes: true, net: true },
   { id: 'isolatie', name: 'Isolatie', mm: '60 – 120 mm', h: 64, fill: 'var(--l-insu)', text: 'PIR- of EPS-platen houden de warmte in de vloer en de kou van de kruipruimte weg. De dekvloer ligt hier zwevend op.' },
-  { id: 'beton', name: 'Constructievloer', mm: '± 200 mm', h: 78, fill: 'var(--l-concrete)', text: 'De dragende betonvloer of kanaalplaatvloer. Ligt de dekvloer direct hierop, dan zorgt Vlevopol voor de hechting.' },
+  { id: 'beton', name: 'Constructievloer', mm: '± 200 mm', h: 78, fill: 'var(--l-concrete)', text: 'De dragende betonvloer of kanaalplaatvloer. Ligt de dekvloer direct hierop, dan zorgt Flevopol voor de hechting.' },
 ];
 export function buildUp() {
   const W = 560; let y = 20;
@@ -173,8 +173,8 @@ export function galleryBand(items) {
 }
 
 // Staande filmpjes van de klant, naast elkaar als telefoonbeeld. Klik opent ze groot, met geluid.
-export const videoSection = (videos, { title = 'Van zandaanvoer tot legklare vloer', lead = 'Zo gaat het op de bouw: het zand komt binnen, de mixer maakt de mortel en de pomp brengt hem naar binnen.' } = {}) => !videos.length ? '' : `<section class="dark vids"><div class="wrap vids-grid">
-<div class="vids-text reveal"><h2>${title}</h2><p class="lead">${lead}</p><p class="vids-note">Klik op een filmpje om het met geluid te bekijken.</p></div>
+export const videoSection = (videos, { title = 'Van zandaanvoer tot legklare vloer', lead = 'Zo gaat het op de bouw: het zand komt binnen, de mixer maakt de mortel en de pomp brengt hem naar binnen.', note = 'Klik op een filmpje om het met geluid te bekijken.' } = {}) => !videos.length ? '' : `<section class="dark vids"><div class="wrap vids-grid">
+<div class="vids-text reveal"><h2>${title}</h2><p class="lead">${lead}</p><p class="vids-note">${note}</p></div>
 <div class="vids-row">${videos.map(v => `<button type="button" class="gal-item vid-tile" data-src="${v.src}" data-webm="${v.webm || ''}" data-video="1" data-caption="${esc(v.caption)}" aria-label="Bekijk filmpje: ${esc(v.caption)}"><video ${v.poster ? `poster="${v.poster}" ` : ''}autoplay muted loop playsinline preload="metadata"><source src="${v.src}" type="video/mp4">${v.webm ? `<source src="${v.webm}" type="video/webm">` : ''}</video><span class="gal-cap">${esc(v.caption)}</span></button>`).join('')}</div>
 </div></section>`;
 

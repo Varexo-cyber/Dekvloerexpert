@@ -46,6 +46,13 @@ const NAME_FIX = {
 };
 const fix = s => NAME_FIX[s] ?? s;
 
+// Onjuiste regels uit de CSV: geen echte wijk van deze gemeente. Geen eigen pagina, 301 naar de stad.
+export const DROP = {
+  'zandcement-dekvloer-rotterdam-kombuis': 'zandcement-dekvloer-rotterdam', // De Kombuis is een buurthuis, geen wijk
+  'zandcement-dekvloer-arnhem-velp-grens': 'zandcement-dekvloer-arnhem', // Velp hoort bij Rheden
+  'zandcement-dekvloer-haarlem-bloemendaal-grens': 'zandcement-dekvloer-haarlem', // geen bestaande wijk
+};
+
 // Stadsdelen die zonder stadsnaam niets zeggen ("Noord", "West").
 const BARE = /^(noord|zuid|oost|west|centrum|zuidoost|nieuw-west|oud-zuid|nijmegen-noord|zwolle-zuid)$/i;
 
@@ -55,7 +62,7 @@ export const PROVINCES = ['Noord-Holland', 'Zuid-Holland', 'Utrecht', 'Noord-Bra
 export function loadPlaces(file) {
   const raw = parseCsv(readFileSync(file, 'utf8'));
   const zoneRows = raw.filter(r => /\(Zone \d+\)/.test(r.city));
-  const rows = raw.filter(r => !/\(Zone \d+\)/.test(r.city));
+  const rows = raw.filter(r => !/\(Zone \d+\)/.test(r.city) && !DROP[r.slug]);
 
   const munis = new Map();
   const places = [];

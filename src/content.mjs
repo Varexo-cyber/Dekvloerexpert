@@ -225,11 +225,11 @@ export const OPTION_WHY = {
   vezels: [
     'Kunststof vezels door de specie beperken krimpscheuren, juist in dikkere lagen.',
     'Bij een ongelijke ondergrond, zoals in oudere panden in {name}, geven vezels extra zekerheid tegen scheuren.',
-    'Een kleine toevoeging die het risico op haarscheuren tijdens het drogen sterk verkleint.'],
+    'Een kleine toevoeging die helpt haarscheuren tijdens het drogen te beperken.'],
   duremit: [
-    'Duremit maakt de vloer sterker én sneller droog, in één toevoeging.',
-    'Voor wie een vloer wil die eerder belastbaar is en een hogere sterkteklasse haalt.',
-    'Geeft een dichtere, sterkere vloer die sneller klaar is voor de afwerking.'],
+    'Duremit kan de druk- en buigtreksterkte van de vloer verhogen, voor een sterkere dekvloer.',
+    'Voor wie een vloer wil die een hogere sterkteklasse haalt, bijvoorbeeld bij intensief gebruik.',
+    'Geeft een dichtere, sterkere vloer die beter bestand is tegen belasting.'],
   krimpnetten: [
     'Een krimpnet houdt de vloer boven vloerverwarming bij elkaar als hij opwarmt en afkoelt.',
     'Extra stevigheid op isolatie en leidingen. Bij vloerverwarming raden we het in {name} bijna altijd aan.',
@@ -239,7 +239,7 @@ export const OPTION_WHY = {
     'Voorkomt scheuren én geluidsoverdracht naar de buren. Onmisbaar in appartementen.',
     'Bij een zwevende dekvloer hoort randisolatie altijd. Zo kan de vloer uitzetten zonder tegen de muur te drukken.'],
   vlevopol: [
-    'Komt de dekvloer direct op een bestaande betonvloer? Vlevopol zorgt voor een sterke hechting tussen oud en nieuw.',
+    'Komt de dekvloer direct op een bestaande betonvloer? Flevopol zorgt voor een sterke hechting tussen oud en nieuw.',
     'Voorkomt holle plekken als de dekvloer dunner wordt gelegd op een oude ondergrond.',
     'Een primer die de hechting verbetert. Handig bij verbouwingen waar weinig hoogte beschikbaar is.'],
 };
@@ -261,7 +261,7 @@ export const FAQ_POOL = [
     'Zandcement wordt aangebracht en met de hand afgereid. Het is sterk, vochtbestendig en geschikt voor bijna elke ruimte, ook badkamers en garages. Anhydriet is vloeibaar, egaliseert zichzelf en kan dunner, maar is gevoelig voor vocht en moet vaak geschuurd worden. Wij leggen allebei en adviseren per ruimte.',
     'Een anhydrietvloer is vloeibaar en kan dunner, wat bij vloerverwarming prettig is. Zandcement is robuuster, kan tegen vocht en is in de meeste woningen de voordeligste keuze. Twijfelt u? Wij adviseren eerlijk wat bij uw situatie past.']],
   ['Hoe dik moet een zandcement dekvloer zijn?', [
-    'Een zwevende dekvloer op isolatie moet minimaal 5 cm zijn. Ligt er vloerverwarming, dan houden we minimaal 3 à 4 cm dekking boven de leidingen aan. Bij grote hoogteverschillen kan een vloer tot wel 30 cm dik worden. Bij de inmeting bepalen we de juiste dikte.',
+    'Dat hangt af van de vloerconstructie. Een zwevende dekvloer op isolatie is doorgaans minimaal 5 cm; boven vloerverwarming houden we voldoende dekking aan. Bij grote hoogteverschillen zijn dikkere vloeren mogelijk, tot circa 30 cm, mits de opbouw daarvoor geschikt is. Bij de inmeting bepalen we de juiste dikte.',
     'Dat hangt af van de ondergrond. Op isolatie of vloerverwarming is ongeveer 5 à 7 cm gebruikelijk, op een vlakke betonvloer kan het minder. Belangrijker dan de dikte zelf is dat hij overal gelijk is, en dat meten we vooraf uit.']],
   ['Kan ik een zandcement dekvloer ook zelf maken?', [
     'Voor een klein stukje kan dat, maar voor een hele ruimte is het zwaar werk. U moet de juiste mengverhouding aanhouden (ongeveer 1 deel cement op 4 à 5 delen zand), de vloer snel en vlak afreien en voorkomen dat hij te snel uitdroogt. Wij doen een gemiddelde woonkamer in een paar uur, met een gegarandeerd vlak resultaat.',

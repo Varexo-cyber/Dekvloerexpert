@@ -209,7 +209,7 @@ ${cta()}`;
 export function werkgebied(ctx) {
   const crumbs = [['/', 'Home'], ['/werkgebied', 'Werkgebied']];
   const body = `
-${hero({ crumbs, h1: 'Ons werkgebied', lead: `Landelijk actief: wij leggen zandcement dekvloeren in alle twaalf provincies, in ${ctx.places.length} plaatsen en wijken.` })}
+${hero({ crumbs, h1: 'Ons werkgebied', lead: 'Dekvloerexpert is actief door heel Nederland. Van particuliere woningen tot grootschalige nieuwbouw- en renovatieprojecten: wij verzorgen zandcementdekvloeren voor zowel particulieren als aannemers en bouwbedrijven. Waar uw project zich ook bevindt, wij denken graag met u mee en bieden een passende oplossing voor uw vloer.' })}
 <section class="paper"><div class="wrap">
 <div class="prov-grid reveal" style="margin-bottom:60px">${ctx.provinces.map(pv => `<a class="prov" href="/werkgebied/${pv.slug}">${pv.name}<span>${pv.munis.length} gemeenten</span></a>`).join('')}</div>
 ${ctx.provinces.map(pv => `<h2 style="margin:50px 0 24px;font-size:1.8rem"><a href="/werkgebied/${pv.slug}" style="text-decoration:none">${esc(pv.name)}</a></h2>

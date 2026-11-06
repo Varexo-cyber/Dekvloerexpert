@@ -9,6 +9,8 @@ export const PROJECT_LIST = [
   { img: '/assets/media/projecten/01-zandaanvoer-op-de-bouwplaats.jpg', tag: 'Nieuwbouw', title: 'Nieuwbouwproject', desc: 'Zandaanvoer op de bouwplaats, direct de mixer in', place: '', m2: '' },
 ];
 export const MORE_PHOTOS = [
+  ['/assets/media/werk/fundering-4.jpg', 'Gestorte en afgewerkte betonvloer'],
+  ['/assets/media/werk/fundering-1.jpg', 'Wapening en bekisting voor funderingsstroken'],
   ['/assets/media/werk/01-zandwagen-komt-aan.jpg', 'Zandwagen komt aan'],
   ['/assets/media/werk/02-zand-gaat-de-mixer-in.jpg', 'Zand gaat de mixer in'],
   ['/assets/media/werk/03-silo-en-mixer-op-locatie.jpg', 'Silo en mixer op locatie'],
